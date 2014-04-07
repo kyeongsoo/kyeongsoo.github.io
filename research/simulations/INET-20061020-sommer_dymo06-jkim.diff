@@ -1,0 +1,1973 @@
+diff -Naur INET-20061020-sommer_dymo06\Examples\Wireless\dymo\AccessPoint.ned INET_dymo\Examples\Wireless\dymo\AccessPoint.ned
+--- INET-20061020-sommer_dymo06\Examples\Wireless\dymo\AccessPoint.ned	Thu Jan 01 00:00:00 1970
++++ INET_dymo\Examples\Wireless\dymo\AccessPoint.ned	Tue Jul 31 15:17:00 2007
+@@ -0,0 +1,112 @@
++//
++// Copyright (C) 2005 Andras Varga
++//
++// This program is free software; you can redistribute it and/or
++// modify it under the terms of the GNU General Public License
++// as published by the Free Software Foundation; either version 2
++// of the License, or (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++//
++
++
++import
++    "NotificationBoard",
++    "InterfaceTable",
++    "RoutingTable",
++    "TCPApp.ned",
++    "TCP.ned",
++    "UDP",
++    "UDPApp",
++    "NetworkLayer",
++    "Nic80211",
++    "BasicMobility";
++
++
++//
++// Models a bridge between Wireless and Ethernet running DYMO
++//
++module AccessPoint
++    parameters:
++
++    gates:
++        in: radioIn;
++        in: lanIn;
++        out: lanOut;
++
++    submodules:
++        notificationBoard: NotificationBoard;
++            display: "p=140,46;i=block/control";
++        interfaceTable: InterfaceTable;
++            display: "p=140,358;i=block/table";
++        mobility: LinearMobility;
++	    parameters:
++	        speed = 0,
++		angle = 0,
++		acceleration = 0,
++		updateInterval = 0;
++            display: "p=60,467;i=block/cogwheel";
++        routingTable: RoutingTable;
++            parameters:
++                IPForward = true,
++                routerId = "",
++                routingFile = "";
++            display: "p=60,358;i=block/table";
++        dymo: DYMO;
++            display: "p=280,143;i=block/fork;q=queue";
++        udp: UDP;
++            display: "p=280,250;i=block/transport";
++        dymo_dataQueue: DYMO_DataQueue;
++            gatesizes:
++                toNetwork[1],
++                fromTransport[1];
++            display: "p=216,298;i=block/queue";
++        networkLayer: NetworkLayer;
++            parameters:
++                proxyARP = false;
++            gatesizes:
++                ifIn[2],
++                ifOut[2];
++            display: "p=280,359;i=block/fork;q=queue";
++        dymo_inboundHook: DYMO_InboundHook;
++            gatesizes:
++                toNetwork[2],
++                ifIn[2];
++            display: "p=280,426;i=block/plug";
++        eth: EthernetInterface;
++            display: "p=344,470,row,90;q=txQueue;i=block/ifcard";
++        wlan: Nic80211;
++            display: "p=216,469;q=queue;i=block/ifcard";
++    connections nocheck:
++        udp.to_app++ --> dymo.from_udp;
++        udp.from_app++ <-- dymo.to_udp;
++
++        dymo_dataQueue.fromTransport[0] <-- udp.to_ip;
++
++        networkLayer.UDPOut --> udp.from_ip;
++        networkLayer.UDPIn <-- dymo_dataQueue[0].toNetwork;
++
++        dymo_inboundHook.toNetwork[0] --> networkLayer.ifIn[0];
++        dymo_inboundHook.toNetwork[1] --> networkLayer.ifIn[1];
++
++        eth.netwOut --> dymo_inboundHook.ifIn[1];
++        eth.netwIn <-- networkLayer.ifOut[1];
++
++        wlan.uppergateOut --> dymo_inboundHook.ifIn[0];
++        wlan.uppergateIn <-- networkLayer.ifOut[0];
++
++        eth.physIn <-- lanIn;
++        eth.physOut --> lanOut;
++
++        radioIn --> wlan.radioIn;
++
++    display: "b=424,541";
++endmodule
++
+diff -Naur INET-20061020-sommer_dymo06\Examples\Wireless\dymo\dymo.bat INET_dymo\Examples\Wireless\dymo\dymo.bat
+--- INET-20061020-sommer_dymo06\Examples\Wireless\dymo\dymo.bat	Thu Jan 01 00:00:00 1970
++++ INET_dymo\Examples\Wireless\dymo\dymo.bat	Thu Aug 02 11:09:00 2007
+@@ -0,0 +1 @@
++..\..\..\bin\INET %*
+diff -Naur INET-20061020-sommer_dymo06\Examples\Wireless\dymo\Gateway.ned INET_dymo\Examples\Wireless\dymo\Gateway.ned
+--- INET-20061020-sommer_dymo06\Examples\Wireless\dymo\Gateway.ned	Thu Jan 01 00:00:00 1970
++++ INET_dymo\Examples\Wireless\dymo\Gateway.ned	Tue Jul 31 15:17:00 2007
+@@ -0,0 +1,96 @@
++//
++// Copyright (C) 2005 Andras Varga
++//
++// This program is free software; you can redistribute it and/or
++// modify it under the terms of the GNU General Public License
++// as published by the Free Software Foundation; either version 2
++// of the License, or (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++//
++
++
++import
++    "NotificationBoard",
++    "InterfaceTable",
++    "RoutingTable",
++    "UDP",
++    "UDPApp",
++    "NetworkLayer",
++    "Nic80211",
++    "BasicMobility";
++
++//
++// Models an Internet Gateway running DYMO on Ethernet
++//
++module Gateway
++    gates:
++        in: in;
++        out: out;
++
++    submodules:
++        interfaceTable: InterfaceTable;
++            display: "p=140,358;i=block/table";
++        notificationBoard: NotificationBoard;
++            display: "p=140,462;i=block/control";
++        routingTable: RoutingTable;
++            parameters:
++                IPForward = true,
++                routerId = "",
++                routingFile = "";
++            display: "p=60,358;i=block/table";
++        dymo: DYMO;
++            display: "p=304,47;i=block/fork;q=queue";
++        udpapp: UDPSink;
++            display: "i=block/app;p=384,47";
++        udp: UDP;
++            display: "p=384,146;i=block/transport";
++        dymo_dataQueue: DYMO_DataQueue;
++            gatesizes:
++                toNetwork[1],
++                fromTransport[1];
++            display: "p=304,226;i=block/queue";
++        networkLayer: NetworkLayer;
++            parameters:
++                proxyARP = false;
++            gatesizes:
++                ifIn[1],
++                ifOut[1];
++            display: "p=304,327;i=block/fork;q=queue";
++        dymo_inboundHook: DYMO_InboundHook;
++            gatesizes:
++                toNetwork[1],
++                ifIn[1];
++            display: "p=232,394;i=block/plug";
++        eth: EthernetInterface;
++            display: "p=304,461,row,90;q=txQueue;i=block/ifcard";
++    connections nocheck:
++        udp.to_app++ --> udpapp.from_udp;
++        udp.from_app++ <-- udpapp.to_udp;
++
++        udp.to_app++ --> dymo.from_udp;
++        udp.from_app++ <-- dymo.to_udp;
++
++        dymo_dataQueue.fromTransport[0] <-- udp.to_ip;
++
++        networkLayer.UDPOut --> udp.from_ip;
++        networkLayer.UDPIn <-- dymo_dataQueue.toNetwork[0];
++
++        dymo_inboundHook[0].toNetwork --> networkLayer.ifIn[0];
++
++        eth.netwOut --> dymo_inboundHook[0].ifIn;
++        eth.netwIn <-- networkLayer.ifOut[0];
++
++        eth.physIn <-- in;
++        eth.physOut --> out;
++
++    display: "b=424,541";
++endmodule
++
+diff -Naur INET-20061020-sommer_dymo06\Examples\Wireless\dymo\Host.ned INET_dymo\Examples\Wireless\dymo\Host.ned
+--- INET-20061020-sommer_dymo06\Examples\Wireless\dymo\Host.ned	Thu Jan 01 00:00:00 1970
++++ INET_dymo\Examples\Wireless\dymo\Host.ned	Tue Jul 31 15:17:00 2007
+@@ -0,0 +1,101 @@
++//
++// Copyright (C) 2005 Andras Varga
++//
++// This program is free software; you can redistribute it and/or
++// modify it under the terms of the GNU General Public License
++// as published by the Free Software Foundation; either version 2
++// of the License, or (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++//
++
++
++import
++    "NotificationBoard",
++    "InterfaceTable",
++    "RoutingTable",
++    "UDP",
++    "UDPApp",
++    "NetworkLayer",
++    "Nic80211",
++    "BasicMobility";
++
++
++//
++// Wireless-enabled Host running DYMO
++//
++module Host
++    parameters:
++
++    gates:
++        in: radioIn;
++
++    submodules:
++        //comm_rad: Display;
++        //    display: "p=140,468;i=block/app2";
++        notificationBoard: NotificationBoard;
++            display: "p=140,462;i=block/control";
++        interfaceTable: InterfaceTable;
++            display: "p=140,326;i=block/table";
++        mobility: RandomWPMobility;
++            display: "p=60,459;i=block/cogwheel";
++        routingTable: RoutingTable;
++            parameters:
++                IPForward = true,
++                routerId = "",
++                routingFile = "";
++            display: "p=60,326;i=block/table";
++        dymo: DYMO;
++            display: "p=304,47;i=block/fork;q=queue";
++        udpapp: UDPBasicApp;
++            display: "i=block/app;p=384,47";
++        udp: UDP;
++            display: "p=384,146;i=block/transport";
++        dymo_dataQueue: DYMO_DataQueue;
++            gatesizes:
++                toNetwork[1],
++                fromTransport[1];
++            display: "p=304,226;i=block/queue";
++        networkLayer: NetworkLayer;
++            parameters:
++                proxyARP = false;
++            gatesizes:
++                ifIn[1],
++                ifOut[1];
++            display: "p=304,327;i=block/fork;q=queue";
++        dymo_inboundHook: DYMO_InboundHook;
++            gatesizes:
++                toNetwork[1],
++                ifIn[1];
++            display: "p=232,394;i=block/plug";
++        wlan: Nic80211;
++            display: "p=304,461;q=queue;i=block/ifcard";
++    connections nocheck:
++        udp.to_app++ --> udpapp.from_udp;
++        udp.from_app++ <-- udpapp.to_udp;
++
++        udp.to_app++ --> dymo.from_udp;
++        udp.from_app++ <-- dymo.to_udp;
++
++        dymo_dataQueue.fromTransport[0] <-- udp.to_ip;
++
++        networkLayer.UDPOut --> udp.from_ip;
++        networkLayer.UDPIn <-- dymo_dataQueue.toNetwork[0];
++
++        dymo_inboundHook.toNetwork[0] --> networkLayer.ifIn[0];
++
++        wlan.uppergateOut --> dymo_inboundHook.ifIn[0];
++        wlan.uppergateIn <-- networkLayer.ifOut[0];
++
++        radioIn --> wlan.radioIn;
++
++    display: "b=424,541";
++endmodule
++
+diff -Naur INET-20061020-sommer_dymo06\Examples\Wireless\dymo\Makefile INET_dymo\Examples\Wireless\dymo\Makefile
+--- INET-20061020-sommer_dymo06\Examples\Wireless\dymo\Makefile	Thu Jan 01 00:00:00 1970
++++ INET_dymo\Examples\Wireless\dymo\Makefile	Tue Jul 31 15:17:00 2007
+@@ -0,0 +1,39 @@
++.PHONY: links clean run
++
++links: INET inet/nedfiles.lst 
++
++clean:
++	@echo ------------------------------------------------------------------------------- 
++	@echo Cleaning up links to INET and inet
++	@echo ------------------------------------------------------------------------------- 
++	test -L INET && rm INET || test ! -e INET
++	test -L inet && rm inet || test ! -e inet 
++
++run: links omnetpp.ini
++	./INET -r1
++
++INET: $(I7INETROOT)/bin/INET
++	@echo ------------------------------------------------------------------------------- 
++	@echo Creating symbolic link "INET" to your INET executable...
++	@echo ------------------------------------------------------------------------------- 
++	ln -s $(I7INETROOT)/bin/INET 
++
++inet/nedfiles.lst: $(I7INETROOT)/nedfiles.lst
++	@echo ------------------------------------------------------------------------------- 
++	@echo Creating symbolic link "inet" to your INET root directory...
++	@echo ------------------------------------------------------------------------------- 
++	ln -s $(I7INETROOT) inet
++
++$(I7INETROOT)/bin/INET:
++	@echo ------------------------------------------------------------------------------- 
++	@echo cannot find I7INETROOT/bin/INET! Make sure your I7INETROOT environment variable is set to the root of your INET installation
++	@echo ------------------------------------------------------------------------------- 
++	@exit 1
++
++$(I7INETROOT)/nedfiles.lst:
++	@echo ------------------------------------------------------------------------------- 
++	@echo cannot find I7INETROOT/nedfiles.lst! Make sure your I7INETROOT environment variable is set to the root of your INET installation
++	@echo ------------------------------------------------------------------------------- 
++	@exit 1
++
++
+diff -Naur INET-20061020-sommer_dymo06\Examples\Wireless\dymo\omnetpp.ini INET_dymo\Examples\Wireless\dymo\omnetpp.ini
+--- INET-20061020-sommer_dymo06\Examples\Wireless\dymo\omnetpp.ini	Thu Jan 01 00:00:00 1970
++++ INET_dymo\Examples\Wireless\dymo\omnetpp.ini	Tue Aug 26 16:20:04 2008
+@@ -0,0 +1,133 @@
++[General]
++;preload-ned-files = *.ned @inet/nedfiles.lst
++preload-ned-files = *.ned @../../../nedfiles.lst
++debug-on-errors = true
++
++network = scenario1
++sim-time-limit = 60m
++
++[Cmdenv]
++express-mode = yes
++
++[Tkenv]
++default-run = 1
++bitmap-path = "bitmaps"
++
++[Parameters]
++**.debug = true
++**.coreDebug = 0
++
++*.playgroundSizeX = 250 ;[m]
++*.playgroundSizeY = 250 ;[m]
++
++; Hosts
++*.hosts = 5
++*.host[*].mobility.x = -1
++*.host[*].mobility.y = -1
++*.host[*].mobility.updateInterval = 0.25 ;[s]
++*.host[*].mobility.speed = uniform(20,33.3)
++*.host[*].mobility.waitTime = 0
++*.host[*].udpapp.dest_addresses = "gateway"
++
++; Access Points
++*.accessPoints = 1
++*.ap[0].mobility.x = 5
++*.ap[0].mobility.y = 5
++
++; DYMO
++**.dymo.headerLengthByte = 20
++**.dymo.RESPONSIBLE_ADDRESSES_PREFIX = -1
++*.gateway.dymo.DYMO_INTERFACES = "eth"
++*.ap[*].dymo.DYMO_INTERFACES = "wlan eth"
++*.host[*].dymo.DYMO_INTERFACES = "wlan"
++**.dymo.AUTOASSIGN_ADDRESS_BASE = "10.0.0.0"
++**.dymo.MIN_HOPLIMIT = 5
++**.dymo.MAX_HOPLIMIT = 10
++**.dymo.ROUTE_AGE_MIN_TIMEOUT = 1 ; NET_TRAVERSAL_TIME
++**.dymo.ROUTE_AGE_MAX_TIMEOUT = 60
++**.dymo.ROUTE_NEW_TIMEOUT = 5 ; ROUTE_TIMEOUT
++**.dymo.ROUTE_USED_TIMEOUT = 5 ; ROUTE_TIMEOUT
++**.dymo.ROUTE_DELETE_TIMEOUT = 10 ; 2x ROUTE_TIMEOUT
++**.dymo.RREQ_RATE_LIMIT = 10
++**.dymo.RREQ_BURST_LIMIT = 3
++**.dymo.RREQ_WAIT_TIME = 2 ; 2x NET_TRAVERSAL_TIME
++**.dymo.RREQ_TRIES = 3
++**.dymo.HOP_MALUS_PER_LANECROSSING = 0
++**.dymo_dataQueue.BUFFER_SIZE_PACKETS = 50
++**.dymo_dataQueue.BUFFER_SIZE_BYTES = 75000 ; 1500x BUFFER_SIZE_PACKETS
++
++; UDPBasicApp / UDPSink
++**.udpapp.dest_addresses = ""
++**.udpapp.startTime = 86400
++**.udpapp.local_port = 9001
++**.udpapp.dest_port = 9001
++*.gateway.udpapp.message_length = 1024
++*.host[*].udpapp.message_length = 256
++**.udpapp.message_freq = uniform(100, 300)
++
++; Network layer
++**.networkLayer.ip.procDelay=10us
++**.networkLayer.arp.retryTimeout = 1
++**.networkLayer.arp.retryCount = 3
++**.networkLayer.arp.cacheTimeout = 100
++
++; WiFi link layer
++**.wlan.mac.address = "auto"
++**.wlan.mac.maxQueueSize = 14
++**.wlan.mac.rtsCts = false
++**.wlan.mac.bitrate = 11e6 # 11Mbps
++**.wlan.mac.broadcastBackoff = 31
++**.wlan.decider.snirThreshold = 4 # in dB
++**.wlan.decider.bitrate = 11e6 ;11Mbps
++**.wlan.snrEval.bitrate=11E+6 ;in bits/second
++**.wlan.snrEval.headerLength=192
++**.wlan.snrEval.snrThresholdLevel=3 ;[dB]
++**.wlan.snrEval.thermalNoise=-110
++**.wlan.snrEval.sensitivity=-85
++**.wlan.snrEval.pathLossAlpha=1.9
++**.wlan.snrEval.carrierFrequency=2.4E+9
++**.wlan.snrEval.channelNumber = 0
++*.channelcontrol.carrierFrequency = 2.4e+9
++**.wlan.snrEval.transmitterPower=2 ;[mW]
++*.channelcontrol.pMax = 2 ;[mW]
++*.channelcontrol.sat = -80
++*.channelcontrol.alpha = 1.9
++*.channelcontrol.numChannels = 1
++
++; Ethernet link layer
++**.eth.queueType = "DropTailQueue"
++**.eth.queue.frameCapacity = 10
++**.eth.encap.writeScalars = false
++**.eth.mac.promiscuous = false
++**.eth.mac.address = "auto"
++**.eth.mac.txrate = 0
++**.eth.mac.duplexEnabled = true
++**.eth.mac.writeScalars = false
++
++; Switch configuration
++**.switch*.relayUnitType = "MACRelayUnitNP"
++**.switch*.writeScalars = true
++**.switch*.mac.address = "auto"
++**.switch*.mac[*].address = "auto"
++**.switch*.mac.maxQueueSize = 50
++**.switch*.mac[*].maxQueueSize = 50
++**.switch*.mac.promiscuous = false
++**.switch*.mac[*].promiscuous = false
++**.switch*.mac.txrate = 0 # autoconfig
++**.switch*.mac[*].txrate = 0 # autoconfig
++**.switch*.mac.duplexEnabled = true
++**.switch*.mac[*].duplexEnabled = true
++**.switch*.mac[*].writeScalars = false
++**.switch*.relayUnit.writeScalars = false
++**.switch*.relayUnit.addressTableSize = 100
++**.switch*.relayUnit.agingTime = 120s
++**.switch*.relayUnit.bufferSize = 1048576 # 1Mb
++**.switch*.relayUnit.highWatermark = 524288 # 512K
++**.switch*.relayUnit.pauseUnits = 300 # pause for 300*512 bit (19200 byte) time
++**.switch*.relayUnit.addressTableFile = ""
++**.switch*.relayUnit.numCPUs = 2
++**.switch*.relayUnit.processingTime = 2us
++
++[OutVectors]
++**.udpapp.*.enabled = yes
++**.enabled = yes
+diff -Naur INET-20061020-sommer_dymo06\Examples\Wireless\dymo\Scenario.ned INET_dymo\Examples\Wireless\dymo\Scenario.ned
+--- INET-20061020-sommer_dymo06\Examples\Wireless\dymo\Scenario.ned	Thu Jan 01 00:00:00 1970
++++ INET_dymo\Examples\Wireless\dymo\Scenario.ned	Tue Jul 31 15:16:00 2007
+@@ -0,0 +1,59 @@
++//
++// Copyright (C) 2005 Andras Varga
++//
++// This program is free software; you can redistribute it and/or
++// modify it under the terms of the GNU General Public License
++// as published by the Free Software Foundation; either version 2
++// of the License, or (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++//
++
++
++import
++    "Host",
++    "ChannelControl";
++
++
++module Scenario
++    parameters:
++        accessPoints: numeric const,
++        hosts: numeric const,
++        playgroundSizeX: numeric const,
++        playgroundSizeY: numeric const;
++    submodules:
++        channelcontrol: ChannelControl;
++            parameters:
++                playgroundSizeX = playgroundSizeX,
++                playgroundSizeY = playgroundSizeY;
++            display: "p=44,-46;i=misc/sun";
++	host: Host[hosts];
++             display: "i=device/wifilaptop_vs";
++        ap: AccessPoint[accessPoints];
++             display: "i=device/antennatower_vs";
++        switch: EtherSwitch;
++            gatesizes:
++                in[accessPoints+1],
++                out[accessPoints+1];
++            display: "p=-40,38;i=device/switch_s";
++        gateway: Gateway;
++             display: "p=-40,-46;i=device/router_s";
++    connections nocheck:
++	for i=0..accessPoints-1 do
++        	ap[i].lanOut --> switch.in[i+1];
++        	ap[i].lanIn <-- switch.out[i+1];
++	endfor;
++        switch.out[0] --> gateway.in;
++        switch.in[0] <-- gateway.out;
++endmodule
++
++network scenario1 : Scenario
++endnetwork
++
+diff -Naur INET-20061020-sommer_dymo06\FAU\Network\DYMO\DYMO.h INET_dymo\FAU\Network\DYMO\DYMO.h
+--- INET-20061020-sommer_dymo06\FAU\Network\DYMO\DYMO.h	Thu Aug 02 10:49:30 2007
++++ INET_dymo\FAU\Network\DYMO\DYMO.h	Tue Aug 26 16:13:11 2008
+@@ -44,6 +44,14 @@
+ #include "DYMO_Timeout_m.h"
+ #include "DYMO_TokenBucket.h"
+ 
++#if defined(_MSC_VER)
++#include "../msvc_env.h"
++/* #elif defined(__APPLE__) */
++/* #include "macosx_env.h" */
++/* #else */
++/* #include "native_env.h" */
++#endif
++
+ //===========================================================================================
+ // class QueueElement: defines a data type for all queued data messages
+ //===========================================================================================
+diff -Naur INET-20061020-sommer_dymo06\FAU\Network\DYMO\DYMO_AddressBlock.h INET_dymo\FAU\Network\DYMO\DYMO_AddressBlock.h
+--- INET-20061020-sommer_dymo06\FAU\Network\DYMO\DYMO_AddressBlock.h	Thu Aug 02 09:41:44 2007
++++ INET_dymo\FAU\Network\DYMO\DYMO_AddressBlock.h	Tue Aug 26 16:13:27 2008
+@@ -22,6 +22,14 @@
+ 
+ #include <stdexcept>
+ 
++#if defined(_MSC_VER)
++#include "../msvc_env.h"
++/* #elif defined(__APPLE__) */
++/* #include "macosx_env.h" */
++/* #else */
++/* #include "native_env.h" */
++#endif
++
+ class DYMO_AddressBlock
+ {
+ 	protected:
+diff -Naur INET-20061020-sommer_dymo06\FAU\Network\DYMO\DYMO_RoutingTable.cc INET_dymo\FAU\Network\DYMO\DYMO_RoutingTable.cc
+--- INET-20061020-sommer_dymo06\FAU\Network\DYMO\DYMO_RoutingTable.cc	Thu Aug 02 10:23:14 2007
++++ INET_dymo\FAU\Network\DYMO\DYMO_RoutingTable.cc	Tue Aug 26 16:06:14 2008
+@@ -17,6 +17,7 @@
+  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  */
+ 
++#include <algorithm>
+ #include <stdexcept>
+ #include <sstream>
+ #include "DYMO_RoutingTable.h"
+diff -Naur INET-20061020-sommer_dymo06\FAU\Network\DYMOnet\DYMO.h INET_dymo\FAU\Network\DYMOnet\DYMO.h
+--- INET-20061020-sommer_dymo06\FAU\Network\DYMOnet\DYMO.h	Thu Aug 02 10:51:44 2007
++++ INET_dymo\FAU\Network\DYMOnet\DYMO.h	Tue Aug 26 16:12:47 2008
+@@ -43,6 +43,14 @@
+ #include "DYMO_Timeout_m.h"
+ #include "DYMO_TokenBucket.h"
+ 
++#if defined(_MSC_VER)
++#include "../msvc_env.h"
++/* #elif defined(__APPLE__) */
++/* #include "macosx_env.h" */
++/* #else */
++/* #include "native_env.h" */
++#endif
++
+ namespace DYMOnet {
+ 
+ //===========================================================================================
+diff -Naur INET-20061020-sommer_dymo06\FAU\Network\DYMOnet\DYMO_AddressBlock.h INET_dymo\FAU\Network\DYMOnet\DYMO_AddressBlock.h
+--- INET-20061020-sommer_dymo06\FAU\Network\DYMOnet\DYMO_AddressBlock.h	Tue Jul 31 15:17:22 2007
++++ INET_dymo\FAU\Network\DYMOnet\DYMO_AddressBlock.h	Tue Aug 26 16:12:15 2008
+@@ -22,6 +22,14 @@
+ 
+ #include <stdexcept>
+ 
++#if defined(_MSC_VER)
++#include "../msvc_env.h"
++/* #elif defined(__APPLE__) */
++/* #include "macosx_env.h" */
++/* #else */
++/* #include "native_env.h" */
++#endif
++
+ namespace DYMOnet {
+ 
+ class DYMO_AddressBlock
+diff -Naur INET-20061020-sommer_dymo06\FAU\Network\msvc_env.h INET_dymo\FAU\Network\msvc_env.h
+--- INET-20061020-sommer_dymo06\FAU\Network\msvc_env.h	Thu Jan 01 00:00:00 1970
++++ INET_dymo\FAU\Network\msvc_env.h	Fri Aug 22 18:21:57 2008
+@@ -0,0 +1,802 @@
++/* #ifndef __MSVCENV_H__ */
++/* #define __MSVCENV_H__ */
++
++/* #include <stdarg.h> */
++/* #include <stdio.h> */
++/* #include <string.h> */
++/* #include <time.h> */
++/* #include <ctype.h> */
++/* #include <stdlib.h> */
++/* #include <limits.h> */
++/* #include <stddef.h> */
++/* #include <sys/stat.h> */
++/* #include <signal.h> */
++/* #include <fcntl.h> */
++/* #include <errno.h> */
++
++/* #include <Winsock.h> */
++
++/* #define __inline__  __inline */
++
++/* #ifdef __cplusplus */
++/* extern "C" { */
++/* #endif */
++
++/* int snprintf (char *s, size_t maxlen, const char *format, ...); */
++/* int vsnprintf(char *s, size_t maxlen, const char *format, va_list arg); */
++/* int strncasecmp(const char *s1, const char *s2, size_t n); */
++
++/* struct cmsghdr * __cmsg_nxthdr (struct msghdr *__mhdr, struct cmsghdr *__cmsg); */
++
++/* #ifdef __cplusplus */
++/* }; */
++/* #endif */
++
++/* #define CMSG_FIRSTHDR(mhdr) \ */
++/*     ((size_t) (mhdr)->msg_controllen >= sizeof (struct cmsghdr) \ */
++/*      ? (struct cmsghdr *) (mhdr)->msg_control : (struct cmsghdr *) NULL) */
++
++/* #define CMSG_NXTHDR(mhdr, cmsg) __cmsg_nxthdr (mhdr, cmsg) */
++
++/* #define CMSG_ALIGN(len) (((len) + sizeof (size_t) - 1) \ */
++/*                                  & (size_t) ~(sizeof (size_t) - 1)) */
++
++/* #undef CMSG_DATA */
++/* #define CMSG_DATA(cmsg)             ((cmsg)->__cmsg_data) */
++
++/* // in WS2tcpip.h, IP_HDRINCL==2 while in Winsock.h that's IP_MULTICAST_IF -- define as 25 to avoid confusion */
++/* #define IP_HDRINCL  25 */
++
++/* #define IP_PKTINFO  19 */
++
++/* #define IN_CLASSD(a)            ((((in_addr_t)(a)) & 0xf0000000) == 0xe0000000) */
++
++/* #define IN_MULTICAST(a)         IN_CLASSD(a) */
++
++/* #define MSG_TRUNC   0x0100 */
++
++/* #define MAXPATHLEN  4096 */
++
++/* #define EWOULDBLOCK     EAGAIN */
++/* #define EAFNOSUPPORT    97 */
++/* #define EINPROGRESS     115 */
++
++/* #define IPVERSION   4 */
++
++// basic types
++
++typedef unsigned int mode_t;
++typedef unsigned int uid_t;
++typedef unsigned int gid_t;
++typedef int pid_t;
++/* typedef long int time_t; */
++typedef unsigned int socklen_t;
++typedef long int ssize_t;
++typedef unsigned char u_char;
++typedef unsigned short int u_short;
++typedef unsigned int u_int;
++typedef unsigned long int u_long;
++typedef unsigned int useconds_t;
++typedef long int suseconds_t;
++typedef unsigned long int ino64_t;
++typedef unsigned long int nlink_t;
++typedef long int off_t;
++typedef long int off64_t;
++typedef long int blksize_t;
++typedef long int blkcnt_t;
++typedef long int blkcnt64_t;
++typedef long int clock_t;
++typedef long int fd_mask;
++
++typedef signed char int8_t;
++typedef unsigned char uint8_t;
++typedef signed short int int16_t;
++typedef unsigned short int uint16_t;
++typedef signed int int32_t;
++typedef unsigned int uint32_t;
++
++typedef signed char s8;
++typedef unsigned char u8;
++typedef signed short s16;
++typedef unsigned short u16;
++typedef signed int s32;
++typedef unsigned int u32;
++typedef signed long long s64;
++typedef unsigned long long u64;
++
++typedef char *caddr_t;
++
++typedef unsigned __int8 u_int8_t;
++typedef unsigned __int16 u_int16_t;
++typedef unsigned __int32 u_int32_t;
++typedef unsigned __int64 u_int64_t;
++
++typedef __int32 int32_t;
++
++/* // time */
++
++/* struct timespec */
++/* { */
++/*     time_t tv_sec; */
++/*     long int tv_nsec; */
++/* }; */
++
++/* // passwd */
++
++/* struct group */
++/* { */
++/*     char *gr_name; */
++/*     char *gr_passwd; */
++/*     gid_t gr_gid; */
++/*     char **gr_mem; */
++/* }; */
++
++/* struct passwd */
++/* { */
++/*     char *pw_name; */
++/*     char *pw_passwd; */
++/*     uid_t pw_uid; */
++/*     gid_t pw_gid; */
++/*     char *pw_gecos; */
++/*     char *pw_dir; */
++/*     char *pw_shell; */
++/* }; */
++
++/* // writev etc */
++
++/* struct iovec */
++/* { */
++/*     void *iov_base; */
++/*     size_t iov_len; */
++/* }; */
++
++/* // signal */
++
++/* typedef int sig_atomic_t; */
++
++/* typedef void (*sighandler_t) (int); */
++
++/* typedef struct */
++/* { */
++/*     unsigned long int __val[(1024 / (8 * sizeof (unsigned long int)))]; */
++/* } sigset_t; */
++
++
++/* typedef union sigval */
++/* { */
++/*     int sival_int; */
++/*     void *sival_ptr; */
++/* } sigval_t; */
++
++/* typedef struct siginfo */
++/* { */
++/*     int si_signo; */
++/*     int si_errno; */
++/*     int si_code; */
++
++/*     union */
++/*     { */
++/*         int _pad[((128 / sizeof (int)) - 4)]; */
++
++/*         struct */
++/*         { */
++/*             pid_t si_pid; */
++/*             uid_t si_uid; */
++/*         } _kill; */
++
++/*         struct */
++/*         { */
++/*             int si_tid; */
++/*             int si_overrun; */
++/*             sigval_t si_sigval; */
++/*         } _timer; */
++
++/*         struct */
++/*         { */
++/*             pid_t si_pid; */
++/*             uid_t si_uid; */
++/*             sigval_t si_sigval; */
++/*         } _rt; */
++
++/*         struct */
++/*         { */
++/*             pid_t si_pid; */
++/*             uid_t si_uid; */
++/*             int si_status; */
++/*             clock_t si_utime; */
++/*             clock_t si_stime; */
++/*         } _sigchld; */
++
++/*         struct */
++/*         { */
++/*             void *si_addr; */
++/*         } _sigfault; */
++
++/*         struct */
++/*         { */
++/*             long int si_band; */
++/*             int si_fd; */
++/*         } _sigpoll; */
++
++/*     } _sifields; */
++
++/* } siginfo_t; */
++
++/* #define struct_sigaction  struct sigaction */
++/* struct sigaction */
++/* { */
++/*     sighandler_t sa_handler; */
++
++/*     sigset_t sa_mask; */
++
++/*     int sa_flags; */
++
++/*     void (*sa_restorer) (void); */
++/* }; */
++
++/* // uname */
++
++/* struct utsname */
++/* { */
++/*     char sysname[65]; */
++/*     char nodename[65]; */
++/*     char release[65]; */
++/*     char version[65]; */
++/*     char machine[65]; */
++/*     char __domainname[65]; */
++/* }; */
++
++/* // networking stuff */
++
++/* typedef uint32_t in_addr_t; */
++
++/* typedef unsigned short int sa_family_t; */
++
++/* struct sockaddr_nl */
++/* { */
++/*         sa_family_t nl_family; */
++/*         unsigned short nl_pad; */
++/*         u32 nl_pid; */
++/*         u32 nl_groups; */
++/* }; */
++
++/* struct ip */
++/* { */
++/*     unsigned int ip_hl:4; */
++/*     unsigned int ip_v:4; */
++
++/*     u_int8_t ip_tos; */
++/*     u_short ip_len; */
++/*     u_short ip_id; */
++/*     u_short ip_off; */
++
++/*     u_int8_t ip_ttl; */
++/*     u_int8_t ip_p; */
++/*     u_short ip_sum; */
++/*     struct in_addr ip_src, ip_dst; */
++/* }; */
++
++/* struct sockaddr_un */
++/* { */
++/*     sa_family_t sun_family; */
++/*     char sun_path[108]; */
++/* }; */
++
++/* typedef uint16_t in_port_t; */
++
++/* struct in6_addr */
++/* { */
++/*     union */
++/*     { */
++/*         uint8_t u6_addr8[16]; */
++/*         uint16_t u6_addr16[8]; */
++/*         uint32_t u6_addr32[4]; */
++/*     } in6_u; */
++/* }; */
++
++/* enum */
++/* { */
++/*     IFF_UP = 0x1, */
++/*     IFF_BROADCAST = 0x2, */
++/*     IFF_DEBUG = 0x4, */
++/*     IFF_LOOPBACK = 0x8, */
++/*     IFF_POINTOPOINT = 0x10, */
++/*     IFF_NOTRAILERS = 0x20, */
++/*     IFF_RUNNING = 0x40, */
++/*     IFF_NOARP = 0x80, */
++/*     IFF_PROMISC = 0x100, */
++/*     IFF_ALLMULTI = 0x200, */
++/*     IFF_MASTER = 0x400, */
++/*     IFF_SLAVE = 0x800, */
++/*     IFF_MULTICAST = 0x1000, */
++/*     IFF_PORTSEL = 0x2000, */
++/*     IFF_AUTOMEDIA = 0x4000 */
++/* }; */
++
++/* // netlink & messages */
++
++/* struct cmsghdr */
++/* { */
++/*     size_t cmsg_len; */
++
++/*     int cmsg_level; */
++/*     int cmsg_type; */
++
++/*     unsigned char __cmsg_data []; */
++/* }; */
++
++/* struct msghdr */
++/* { */
++/*     void *msg_name; */
++/*     socklen_t msg_namelen; */
++
++/*     struct iovec *msg_iov; */
++/*     size_t msg_iovlen; */
++
++/*     void *msg_control; */
++/*     size_t msg_controllen; */
++
++/*     int msg_flags; */
++/* }; */
++
++/* enum rt_class_t */
++/* { */
++/*         RT_TABLE_UNSPEC=0, */
++/*         RT_TABLE_DEFAULT=253, */
++/*         RT_TABLE_MAIN=254, */
++/*         RT_TABLE_LOCAL=255 */
++/* }; */
++
++/* enum rtattr_type_t */
++/* { */
++/*         RTA_UNSPEC, */
++/*         RTA_DST, */
++/*         RTA_SRC, */
++/*         RTA_IIF, */
++/*         RTA_OIF, */
++/*         RTA_GATEWAY, */
++/*         RTA_PRIORITY, */
++/*         RTA_PREFSRC, */
++/*         RTA_METRICS, */
++/*         RTA_MULTIPATH, */
++/*         RTA_PROTOINFO, */
++/*         RTA_FLOW, */
++/*         RTA_CACHEINFO, */
++/*         RTA_SESSION, */
++/* }; */
++
++/* struct nlmsghdr */
++/* { */
++/*         u32 nlmsg_len; */
++/*         u16 nlmsg_type; */
++/*         u16 nlmsg_flags; */
++/*         u32 nlmsg_seq; */
++/*         u32 nlmsg_pid; */
++/* }; */
++
++/* struct rtgenmsg */
++/* { */
++/*     unsigned char rtgen_family; */
++/* }; */
++
++/* struct ifinfomsg */
++/* { */
++/*     unsigned char ifi_family; */
++/*     unsigned char __ifi_pad; */
++/*     unsigned short ifi_type; */
++/*     int ifi_index; */
++/*     unsigned ifi_flags; */
++/*     unsigned ifi_change; */
++/* }; */
++
++/* struct nlmsgerr */
++/* { */
++/*     int error; */
++/*     struct nlmsghdr msg; */
++/* }; */
++
++/* struct rtattr */
++/* { */
++/*     unsigned short rta_len; */
++/*     unsigned short rta_type; */
++/* }; */
++
++/* struct rtmsg */
++/* { */
++/*     unsigned char rtm_family; */
++/*     unsigned char rtm_dst_len; */
++/*     unsigned char rtm_src_len; */
++/*     unsigned char rtm_tos; */
++
++/*     unsigned char rtm_table; */
++/*     unsigned char rtm_protocol; */
++/*     unsigned char rtm_scope; */
++/*     unsigned char rtm_type; */
++
++/*     unsigned rtm_flags; */
++/* }; */
++
++/* enum */
++/* { */
++/*         IFLA_UNSPEC, */
++/*         IFLA_ADDRESS, */
++/*         IFLA_BROADCAST, */
++/*         IFLA_IFNAME, */
++/*         IFLA_MTU, */
++/*         IFLA_LINK, */
++/*         IFLA_QDISC, */
++/*         IFLA_STATS, */
++/*         IFLA_COST, */
++/*         IFLA_PRIORITY, */
++/*         IFLA_MASTER, */
++/*         IFLA_WIRELESS, */
++/*         IFLA_PROTINFO, */
++/* }; */
++
++/* enum */
++/* { */
++/*         IFA_UNSPEC, */
++/*         IFA_ADDRESS, */
++/*         IFA_LOCAL, */
++/*         IFA_LABEL, */
++/*         IFA_BROADCAST, */
++/*         IFA_ANYCAST, */
++/*         IFA_CACHEINFO */
++/* }; */
++
++/* struct ifaddrmsg */
++/* { */
++/*     unsigned char ifa_family; */
++/*     unsigned char ifa_prefixlen; */
++/*     unsigned char ifa_flags; */
++/*     unsigned char ifa_scope; */
++/*     int ifa_index; */
++/* }; */
++
++/* enum */
++/* { */
++/*     RTN_UNSPEC, */
++/*     RTN_UNICAST, */
++/*     RTN_LOCAL, */
++/*     RTN_BROADCAST, */
++/*     RTN_ANYCAST, */
++/*     RTN_MULTICAST, */
++/*     RTN_BLACKHOLE, */
++/*     RTN_UNREACHABLE, */
++/*     RTN_PROHIBIT, */
++/*     RTN_THROW, */
++/*     RTN_NAT, */
++/*     RTN_XRESOLVE, */
++/* }; */
++
++/* enum rt_scope_t */
++/* { */
++/*     RT_SCOPE_UNIVERSE=0, */
++/*     RT_SCOPE_SITE=200, */
++/*     RT_SCOPE_LINK=253, */
++/*     RT_SCOPE_HOST=254, */
++/*     RT_SCOPE_NOWHERE=255 */
++/* }; */
++
++/* struct rtnexthop */
++/* { */
++/*     unsigned short rtnh_len; */
++/*     unsigned char rtnh_flags; */
++/*     unsigned char rtnh_hops; */
++/*     int rtnh_ifindex; */
++/* }; */
++
++/* struct ifmap */
++/* { */
++/*     unsigned long int mem_start; */
++/*     unsigned long int mem_end; */
++/*     unsigned short int base_addr; */
++/*     unsigned char irq; */
++/*     unsigned char dma; */
++/*     unsigned char port; */
++/* }; */
++
++/* struct ifreq */
++/* { */
++/*     union */
++/*     { */
++/*         char ifrn_name[16]; */
++/*     } ifr_ifrn; */
++
++/*     union */
++/*     { */
++/*         struct sockaddr ifru_addr; */
++/*         struct sockaddr ifru_dstaddr; */
++/*         struct sockaddr ifru_broadaddr; */
++/*         struct sockaddr ifru_netmask; */
++/*         struct sockaddr ifru_hwaddr; */
++/*         short int ifru_flags; */
++/*         int ifru_ivalue; */
++/*         int ifru_mtu; */
++/*         struct ifmap ifru_map; */
++/*         char ifru_slave[16]; */
++/*         char ifru_newname[16]; */
++/*         caddr_t ifru_data; */
++/*     } ifr_ifru; */
++/* }; */
++
++/* typedef int (*compar_fn_t) (const void *, const void *); */
++
++/* struct in_pktinfo */
++/* { */
++/*   int ipi_ifindex; */
++/*   struct in_addr ipi_spec_dst; */
++/*   struct in_addr ipi_addr; */
++/* }; */
++
++/* #define RT_TABLE_MAX RT_TABLE_LOCAL */
++
++/* #define RTM_BASE        0x10 */
++
++/* #define RTM_NEWLINK     (RTM_BASE+0) */
++/* #define RTM_DELLINK     (RTM_BASE+1) */
++/* #define RTM_GETLINK     (RTM_BASE+2) */
++/* #define RTM_SETLINK     (RTM_BASE+3) */
++
++/* #define RTM_NEWADDR     (RTM_BASE+4) */
++/* #define RTM_DELADDR     (RTM_BASE+5) */
++/* #define RTM_GETADDR     (RTM_BASE+6) */
++
++/* #define RTM_NEWROUTE    (RTM_BASE+8) */
++/* #define RTM_DELROUTE    (RTM_BASE+9) */
++/* #define RTM_GETROUTE    (RTM_BASE+10) */
++
++/* #define RTM_NEWNEIGH    (RTM_BASE+12) */
++/* #define RTM_DELNEIGH    (RTM_BASE+13) */
++/* #define RTM_GETNEIGH    (RTM_BASE+14) */
++
++/* #define RTM_NEWRULE     (RTM_BASE+16) */
++/* #define RTM_DELRULE     (RTM_BASE+17) */
++/* #define RTM_GETRULE     (RTM_BASE+18) */
++
++/* #define RTM_NEWQDISC    (RTM_BASE+20) */
++/* #define RTM_DELQDISC    (RTM_BASE+21) */
++/* #define RTM_GETQDISC    (RTM_BASE+22) */
++
++/* #define RTM_NEWTCLASS   (RTM_BASE+24) */
++/* #define RTM_DELTCLASS   (RTM_BASE+25) */
++/* #define RTM_GETTCLASS   (RTM_BASE+26) */
++
++/* #define RTM_NEWTFILTER  (RTM_BASE+28) */
++/* #define RTM_DELTFILTER  (RTM_BASE+29) */
++/* #define RTM_GETTFILTER  (RTM_BASE+30) */
++
++/* #define RTM_MAX         (RTM_BASE+31) */
++
++/* #define RTA_MAX     RTA_SESSION */
++
++/* #define RTN_MAX     RTN_XRESOLVE */
++
++/* #define IFLA_COST IFLA_COST */
++/* #define IFLA_PRIORITY IFLA_PRIORITY */
++/* #define IFLA_MASTER IFLA_MASTER */
++/* #define IFLA_WIRELESS IFLA_WIRELESS */
++/* #define IFLA_PROTINFO IFLA_PROTINFO */
++
++/* #define IFLA_MAX        IFLA_PROTINFO */
++
++/* #define IFA_MAX         IFA_CACHEINFO */
++
++/* #define IFA_F_SECONDARY         0x01 */
++/* #define IFA_F_TEMPORARY         IFA_F_SECONDARY */
++
++/* #define IFA_F_DEPRECATED        0x20 */
++/* #define IFA_F_TENTATIVE         0x40 */
++/* #define IFA_F_PERMANENT         0x80 */
++
++/* #define RTM_F_NOTIFY            0x100 */
++/* #define RTM_F_CLONED            0x200 */
++/* #define RTM_F_EQUALIZE          0x400 */
++/* #define RTM_F_PREFIX            0x800 */
++
++/* #define RTPROT_UNSPEC       0 */
++/* #define RTPROT_REDIRECT     1 */
++/* #define RTPROT_KERNEL       2 */
++/* #define RTPROT_BOOT         3 */
++/* #define RTPROT_STATIC       4 */
++
++/* #define RTPROT_GATED        8 */
++/* #define RTPROT_RA           9 */
++/* #define RTPROT_MRT          10 */
++/* #define RTPROT_ZEBRA        11 */
++/* #define RTPROT_BIRD         12 */
++/* #define RTPROT_DNROUTED     13 */
++
++/* #define RTMGRP_LINK         1 */
++/* #define RTMGRP_NOTIFY       2 */
++/* #define RTMGRP_NEIGH        4 */
++/* #define RTMGRP_TC           8 */
++
++/* #define RTMGRP_IPV4_IFADDR      0x10 */
++/* #define RTMGRP_IPV4_MROUTE      0x20 */
++/* #define RTMGRP_IPV4_ROUTE       0x40 */
++
++/* #define RTMGRP_IPV6_IFADDR      0x100 */
++/* #define RTMGRP_IPV6_MROUTE      0x200 */
++/* #define RTMGRP_IPV6_ROUTE       0x400 */
++
++/* #define RTMGRP_DECnet_IFADDR    0x1000 */
++/* #define RTMGRP_DECnet_ROUTE     0x4000 */
++
++/* #define RTA_ALIGNTO             4 */
++/* #define RTA_ALIGN(len)          ( ((len)+RTA_ALIGNTO-1) & ~(RTA_ALIGNTO-1) ) */
++/* #define RTA_OK(rta,len)         ((len) > 0 && (rta)->rta_len >= sizeof(struct rtattr) && \ */
++/*                                     (rta)->rta_len <= (len)) */
++/* #define RTA_NEXT(rta,attrlen)   ((attrlen) -= RTA_ALIGN((rta)->rta_len), \ */
++/*                                     (struct rtattr*)(((char*)(rta)) + RTA_ALIGN((rta)->rta_len))) */
++
++/* #define RTA_LENGTH(len)         (RTA_ALIGN(sizeof(struct rtattr)) + (len)) */
++/* #define RTA_SPACE(len)          RTA_ALIGN(RTA_LENGTH(len)) */
++/* #define RTA_DATA(rta)           ((void*)(((char*)(rta)) + RTA_LENGTH(0))) */
++/* #define RTA_PAYLOAD(rta)        ((int)((rta)->rta_len) - RTA_LENGTH(0)) */
++
++/* #define IFLA_RTA(r)             ((struct rtattr*)(((char*)(r)) + NLMSG_ALIGN(sizeof(struct ifinfomsg)))) */
++/* #define IFLA_PAYLOAD(n)         NLMSG_PAYLOAD(n,sizeof(struct ifinfomsg)) */
++
++/* #define IFA_RTA(r)              ((struct rtattr*)(((char*)(r)) + NLMSG_ALIGN(sizeof(struct ifaddrmsg)))) */
++/* #define IFA_PAYLOAD(n)          NLMSG_PAYLOAD(n,sizeof(struct ifaddrmsg)) */
++
++/* #define RTM_RTA(r)              ((struct rtattr*)(((char*)(r)) + NLMSG_ALIGN(sizeof(struct rtmsg)))) */
++/* #define RTM_PAYLOAD(n)          NLMSG_PAYLOAD(n,sizeof(struct rtmsg)) */
++
++/* #define RTNH_ALIGNTO            4 */
++/* #define RTNH_ALIGN(len)         (((len)+RTNH_ALIGNTO-1) & ~(RTNH_ALIGNTO-1)) */
++/* #define RTNH_NEXT(rtnh)         ((struct rtnexthop*)(((char*)(rtnh)) + RTNH_ALIGN((rtnh)->rtnh_len))) */
++
++/* #define NETLINK_ROUTE       0 */
++
++/* #define NLM_F_REQUEST       1 */
++/* #define NLM_F_MULTI         2 */
++
++/* #define NLM_F_ROOT          0x100 */
++/* #define NLM_F_MATCH         0x200 */
++/* #define NLM_F_ACK           4 */
++/* #define NLM_F_ECHO          8 */
++
++/* #define NLM_F_REPLACE       0x100 */
++/* #define NLM_F_EXCL          0x200 */
++/* #define NLM_F_CREATE        0x400 */
++/* #define NLM_F_APPEND        0x800 */
++
++/* #define NLMSG_ALIGNTO           4 */
++/* #define NLMSG_ALIGN(len)        ( ((len)+NLMSG_ALIGNTO-1) & ~(NLMSG_ALIGNTO-1) ) */
++/* #define NLMSG_LENGTH(len)       ((len)+NLMSG_ALIGN(sizeof(struct nlmsghdr))) */
++/* #define NLMSG_SPACE(len)        NLMSG_ALIGN(NLMSG_LENGTH(len)) */
++/* #define NLMSG_DATA(nlh)         ((void*)(((char*)nlh) + NLMSG_LENGTH(0))) */
++/* #define NLMSG_NEXT(nlh,len)     ((len) -= NLMSG_ALIGN((nlh)->nlmsg_len), \ */
++/*                                     (struct nlmsghdr*)(((char*)(nlh)) + NLMSG_ALIGN((nlh)->nlmsg_len))) */
++/* #define NLMSG_OK(nlh,len)       ((len) > 0 && (nlh)->nlmsg_len >= sizeof(struct nlmsghdr) && \ */
++/*                                     (nlh)->nlmsg_len <= (len)) */
++/* #define NLMSG_PAYLOAD(nlh,len)  ((nlh)->nlmsg_len - NLMSG_SPACE((len))) */
++
++/* #define NLMSG_NOOP          0x1 */
++/* #define NLMSG_ERROR         0x2 */
++/* #define NLMSG_DONE          0x3 */
++/* #define NLMSG_OVERRUN       0x4 */
++
++/* #define ARPHRD_ETHER    1 */
++/* #define ARPHRD_PPP      512 */
++/* #define ARPHRD_LOOPBACK 772 */
++
++/* #define AF_NETLINK      PF_NETLINK */
++/* #define AF_PACKET       PF_PACKET */
++/* #define PF_NETLINK      16 */
++/* #define PF_PACKET       17 */
++
++/* // arpa/telnet.h */
++
++/* #define IAC             255 */
++/* #define DONT            254 */
++/* #define DO              253 */
++/* #define WILL            251 */
++/* #define SB              250 */
++/* #define SE              240 */
++
++/* #define TELOPT_ECHO     1 */
++/* #define TELOPT_SGA      3 */
++/* #define TELOPT_NAWS     31 */
++/* #define TELOPT_LINEMODE 34 */
++
++/* // sys/syslog.h */
++
++/* #define LOG_EMERG       0 */
++/* #define LOG_ALERT       1 */
++/* #define LOG_CRIT        2 */
++/* #define LOG_ERR         3 */
++/* #define LOG_WARNING     4 */
++/* #define LOG_NOTICE      5 */
++/* #define LOG_INFO        6 */
++/* #define LOG_DEBUG       7 */
++
++/* #define LOG_KERN        (0<<3) */
++/* #define LOG_USER        (1<<3) */
++/* #define LOG_MAIL        (2<<3) */
++/* #define LOG_DAEMON      (3<<3) */
++/* #define LOG_AUTH        (4<<3) */
++/* #define LOG_SYSLOG      (5<<3) */
++/* #define LOG_LPR         (6<<3) */
++/* #define LOG_NEWS        (7<<3) */
++/* #define LOG_UUCP        (8<<3) */
++/* #define LOG_CRON        (9<<3) */
++/* #define LOG_AUTHPRIV    (10<<3) */
++/* #define LOG_FTP         (11<<3) */
++
++/* #define LOG_LOCAL0      (16<<3) */
++/* #define LOG_LOCAL1      (17<<3) */
++/* #define LOG_LOCAL2      (18<<3) */
++/* #define LOG_LOCAL3      (19<<3) */
++/* #define LOG_LOCAL4      (20<<3) */
++/* #define LOG_LOCAL5      (21<<3) */
++/* #define LOG_LOCAL6      (22<<3) */
++/* #define LOG_LOCAL7      (23<<3) */
++
++/* #define LOG_PID         0x01 */
++/* #define LOG_CONS        0x02 */
++/* #define LOG_ODELAY      0x04 */
++/* #define LOG_NDELAY      0x08 */
++/* #define LOG_NOWAIT      0x10 */
++/* #define LOG_PERROR      0x20 */
++
++/* // asm/fcntl.h */
++
++/* #define F_GETFL     3 */
++/* #define F_SETFL     4 */
++/* #define O_NONBLOCK  04000 */
++
++/* // asm/signal.h */
++
++/* #define SIGHUP          1 */
++/* #define SIGINT          2 */
++/* #define SIGQUIT         3 */
++/* #define SIGILL          4 */
++/* #define SIGBUS          7 */
++/* #define SIGFPE          8 */
++/* #define SIGUSR1         10 */
++/* #define SIGSEGV         11 */
++/* #define SIGUSR2         12 */
++/* #define SIGPIPE         13 */
++/* #define SIGALRM         14 */
++/* #define SIGTERM         15 */
++
++/* // bits/ioctls.h */
++
++/* #define SIOCADDRT           0x890B */
++/* #define SIOCDELRT           0x890C */
++/* #define SIOCRTMSG           0x890D */
++
++/* #define SIOCGIFFLAGS        0x8913 */
++/* #define SIOCSIFFLAGS        0x8914 */
++
++/* // net/if.h */
++
++/* #define IF_NAMESIZE     16 */
++
++/* #define IFHWADDRLEN    6 */
++/* #define IFNAMSIZ       IF_NAMESIZE */
++
++/* #define ifr_name        ifr_ifrn.ifrn_name */
++/* #define ifr_hwaddr      ifr_ifru.ifru_hwaddr */
++/* #define ifr_addr        ifr_ifru.ifru_addr */
++/* #define ifr_dstaddr     ifr_ifru.ifru_dstaddr */
++/* #define ifr_broadaddr   ifr_ifru.ifru_broadaddr */
++/* #define ifr_netmask     ifr_ifru.ifru_netmask */
++/* #define ifr_flags       ifr_ifru.ifru_flags */
++/* #define ifr_metric      ifr_ifru.ifru_ivalue */
++/* #define ifr_mtu         ifr_ifru.ifru_mtu */
++/* #define ifr_map         ifr_ifru.ifru_map */
++/* #define ifr_slave       ifr_ifru.ifru_slave */
++/* #define ifr_data        ifr_ifru.ifru_data */
++/* #define ifr_ifindex     ifr_ifru.ifru_ivalue */
++/* #define ifr_bandwidth   ifr_ifru.ifru_ivalue */
++/* #define ifr_qlen        ifr_ifru.ifru_ivalue */
++/* #define ifr_newname     ifr_ifru.ifru_newname */
++/* #define _IOT_ifreq     _IOT(_IOTS(char),IFNAMSIZ,_IOTS(char),16,0,0) */
++/* #define _IOT_ifreq_short _IOT(_IOTS(char),IFNAMSIZ,_IOTS(short),1,0,0) */
++/* #define _IOT_ifreq_int _IOT(_IOTS(char),IFNAMSIZ,_IOTS(int),1,0,0) */
++
++/* #endif */
+diff -Naur INET-20061020-sommer_dymo06\inetconfig.vc INET_dymo\inetconfig.vc
+--- INET-20061020-sommer_dymo06\inetconfig.vc	Thu Jan 01 00:00:00 1970
++++ INET_dymo\inetconfig.vc	Wed Aug 20 14:40:34 2008
+@@ -0,0 +1,27 @@
++#
++# Config file for the INET framework on Windows/MSVC. (Not used on Linux.)
++# This is included by every makefile.
++#
++# BEFORE COMPILATION: copy/rename this file to inetconfig.vc, and adjust 
++# OMNETPP_ROOT in it. (inetconfig.vc was removed from the CVS, to prevent
++# overwriting each other's settings in it with each cvs update.)
++#
++
++OMNETPP_ROOT=e:/tools/omnetpp
++
++!if !exist($(OMNETPP_ROOT)\configuser.vc)
++!  error Please adjust OMNETPP_ROOT in inetconfig.vc to point to your OMNeT++ installation!
++!endif
++
++!include $(OMNETPP_ROOT)\configuser.vc
++
++CFLAGS=$(CFLAGS) /DBUILDING_INET /DWITH_IPv6
++
++#INCLUDE_PATH=$(INCLUDE_PATH) ...additional include directories...
++#LIBS=$(LIBS) ...additional libs and lib directories...
++
++
++
++
++
++
+diff -Naur INET-20061020-sommer_dymo06\makefrag.vc INET_dymo\makefrag.vc
+--- INET-20061020-sommer_dymo06\makefrag.vc	Thu Aug 02 11:09:24 2007
++++ INET_dymo\makefrag.vc	Fri Aug 22 17:39:46 2008
+@@ -11,7 +11,7 @@
+ Applications_dir NetworkInterfaces_dir : Network_dir
+ 
+ # add dependencies across directories
+-bin_dir: Applications_dir Transport_dir Network_dir NetworkInterfaces_dir PHY_dir Mobility_dir World_dir Base_dir Util_dir Nodes_dir
++bin_dir: Applications_dir Transport_dir Network_dir NetworkInterfaces_dir PHY_dir Mobility_dir World_dir Base_dir Util_dir Nodes_dir FAU_dir
+ Network_dir Transport_dir NetworkInterfaces_dir PHY_dir Applications_dir : Util_dir Base_dir
+ Nodes_dir : Network_dir Transport_dir NetworkInterfaces_dir PHY_dir Mobility_dir Applications_dir World_dir
+ Examples_dir Tests_dir : Nodes_dir
+diff -Naur INET-20061020-sommer_dymo06\makemakefiles INET_dymo\makemakefiles
+--- INET-20061020-sommer_dymo06\makemakefiles	Thu Aug 02 11:16:44 2007
++++ INET_dymo\makemakefiles	Wed Aug 20 15:08:25 2008
+@@ -49,12 +49,12 @@
+ 	cd Base && $(MAKEMAKE) $(OPTS) -n -r -I../Util
+ 	cd Util && $(MAKEMAKE) $(OPTS) -n -r $(ALL_INET_INCLUDES) $(ALL_IPv6_INCLUDES) $(ALL_MPLS_INCLUDES) $(ALL_MF_INCLUDES)
+ 
+-	# -v- begin FAU extensions -v-
++# -v- begin FAU extensions -v-
+ 	cd FAU && $(MAKEMAKE) $(OPTS) -n -r
+ 	cd FAU/Network && $(MAKEMAKE) $(OPTS) -n -r
+ 	cd FAU/Network/DYMO && $(MAKEMAKE) $(OPTS) -n -r $(CONTRACT_INCLUDES) -I$(ROOT) -I$(ROOT)/Network/IPv4
+ 	cd FAU/Network/DYMOnet && $(MAKEMAKE) $(OPTS) -n -r $(CONTRACT_INCLUDES) -I$(ROOT) -I$(ROOT)/Network/IPv4
+-	# -^- end FAU extensions -^-
++# -^- end FAU extensions -^-
+ 
+ 	: # MF stuff follows
+ 	cd World && $(MAKEMAKE) $(OPTS) -n -r -I../Util -I../Base
+diff -Naur INET-20061020-sommer_dymo06\nedfiles.lst INET_dymo\nedfiles.lst
+--- INET-20061020-sommer_dymo06\nedfiles.lst	Thu Aug 02 11:23:04 2007
++++ INET_dymo\nedfiles.lst	Fri Aug 22 17:41:01 2008
+@@ -1,286 +1,164 @@
+-./Base/NotificationBoard.ned
+-./Base/Blackboard.ned
+-./Base/Join.ned
+-./Base/Sink.ned
+-./Base/Nop.ned
+-./Util/TCPDump.ned
+-./Util/NAMTraceWriter.ned
+-./inet-index.ned
+-./Nodes/INET/StandardHost.ned
+-./Nodes/INET/QuaggaRouter.ned
+-./Nodes/INET/NetworkLayer.ned
+-./Nodes/INET/Router.ned
+-./Nodes/INET/BurstHost.ned
+-./Nodes/INET/OSPFRouter.ned
+-./Nodes/INET/FailedRouter.ned
+-./Nodes/INET/TCPSpoofingHost.ned
+-./Nodes/IPv6/Router6.ned
+-./Nodes/IPv6/NetworkLayer6.ned
+-./Nodes/IPv6/StandardHost6.ned
+-./Nodes/MPLS/RSVP_FAILED.ned
+-./Nodes/MPLS/LDP_LSR.ned
+-./Nodes/MPLS/RSVP_LSR.ned
+-./Nodes/MPLS/LDP_FAILED.ned
+-./Nodes/Adhoc/MFMobileHost.ned
+-./Nodes/Adhoc/MobileHost.ned
+-./Nodes/Wireless/WirelessAPWithEthSimplified.ned
+-./Nodes/Wireless/WirelessAP.ned
+-./Nodes/Wireless/WirelessHost.ned
+-./Nodes/Wireless/WirelessAPSimplified.ned
+-./Nodes/Wireless/WirelessAPWithEth.ned
+-./Nodes/Wireless/WirelessHostSimplified.ned
+-
+-
+-
+-
+-
+-./World/NAMTrace.ned
+-./World/ScenarioManager.ned
+-./World/ChannelControl.ned
+-./World/ChannelInstaller.ned
+-./NetworkInterfaces/PPP/PPPInterface.ned
+-./NetworkInterfaces/PPP/PPP.ned
+-./NetworkInterfaces/PPP/PPPInterfaceNoQueue.ned
+-./NetworkInterfaces/PPP/ThruputMeter.ned
+-./NetworkInterfaces/Ethernet/EthernetInterface.ned
+-./NetworkInterfaces/Ethernet/EtherEncap.ned
+-./NetworkInterfaces/Ethernet/EtherMAC.ned
+-./NetworkInterfaces/Ethernet/EtherLLC.ned
+-./NetworkInterfaces/Ethernet/EtherHub.ned
+-./NetworkInterfaces/Ethernet/EtherBus.ned
+-./NetworkInterfaces/Ethernet/eth-index.ned
+-./NetworkInterfaces/Ethernet/EtherMAC2.ned
+-./NetworkInterfaces/Ethernet/EthernetInterface2.ned
+-./NetworkInterfaces/Ethernet/EthernetInterfaceNoQueue.ned
+-./NetworkInterfaces/Radio/GenericRadio.ned
+-./NetworkInterfaces/Radio/Ieee80211Radio.ned
+-./NetworkInterfaces/Radio/Radio.ned
+-./NetworkInterfaces/MFCore/BasicDecider.ned
+-./NetworkInterfaces/MFCore/WirelessMac.ned
+-./NetworkInterfaces/MFCore/BasicSnrEval.ned
+-./NetworkInterfaces/EtherSwitch/MACRelayUnitNP.ned
+-./NetworkInterfaces/EtherSwitch/MACRelayUnitPP.ned
+-./NetworkInterfaces/EtherSwitch/EtherSwitch.ned
+-./NetworkInterfaces/EtherSwitch/MACRelayUnit.ned
+-./NetworkInterfaces/EtherSwitch/EtherSwitch2.ned
+-./NetworkInterfaces/MF80211/NicCsma.ned
+-./NetworkInterfaces/MF80211/macLayer/Mac80211.ned
+-./NetworkInterfaces/MF80211/macLayer/CSMAMacLayer.ned
+-./NetworkInterfaces/MF80211/Nic80211.ned
+-./NetworkInterfaces/MF80211/phyLayer/decider/ErrAndCollDecider.ned
+-./NetworkInterfaces/MF80211/phyLayer/decider/SnrDecider.ned
+-./NetworkInterfaces/MF80211/phyLayer/decider/Decider80211.ned
+-./NetworkInterfaces/MF80211/phyLayer/snrEval/SnrEval.ned
+-./NetworkInterfaces/MF80211/phyLayer/snrEval/SnrEval80211.ned
+-./NetworkInterfaces/MF80211/phyLayer/snrEval/GilbertElliotSnr.ned
+-./NetworkInterfaces/MF80211/SnrNic.ned
+-./NetworkInterfaces/NetworkInterface.ned
+-./NetworkInterfaces/Ieee80211/Ieee80211NicAdhoc.ned
+-./NetworkInterfaces/Ieee80211/Mac/Ieee80211Mac.ned
+-./NetworkInterfaces/Ieee80211/Ieee80211NicAP.ned
+-./NetworkInterfaces/Ieee80211/Mgmt/Ieee80211MgmtSTASimplified.ned
+-./NetworkInterfaces/Ieee80211/Mgmt/Ieee80211AgentSTA.ned
+-./NetworkInterfaces/Ieee80211/Mgmt/Ieee80211MgmtAdhoc.ned
+-./NetworkInterfaces/Ieee80211/Mgmt/Ieee80211Mgmt.ned
+-./NetworkInterfaces/Ieee80211/Mgmt/Ieee80211MgmtAPSimplified.ned
+-./NetworkInterfaces/Ieee80211/Mgmt/Ieee80211MgmtSTA.ned
+-./NetworkInterfaces/Ieee80211/Mgmt/Ieee80211MgmtAP.ned
+-./NetworkInterfaces/Ieee80211/Ieee80211Doc.ned
+-./NetworkInterfaces/Ieee80211/Ieee80211NicSTASimplified.ned
+-./NetworkInterfaces/Ieee80211/Ieee80211NicAPSimplified.ned
+-./NetworkInterfaces/Ieee80211/Ieee80211Nic.ned
+-./NetworkInterfaces/Ieee80211/Ieee80211NicSTA.ned
+-./mpls-doc.ned
+-./Applications/Ethernet/EtherAppSrv.ned
+-./Applications/Ethernet/EtherAppCli.ned
+-./Applications/PingApp/PingApp.ned
+-./Applications/TCPApp/TCPSessionApp.ned
+-./Applications/TCPApp/TCPApp.ned
+-./Applications/TCPApp/TCPBasicClientApp.ned
+-./Applications/TCPApp/TelnetApp.ned
+-./Applications/TCPApp/TCPSinkApp.ned
+-./Applications/TCPApp/TCPSrvHostApp.ned
+-./Applications/TCPApp/TCPSpoof.ned
+-./Applications/TCPApp/TCPEchoApp.ned
+-./Applications/TCPApp/TCPGenericSrvApp.ned
+-./Applications/UDPApp/UDPSink.ned
+-./Applications/UDPApp/UDPVideoStreamSvr.ned
+-./Applications/UDPApp/UDPBasicApp.ned
+-./Applications/UDPApp/UDPVideoStreamCli.ned
+-./Applications/UDPApp/UDPApp.ned
+-./Applications/UDPApp/UDPEchoApp.ned
+-./Applications/Generic/IPTrafficGenerator.ned
+-./Applications/Generic/IPTrafGen.ned
+-./inet-doc.ned
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-./Transport/RTP/RTPPayloadReceiver.ned
+-./Transport/RTP/RTPHost.ned
+-./Transport/RTP/RTPLayer.ned
+-./Transport/RTP/RTPApplication.ned
+-./Transport/RTP/RTPPayloadSender.ned
+-./Transport/RTP/RTPProfile.ned
+-./Transport/RTP/RTCPModule.ned
+-./Transport/RTP/RTPModule.ned
+-./Transport/TCP/TCP.ned
+-./Transport/UDP/UDP.ned
+-./Network/ARP/ARP.ned
+-./Network/LDP/LDP.ned
+-./Network/TED/LinkStateRouting.ned
+-./Network/TED/TED.ned
+-./Network/IPv4/IP.ned
+-./Network/IPv4/RoutingTable.ned
+-./Network/IPv4/IGMP.ned
+-./Network/IPv4/ICMP.ned
+-./Network/IPv4/ErrorHandling.ned
+-./Network/IPv6/IPv6.ned
+-./Network/IPv6/IPv6ErrorHandling.ned
+-./Network/IPv6/RoutingTable6.ned
+-./Network/MPLS/MPLS.ned
+-./Network/MPLS/LIBTable.ned
+-./Network/ICMPv6/IPv6NeighbourDiscovery.ned
+-./Network/ICMPv6/ICMPv6.ned
+-./Network/Extras/Dummy.ned
+-./Network/Extras/FailureManager.ned
+-./Network/AutoRouting/FlatNetworkConfigurator.ned
+-./Network/AutoRouting/FlatNetworkConfigurator6.ned
+-./Network/AutoRouting/NetworkConfigurator.ned
+-./Network/Queue/OutputQueue.ned
+-./Network/Queue/REDQueue.ned
+-./Network/Queue/DropTailQueue.ned
+-./Network/Queue/DropTailQoSQueue.ned
+-./Network/OSPFv2/OSPFRouting.ned
+-./Network/RSVP_TE/SimpleClassifier.ned
+-./Network/RSVP_TE/RSVP.ned
+-./Network/Contract/InterfaceTable.ned
+-./Network/Quagga/Daemon.ned
+-./Mobility/RandomWPMobility.ned
+-./Mobility/MassMobility.ned
+-./Mobility/NullMobility.ned
+-./Mobility/LinearMobility.ned
+-./Mobility/ANSimMobility.ned
+-./Mobility/TurtleMobility.ned
+-./Mobility/ConstSpeedMobility.ned
+-./Mobility/RectangleMobility.ned
+-./Mobility/BonnMotionMobility.ned
+-./Mobility/CircleMobility.ned
+-./Mobility/BasicMobility.ned
+-./FAU/Network/DYMO/DYMO_DataQueue.ned
+-./FAU/Network/DYMO/DYMO_InboundHook.ned
+-./FAU/Network/DYMO/DYMO.ned
+-./FAU/Network/DYMOnet/DYMO.ned
++inet-doc.ned
++inet-index.ned
++mpls-doc.ned
++Applications/Ethernet/EtherAppCli.ned
++Applications/Ethernet/EtherAppSrv.ned
++Applications/Generic/IPTrafficGenerator.ned
++Applications/Generic/IPTrafGen.ned
++Applications/PingApp/PingApp.ned
++Applications/TCPApp/TCPApp.ned
++Applications/TCPApp/TCPBasicClientApp.ned
++Applications/TCPApp/TCPEchoApp.ned
++Applications/TCPApp/TCPGenericSrvApp.ned
++Applications/TCPApp/TCPSessionApp.ned
++Applications/TCPApp/TCPSinkApp.ned
++Applications/TCPApp/TCPSpoof.ned
++Applications/TCPApp/TCPSrvHostApp.ned
++Applications/TCPApp/TelnetApp.ned
++Applications/UDPApp/UDPApp.ned
++Applications/UDPApp/UDPBasicApp.ned
++Applications/UDPApp/UDPEchoApp.ned
++Applications/UDPApp/UDPSink.ned
++Applications/UDPApp/UDPVideoStreamCli.ned
++Applications/UDPApp/UDPVideoStreamSvr.ned
++Base/Blackboard.ned
++Base/Join.ned
++Base/Nop.ned
++Base/NotificationBoard.ned
++Base/Sink.ned
++FAU/Network/DYMO/DYMO.ned
++FAU/Network/DYMO/DYMO_DataQueue.ned
++FAU/Network/DYMO/DYMO_InboundHook.ned
++FAU/Network/DYMOnet/DYMO.ned
++Mobility/ANSimMobility.ned
++Mobility/BasicMobility.ned
++Mobility/BonnMotionMobility.ned
++Mobility/CircleMobility.ned
++Mobility/ConstSpeedMobility.ned
++Mobility/LinearMobility.ned
++Mobility/MassMobility.ned
++Mobility/NullMobility.ned
++Mobility/RandomWPMobility.ned
++Mobility/RectangleMobility.ned
++Mobility/TurtleMobility.ned
++Network/ARP/ARP.ned
++Network/AutoRouting/FlatNetworkConfigurator.ned
++Network/AutoRouting/FlatNetworkConfigurator6.ned
++Network/AutoRouting/NetworkConfigurator.ned
++Network/Contract/InterfaceTable.ned
++Network/Extras/Dummy.ned
++Network/Extras/FailureManager.ned
++Network/ICMPv6/ICMPv6.ned
++Network/ICMPv6/IPv6NeighbourDiscovery.ned
++Network/IPv4/ErrorHandling.ned
++Network/IPv4/ICMP.ned
++Network/IPv4/IGMP.ned
++Network/IPv4/IP.ned
++Network/IPv4/RoutingTable.ned
++Network/IPv6/IPv6.ned
++Network/IPv6/IPv6ErrorHandling.ned
++Network/IPv6/RoutingTable6.ned
++Network/LDP/LDP.ned
++Network/MPLS/LIBTable.ned
++Network/MPLS/MPLS.ned
++Network/OSPFv2/OSPFRouting.ned
++Network/Quagga/Daemon.ned
++Network/Queue/DropTailQoSQueue.ned
++Network/Queue/DropTailQueue.ned
++Network/Queue/OutputQueue.ned
++Network/Queue/REDQueue.ned
++Network/RSVP_TE/RSVP.ned
++Network/RSVP_TE/SimpleClassifier.ned
++Network/TED/LinkStateRouting.ned
++Network/TED/TED.ned
++NetworkInterfaces/NetworkInterface.ned
++NetworkInterfaces/Ethernet/eth-index.ned
++NetworkInterfaces/Ethernet/EtherBus.ned
++NetworkInterfaces/Ethernet/EtherEncap.ned
++NetworkInterfaces/Ethernet/EtherHub.ned
++NetworkInterfaces/Ethernet/EtherLLC.ned
++NetworkInterfaces/Ethernet/EtherMAC.ned
++NetworkInterfaces/Ethernet/EtherMAC2.ned
++NetworkInterfaces/Ethernet/EthernetInterface.ned
++NetworkInterfaces/Ethernet/EthernetInterface2.ned
++NetworkInterfaces/Ethernet/EthernetInterfaceNoQueue.ned
++NetworkInterfaces/EtherSwitch/EtherSwitch.ned
++NetworkInterfaces/EtherSwitch/EtherSwitch2.ned
++NetworkInterfaces/EtherSwitch/MACRelayUnit.ned
++NetworkInterfaces/EtherSwitch/MACRelayUnitNP.ned
++NetworkInterfaces/EtherSwitch/MACRelayUnitPP.ned
++NetworkInterfaces/Ieee80211/Ieee80211Doc.ned
++NetworkInterfaces/Ieee80211/Ieee80211Nic.ned
++NetworkInterfaces/Ieee80211/Ieee80211NicAdhoc.ned
++NetworkInterfaces/Ieee80211/Ieee80211NicAP.ned
++NetworkInterfaces/Ieee80211/Ieee80211NicAPSimplified.ned
++NetworkInterfaces/Ieee80211/Ieee80211NicSTA.ned
++NetworkInterfaces/Ieee80211/Ieee80211NicSTASimplified.ned
++NetworkInterfaces/Ieee80211/Mac/Ieee80211Mac.ned
++NetworkInterfaces/Ieee80211/Mgmt/Ieee80211AgentSTA.ned
++NetworkInterfaces/Ieee80211/Mgmt/Ieee80211Mgmt.ned
++NetworkInterfaces/Ieee80211/Mgmt/Ieee80211MgmtAdhoc.ned
++NetworkInterfaces/Ieee80211/Mgmt/Ieee80211MgmtAP.ned
++NetworkInterfaces/Ieee80211/Mgmt/Ieee80211MgmtAPSimplified.ned
++NetworkInterfaces/Ieee80211/Mgmt/Ieee80211MgmtSTA.ned
++NetworkInterfaces/Ieee80211/Mgmt/Ieee80211MgmtSTASimplified.ned
++NetworkInterfaces/MF80211/Nic80211.ned
++NetworkInterfaces/MF80211/NicCsma.ned
++NetworkInterfaces/MF80211/SnrNic.ned
++NetworkInterfaces/MF80211/macLayer/CSMAMacLayer.ned
++NetworkInterfaces/MF80211/macLayer/Mac80211.ned
++NetworkInterfaces/MF80211/phyLayer/decider/Decider80211.ned
++NetworkInterfaces/MF80211/phyLayer/decider/ErrAndCollDecider.ned
++NetworkInterfaces/MF80211/phyLayer/decider/SnrDecider.ned
++NetworkInterfaces/MF80211/phyLayer/snrEval/GilbertElliotSnr.ned
++NetworkInterfaces/MF80211/phyLayer/snrEval/SnrEval.ned
++NetworkInterfaces/MF80211/phyLayer/snrEval/SnrEval80211.ned
++NetworkInterfaces/MFCore/BasicDecider.ned
++NetworkInterfaces/MFCore/BasicSnrEval.ned
++NetworkInterfaces/MFCore/WirelessMac.ned
++NetworkInterfaces/PPP/PPP.ned
++NetworkInterfaces/PPP/PPPInterface.ned
++NetworkInterfaces/PPP/PPPInterfaceNoQueue.ned
++NetworkInterfaces/PPP/ThruputMeter.ned
++NetworkInterfaces/Radio/GenericRadio.ned
++NetworkInterfaces/Radio/Ieee80211Radio.ned
++NetworkInterfaces/Radio/Radio.ned
++Nodes/Adhoc/MFMobileHost.ned
++Nodes/Adhoc/MobileHost.ned
++Nodes/INET/BurstHost.ned
++Nodes/INET/FailedRouter.ned
++Nodes/INET/NetworkLayer.ned
++Nodes/INET/OSPFRouter.ned
++Nodes/INET/QuaggaRouter.ned
++Nodes/INET/Router.ned
++Nodes/INET/StandardHost.ned
++Nodes/INET/TCPSpoofingHost.ned
++Nodes/IPv6/NetworkLayer6.ned
++Nodes/IPv6/Router6.ned
++Nodes/IPv6/StandardHost6.ned
++Nodes/MPLS/LDP_FAILED.ned
++Nodes/MPLS/LDP_LSR.ned
++Nodes/MPLS/RSVP_FAILED.ned
++Nodes/MPLS/RSVP_LSR.ned
++Nodes/Wireless/WirelessAP.ned
++Nodes/Wireless/WirelessAPSimplified.ned
++Nodes/Wireless/WirelessAPWithEth.ned
++Nodes/Wireless/WirelessAPWithEthSimplified.ned
++Nodes/Wireless/WirelessHost.ned
++Nodes/Wireless/WirelessHostSimplified.ned
++Transport/RTP/RTCPModule.ned
++Transport/RTP/RTPApplication.ned
++Transport/RTP/RTPHost.ned
++Transport/RTP/RTPLayer.ned
++Transport/RTP/RTPModule.ned
++Transport/RTP/RTPPayloadReceiver.ned
++Transport/RTP/RTPPayloadSender.ned
++Transport/RTP/RTPProfile.ned
++Transport/TCP/TCP.ned
++Transport/UDP/UDP.ned
++Util/NAMTraceWriter.ned
++Util/TCPDump.ned
++World/ChannelControl.ned
++World/ChannelInstaller.ned
++World/NAMTrace.ned
++World/ScenarioManager.ned
