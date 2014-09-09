@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Clean-Slate Design of Next-Generation Optical Access (NGOA)</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Clean-Slate Design of Next-Generation Optical Access (NGOA)"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="Time-stamp: &lt;2014-09-09 10:20:51 Kyeong Soo (Joseph) Kim&gt;"/>
+<meta name="author" content="Kyeong Soo (Joseph) Kim, Karin Ennser, and Yogesh K. Dwivedi"/>
+<meta name="description" content="level-2 org export template"/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../css/mystyle.css" />
+<link rel="stylesheet" type="text/css" href="../../css/mystyle.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="../../index.html"> UP </a>
+ |
+ <a accesskey="H" href="./index.html"> HOME </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Clean-Slate Design of Next-Generation Optical Access (NGOA)</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">People</a>
+<ul>
+<li><a href="#sec-1-1">Faculty</a></li>
+<li><a href="#sec-1-2">Students</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">Partners</a></li>
+<li><a href="#sec-3">Equipment and Facilities</a></li>
+<li><a href="#sec-4">Executive Summary</a>
+<ul>
+<li><a href="#sec-4-1">1-page poster summary (pdf)</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">Proposed Research and its Context</a>
+<ul>
+<li><a href="#sec-5-1">Background</a></li>
+<li><a href="#sec-5-2">Academic Impact</a></li>
+<li><a href="#sec-5-3">Research Hypothesis and Objectives</a></li>
+<li><a href="#sec-5-4">Programme and Methodology</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">Pathways to Impact</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">People</h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">Faculty</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<ul>
+<li><a href="http://kyeongsoo.github.io/">Dr Kyeong Soo (Joseph) Kim</a>, <a href="http://www.swan.ac.uk/engineering/">College of Engineering</a>, <a href="http://www.swan.ac.uk/">Swansea University</a>
+</li>
+<li><a href="mailto:k.ennser@swansea.ac.uk">Dr Karin Ennser</a>, <a href="http://www.swan.ac.uk/engineering/">College of Engineering</a>, <a href="http://www.swan.ac.uk/">Swansea University</a>
+</li>
+<li><a href="http://www.swan.ac.uk/staff/academic/BusinessEconomics/dwivediy/">Dr Yogesh K. Dwivedi</a>, <a href="http://www.swan.ac.uk/business/">School of Business &amp; Economics</a>, <a href="http://www.swan.ac.uk/">Swansea University</a>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2">Students</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<ul>
+<li>Mr Marcelo Zannin da Rosa
+<ul>
+<li><b>E-mail</b>: marcelo.z.rosa_at_gmail.com
+</li>
+</ul>
+
+</li>
+<li>Mr Solomon Mangeni
+<ul>
+<li><b>E-mail</b>: S.W.Mangeni_at_swansea.ac.uk
+</li>
+</ul>
+
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Partners</h2>
+<div class="outline-text-2" id="text-2">
+
+<ul>
+<li><a href="http://www.amazon.com/">Amazon</a> (<a href="http://aws.amazon.com/education/">Amazon Web Services (AWS) in Education</a> Research Grant)
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Equipment and Facilities</h2>
+<div class="outline-text-2" id="text-3">
+
+<p><img src="../../../img/ngoa_virtual_testbed.png"  alt="../../../img/ngoa_virtual_testbed.png" />
+</p><ul>
+<li>1.25 Gb/s GPON testbed
+</li>
+<li>Private cloud: Dell Linux HPC cluster
+<ul>
+<li>1 head + 16 computing nodes; each computing node with 2-GHz, 6-core Intel
+    Xeon E5-2620 processor and 32-GB memory (i.e., 192 logical cores and 512-GB
+    memory in total)
+</li>
+</ul>
+
+</li>
+<li>Public cloud: <a href="http://aws.amazon.com/ec2/">Amazon Elastic Compute Cloud (Amazon EC2)</a>
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Executive Summary</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>We have been investigating the issues of quality of experience (QoE),
+elasticity<sup><a class="footref" name="fnr-.1" href="#fn-.1">1</a></sup>, and energy efficiency in NGOA with a focus on the
+solutions beyond 10G-EPON/XG-PON (i.e., NG-PON2 by ITU-T) and found
+out that the progress in the clean-slate design of NGOA has been
+impeded by the absence of a comprehensive research framework for a
+comparative analysis of candidate network architectures and protocols.
+</p>
+<p>
+We propose, therefore, a research programme for the clean-slate design
+of NGOA with the following major objectives:
+</p><ul>
+<li>A new comparative analysis framework based on statistical hypothesis
+  testing and user-perceived performances;
+</li>
+<li>User behaviour modelling for future services and applications;
+</li>
+<li>Virtual test bed for experiments under a realistic operating
+  environment;
+</li>
+<li>Energy-efficient and elastic components and architectures.
+</li>
+</ul>
+
+
+<p>
+The results of the proposed research programme will not only enable
+researchers to carry out a fair and objective comparison of various
+candidate architectures and protocols, but also allow network
+operators &amp; service providers to dimension their future NGOA under a
+realistic environment through the virtual test bed.
+</p>
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><a href="./programme_overview.pdf">1-page poster summary (pdf)</a></h3>
+<div class="outline-text-3" id="text-4-1">
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">Proposed Research and its Context</h2>
+<div class="outline-text-2" id="text-5">
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1">Background</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<p>One of the major questions within the optical networking community now
+is not whether we should deploy the optical access, but when and how
+we should. The choice of network architecture, therefore, becomes a
+critical concern. In selecting network architecture for
+next-generation optical access (NGOA), a fundamental question is user
+bandwidth requirement: How much bandwidth will be enough to meet user
+demands for future services and applications? In fact, specifying the
+user bandwidth requirement is a complicated task. For example, when we
+are talking about "10-Gb/s access", it is not clear whether this means
+10 Gb/s per user in a non-contentious way or not. Also, 10-Gb/s line
+rate in the access is a necessary but not a sufficient condition
+because some degree of contention can exist at various points in the
+network. If we limit our focus on the access side, the original
+question becomes What does 10-Gb/s access means at the user side? To
+answer this question, we need a quantifiable and measurable definition
+of user bandwidth requirement. The answer to this question will not
+only decide whether we can use shared architectures, which can provide
+many benefits from sharing of network resources, but also enable us to
+quantify the advantages of one architecture against the other.  Note
+that most existing work in optical access has focused on technical
+issues in physical and data link layers only and hardly taken into
+account the upper layers and application- and user-level
+performances. On the other hand, many of the study on services &amp;
+applications, network traffic, and higher layer protocols do not
+consider much the lower layer issues.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2">Academic Impact</h3>
+<div class="outline-text-3" id="text-5-2">
+
+<p>A new comprehensive research framework and a way to carry out
+experiments under it through a virtual test bed will provide
+researchers with a <i>standard methodology to evaluate the performances</i>
+of their proposed architectures and protocols and <i>compare</i> them with
+those from others in an objective and systematic way.
+</p><ul>
+<li>The resulting metric (see the research programme below for details)
+  will serve as a <i>benchmark</i> among candidate systems (as in computing
+  industry).
+</li>
+<li>A virtual test bed will be implemented as open-source simulation
+  framework &amp; models and, as such, <i>available to all researchers</i> in
+  both Academia and Industry.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3">Research Hypothesis and Objectives</h3>
+<div class="outline-text-3" id="text-5-3">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-4" class="outline-3">
+<h3 id="sec-5-4">Programme and Methodology</h3>
+<div class="outline-text-3" id="text-5-4">
+
+<p>We tackle the problem of quantifying user bandwidth requirement for
+the NGOA in objective and fair assessment of candidate
+architectures. We will base our work on the equivalent circuit rate
+(ECR) framework<sup><a class="footref" name="fnr-.2" href="#fn-.2">2</a></sup>, a quantitative analysis framework based on the
+end-user experiences capturing the impact of the whole network
+protocol stack as well as network architecture itself, and implement a
+virtual test bed for realistic simulation of candidate architectures.
+</p>
+<p>
+The major objectives are:
+</p><ul>
+<li>To develop a quantifiable and measurable definition of user
+  bandwidth requirement;
+</li>
+<li>To implement a virtual test bed capturing all the important aspects
+  from the physical layer to the application layer to end-user
+  behavior;
+</li>
+<li>To investigate power and cost issues of architectures based on the
+  developed measure and the virtual test bed.
+</li>
+</ul>
+
+
+<p>
+We recently reported initial results on this
+work<sup><a class="footref" name="fnr-.2.2" href="#fn-.2">2</a></sup>,<sup><a class="footref" name="fnr-.3" href="#fn-.3">3</a></sup>,<sup><a class="footref" name="fnr-.4" href="#fn-.4">4</a></sup>,<sup><a class="footref" name="fnr-.5" href="#fn-.5">5</a></sup>,<sup><a class="footref" name="fnr-.6" href="#fn-.6">6</a></sup>: We have developed a systematic
+ECR calculation procedure and application-level traffic models for web
+browsing, file downloading, and streaming video; we have also carried
+out a comparison study with a dedicated reference architecture and
+hybrid TDM/WDM-PON.
+</p>
+<p>
+Two major challenges identified from the initial work are (1) the need
+of huge computing power for a series of large-scale simulations and
+(2) the development of end-user behavioral models.
+</p>
+<p>
+As for the computing power, note that it took several months to finish
+the whole simulation with a Linux cluster with 22 nodes, each with
+8-GB memory and a 2-GHz 8-core Intel Xeon CPU. The computing power
+from Amazon EC2 could greatly reduce the run time in this regard.
+</p>
+<p>
+As for the end-user behavior, we will first build a demographic and
+behavioral user profile by focusing on groups for initial exploration
+and surveying large-scale data collection. Then we will build end-user
+behavioral models governing underlying application-level traffic
+models based on the developed profile, which can capture the
+difference between business &amp; residential users and temporal
+aspects of end-user behaviors.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">Pathways to Impact</h2>
+<div class="outline-text-2" id="text-6">
+
+<p>The proposed NGOA research framework (i.e., comparative analysis
+framework + virtual test bed) enables <i>network service providers</i>
+(e.g., BT) to not only assess various candidate systems under a
+realistic operating environment but also dimension their networks
+before actual deployment.
+</p>
+<p>
+The proposed research programme has been inspired (e.g., economy of
+scale, elasticity) and enabled (i.e., large-scale, on-demand computing
+on Amazon EC2) by the cloud computing; its outcome, therefore, will
+have a valuable impact on the <i>providers of NGOA and\/or cloud computing</i>.
+</p>
+<p>
+The quantification of user-perceived performances (i.e., ECR) provides
+valuable information for both network service providers and customers
+to compare various solutions in a fair basis, like benchmarks in
+computing.
+</p>
+<p>
+A new revenue model based on predicted user demands reduces the risk
+of huge investment requested for the deployment of NGOA solutions.
+</p>
+
+<hr/>
+
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+<p class="footnote"><sup><a class="footnum" name="fn-.1" href="#fnr-.1">1</a></sup> The elasticity in the context of networking means the ability
+to manage overall performances by fast provisioning of network
+resources based on user demands.
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.2" href="#fnr-.2">2</a></sup> Kyeong Soo Kim, "A research framework for the clean-slate
+design of next-generation optical access," <i>(Extended version of the FOAN 2011 paper) accepted for publication in</i> <a href="http://www.tandf.co.uk/journals/tf/01468030.html"><i>Fiber and Integrated Optics</i></a> <i>Special Issue on QoS in Access Networks</i>,
+Jan. 2012. (<a href="http://iat-hnrl.swan.ac.uk/~kks/publications/ngoa_research_fio2012_draft.pdf">HNRL</a>)
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.3" href="#fnr-.3">3</a></sup> Kyeong Soo Kim, "A research framework for the clean-slate
+design of next-generation optical access," <i>(Best Paper Award at</i>
+<i>FOAN 2011) Proc. of the 3rd International Congress on Ultra Modern</i>
+<i>Telecommunications and Control Systems (ICUMT 2011)</i>, Budapest,
+Hungary,
+Oct. 2011. (<a href="http://iat-hnrl.swan.ac.uk/~kks/publications/ngoa_research_foan2011.pdf">HNRL</a>)
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.4" href="#fnr-.4">4</a></sup> Kyeong Soo Kim, Karin Ennser, and Yogesh K. Dwivedi,
+"Clean-slate design of next-generation optical access," <i>(Invited</i>
+<i>paper) Proc. of the 13th International Conference on Transparent</i>
+<i>Optical Networks (ICTON)</i>, Stockholm, Sweden,
+Jun. 2011. (<a href="http://iat-hnrl.swan.ac.uk/~kks/publications/ngoa_icton2011_submitted.pdf">HNRL</a>)
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.5" href="#fnr-.5">5</a></sup> Karin Ennser, "Next generation access: A clean-slate
+approach?", <i>(Invited Talk) Midterm Workshop of FP7 Integrated Project OASE: Optical Access Seamless Evolution</i>, June 26 - 30, 2011,
+Stockholm, Sweden.
+</p>
+
+
+<p class="footnote"><sup><a class="footnum" name="fn-.6" href="#fnr-.6">6</a></sup> Kyeong Soo Kim, "Integration of OMNeT++ hybrid TDM/WDM-PON
+models into INET Framework," <i>OMNeT++ Workshop 2011</i>, Barcelona,
+Spain,
+Mar. 21, 2011. (<a href="http://iat-hnrl.swan.ac.uk/~kks/publications/hybrid_pon_omnetpp2011_extended_abstract.pdf">HNRL</a>)
+</p>
+
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: Time-stamp: &lt;2014-09-09 10:20:51 Kyeong Soo (Joseph) Kim&gt;</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
