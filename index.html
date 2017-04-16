@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-02-02 Thu 11:55 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2017-04-16 Sun 18:54 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Kyeong Soo (Joseph) Kim</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="description" content="level-1 org export template"
+<meta name="generator" content="Org mode" />
+<meta name="description" content="level-1 org export template"
  />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -54,13 +54,97 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -93,6 +177,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="css/mystyle.css" />
@@ -150,38 +235,38 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">Profile</a>
+<li><a href="#org377678b">Profile</a>
 <ul>
-<li><a href="#orgheadline2">Contact</a></li>
-<li><a href="#orgheadline3">Updates</a></li>
+<li><a href="#org7dddf37">Contact</a></li>
+<li><a href="#orga47ec8b">Updates</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline22">Research</a>
+<li><a href="#org867e686">Research</a>
 <ul>
-<li><a href="#orgheadline7">Projects</a></li>
-<li><a href="#orgheadline8">Software</a></li>
-<li><a href="#orgheadline9">Publications (@Google Scholar)</a></li>
+<li><a href="#org7bb30c0">Projects</a></li>
+<li><a href="#org08b302c">Software</a></li>
+<li><a href="#orga784b4b">Publications (@Google Scholar)</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline26">Teaching</a>
+<li><a href="#org62da814">Teaching</a>
 <ul>
-<li><a href="#orgheadline23">Office Hours</a></li>
-<li><a href="#orgheadline24">Courses</a></li>
-<li><a href="#orgheadline25">For Final Year Projects</a></li>
+<li><a href="#org2ea2e39">Office Hours</a></li>
+<li><a href="#orgacde985">Courses</a></li>
+<li><a href="#orgcddf84a">For Final Year Projects</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline27">Curriculum Vitae</a></li>
+<li><a href="#org7991ad5">Curriculum Vitae</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1">Profile</h2>
-<div class="outline-text-2" id="text-orgheadline1">
+<div id="outline-container-org377678b" class="outline-2">
+<h2 id="org377678b">Profile</h2>
+<div class="outline-text-2" id="text-org377678b">
 <p>
 <img src="./img/kimks.png" alt="kimks.png" /> Kyeong Soo (Joseph) Kim received B.S., M.S., and Ph.D. degrees
 in Electronics Engineering from <a href="http://www.snu.ac.kr/">Seoul National University</a>, Seoul, Korea, in
-1989, 1991, and 1995, respectively.<br  />
+1989, 1991, and 1995, respectively.<br />
 From 1996 to 1997, he was engaged in the development of multi-channel
 asynchronous transfer mode (ATM) switching systems as a Post-Doc researcher at
 <a href="http://www.wustl.edu/">Washington University in St. Louis</a>, Missouri, where he also taught undergraduate
@@ -200,23 +285,23 @@ University</a>. From Aug. 2007 to Jun. 2014, he worked at the <a href="http://ww
 Engineering</a>, <a href="http://www.swan.ac.uk/">Swansea University</a>, Wales, U.K., as Associate Professor in
 Networking, where he led <a href="http://iat-hnrl.swan.ac.uk/">Hybrid Networking Research Laboratory (HNRL)</a> and
 carried out research in next-generation optical access (NGOA) and hybrid
-optical-wireless networks.<br  />
+optical-wireless networks.<br />
 Since Jul. 2014, he has been working at the <a href="http://academic.xjtlu.edu.cn/eee/">Department of Electrical and
 Electronic Engineering (EEE)</a>, <a href="http://www.xjtlu.edu.cn/en/">Xi'an Jiaotong-Liverpool University (XJTLU)</a>,
-Suzhou, China, as Associate Professor.<br  />
+Suzhou, China, as Associate Professor.<br />
 Dr. Kim is a member of <a href="http://www.ieee.org/">IEEE</a> and <a href="http://www.theiet.org/">IET</a>.
 </p>
 <p><span id='badgeCont56199' style='width:126px'><script src='http://labs.researcherid.com/mashlets?el=badgeCont56199&mashlet=badge&showTitle=false&className=a&rid=I-6035-2013'></script></span></p>
 </div>
-<div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2">Contact</h3>
-<div class="outline-text-3" id="text-orgheadline2">
+<div id="outline-container-org7dddf37" class="outline-3">
+<h3 id="org7dddf37">Contact</h3>
+<div class="outline-text-3" id="text-org7dddf37">
 <p>
-Kyeong Soo (Joseph) Kim, Ph.D.<br  />
-Associate Professor<br  />
-<a href="http://academic.xjtlu.edu.cn/eee/">Department of Electrical and Electronic Engineering</a><br  />
-<a href="http://www.xjtlu.edu.cn/en/">Xi'an Jiaotong-Liverpool University</a><br  />
-111 Ren'ai Road, Dushu Lake Higher Education Town, Suzhou Industrial Park<br  />
+Kyeong Soo (Joseph) Kim, Ph.D.<br />
+Associate Professor<br />
+<a href="http://academic.xjtlu.edu.cn/eee/">Department of Electrical and Electronic Engineering</a><br />
+<a href="http://www.xjtlu.edu.cn/en/">Xi'an Jiaotong-Liverpool University</a><br />
+111 Ren'ai Road, Dushu Lake Higher Education Town, Suzhou Industrial Park<br />
 Suzhou 215123, Jiangsu Province, P. R. China
 </p>
 <ul class="org-ul">
@@ -224,23 +309,26 @@ Suzhou 215123, Jiangsu Province, P. R. China
 <li><b>Tel</b>: +86 (0)512 8188 4811</li>
 <li><b>Fax</b>: +86 (0)512 8188 0445</li>
 <li><b>Email</b>: Kyeongsoo.Kim_at_xjtlu.edu.cn / kimks_at_ieee.org</li>
-<li><b>Homepage@XJTLU</b>: <a href="http://academic.xjtlu.edu.cn/eee/Staff/kyeongsoo-kim">http://academic.xjtlu.edu.cn/eee/Staff/kyeongsoo-kim</a></li>
-<li><b>Homepage@LinkedIn</b>: <a href="https://www.linkedin.com/in/kyeongsoo">https://www.linkedin.com/in/kyeongsoo</a></li>
+<li><b>Homepage</b>: <a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/staff/kyeong-soo-joseph-kim">@XJTLU</a> / <a href="https://www.linkedin.com/in/kyeongsoo">@LinkedIn</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3">Updates</h3>
-<div class="outline-text-3" id="text-orgheadline3">
+<div id="outline-container-orga47ec8b" class="outline-3">
+<h3 id="orga47ec8b">Updates</h3>
+<div class="outline-text-3" id="text-orga47ec8b">
 <ul class="org-ul">
+<li>Minghao Piao, Yongjun Piao, Jeong-Yong Byun, Kyeong Soo Kim, and Keun Ho
+Ryu, "Symmetrical uncertainty based dimensionality reduction for electricity
+customer classification," <i>to be presented at</i> <a href="http://www.sgtdp2017.org/"><i>SGTDP 2017</i></a>, Feb. 1, 2017.</li>
 <li>Yangyu Wang and Kyeong Soo Kim, "Multi-hop extensions of energy-efficient
 wireless sensor network time synchronization," <i>to be presented at</i> <a href="http://www.sgtdp2017.org/"><i>SGTDP
-2017</i></a>, Feb. 1, 2017.</li>
+2017</i></a>, Feb. 1, 2017. (<a href="https://arxiv.org/abs/1702.00536">arXiv</a>)</li>
 <li>Kyeong Soo Kim, "Energy-efficient time synchronization achieving nanosecond
 accuracy in wireless networks," <i>invited for a talk at 2016 International</i>
 <i>Conference on Internet of Things and 5G Mobile Technologies (2016
-ICIOT-5GMT)</i>, Guangzhou University, Guangzhou, Nov. 27-28, 2016.</li>
+ICIOT-5GMT)</i>, Guangzhou University, Guangzhou,
+Nov. 27-28, 2016. (<a href="http://www.slideshare.net/kyeongsoo/energyefficient-time-synchronization-achieving-nanosecond-accuracy-in-wireless-networks">slideshare</a>)</li>
 <li>Kyeong Soo Kim, Sanghyuk Lee, and Eng Gee Lim, "Energy-efficient time
 synchronization based on asynchronous source clock frequency recovery and
 reverse two-way message exchanges in wireless sensor networks," <i>accepted
@@ -307,15 +395,15 @@ Communications Letters</i></a>, Jan. 25, 2014. (<a href="http://dx.doi.org/10.11
 </div>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-2">
-<h2 id="orgheadline22">Research</h2>
-<div class="outline-text-2" id="text-orgheadline22">
-</div><div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7">Projects</h3>
-<div class="outline-text-3" id="text-orgheadline7">
-</div><div id="outline-container-orgheadline4" class="outline-4">
-<h4 id="orgheadline4">Network Traffic Control Schemes and Service Plans exploiting Excess Bandwidth in Shared Access Networks</h4>
-<div class="outline-text-4" id="text-orgheadline4">
+<div id="outline-container-org867e686" class="outline-2">
+<h2 id="org867e686">Research</h2>
+<div class="outline-text-2" id="text-org867e686">
+</div><div id="outline-container-org7bb30c0" class="outline-3">
+<h3 id="org7bb30c0">Projects</h3>
+<div class="outline-text-3" id="text-org7bb30c0">
+</div><div id="outline-container-org272481d" class="outline-4">
+<h4 id="org272481d">Network Traffic Control Schemes and Service Plans exploiting Excess Bandwidth in Shared Access Networks</h4>
+<div class="outline-text-4" id="text-org272481d">
 <ul class="org-ul">
 <li>Xi'an Jiaotong-Liverpool University Research Development Fund (RDF) under
 grant reference number RDF-14-01-25.</li>
@@ -332,16 +420,16 @@ Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="orgheadline5"><a href="research/projects/clean-slate_design_of_ngoa/index.html">Clean-Slate Design of Next-Generation Optical Access (NGOA)</a></h4>
+<div id="outline-container-orgb302aad" class="outline-4">
+<h4 id="orgb302aad"><a href="research/projects/clean-slate_design_of_ngoa/index.html">Clean-Slate Design of Next-Generation Optical Access (NGOA)</a></h4>
 </div>
-<div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><a href="research/projects/tsb_photonics21/index.html">Roadmap for Broadband Optical Internet Access Towards 10Gbit/s Everywhere</a></h4>
+<div id="outline-container-org9611203" class="outline-4">
+<h4 id="org9611203"><a href="research/projects/tsb_photonics21/index.html">Roadmap for Broadband Optical Internet Access Towards 10Gbit/s Everywhere</a></h4>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-3">
-<h3 id="orgheadline8">Software</h3>
-<div class="outline-text-3" id="text-orgheadline8">
+<div id="outline-container-org08b302c" class="outline-3">
+<h3 id="org08b302c">Software</h3>
+<div class="outline-text-3" id="text-org08b302c">
 <ul class="org-ul">
 <li><a href="http://kyeongsoo.github.com/inet-hnrl/">INET-HNRL</a>: A new fork of <a href="https://github.com/inet-framework/inet/">INET framework</a> which provides simulation
 models and new analysis frameworks in both optical and wireless
@@ -352,19 +440,21 @@ model</a>, including a simulation example, to run on Windows platforms.</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9">Publications (<a href="http://scholar.google.com/citations?hl=en&amp;user=5HYNo54AAAAJ">@Google Scholar</a>)</h3>
-<div class="outline-text-3" id="text-orgheadline9">
-<b>Note: &#169; 20xx IEEE. Personal use of this material is
-permitted. Permission from IEEE must be obtained for all other uses, including
-reprinting/republishing this material for advertising or promotional purposes,
-collecting new collected works for resale or redistribution to servers or lists,
-or reuse of any copyrighted component of this work in other works.</b>
+<div id="outline-container-orga784b4b" class="outline-3">
+<h3 id="orga784b4b">Publications (<a href="http://scholar.google.com/citations?hl=en&amp;user=5HYNo54AAAAJ">@Google Scholar</a>)</h3>
+<div class="outline-text-3" id="text-orga784b4b">
+<p>
+Note: &copy; 20xx IEEE. Personal use of this material is permitted. Permission from
+IEEE must be obtained for all other uses, including reprinting/republishing this
+material for advertising or promotional purposes, collecting new collected works
+for resale or redistribution to servers or lists, or reuse of any copyrighted
+component of this work in other works.
+</p>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-4">
-<h4 id="orgheadline10">Journals and Magazines</h4>
-<div class="outline-text-4" id="text-orgheadline10">
+<div id="outline-container-org34609ce" class="outline-4">
+<h4 id="org34609ce">Journals and Magazines</h4>
+<div class="outline-text-4" id="text-org34609ce">
 <ul class="org-ul">
 <li>Kyeong Soo Kim, Sanghyuk Lee, and Eng Gee Lim, "Energy-efficient time
 synchronization based on asynchronous source clock frequency recovery and
@@ -439,10 +529,19 @@ pp.2173-2182, Aug. 1995. (<a href="http://dbpia.co.kr/view/ar_view.asp?arid=2126
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline11" class="outline-4">
-<h4 id="orgheadline11">Conferences and Workshops</h4>
-<div class="outline-text-4" id="text-orgheadline11">
+<div id="outline-container-org924a679" class="outline-4">
+<h4 id="org924a679">Conferences and Workshops</h4>
+<div class="outline-text-4" id="text-org924a679">
 <ul class="org-ul">
+<li>Minghao Piao, Yongjun Piao, Jeong-Yong Byun, Kyeong Soo Kim, and Keun Ho
+Ryu, "Symmetrical uncertainty based dimensionality reduction for electricity
+customer classification," <i>Proc. of Smart Grid Technology and Data
+Processing (SGTDP) 2017</i>, Xi'an Jiaotong-Liverpool University, Suzhou,
+China, Feb. 17, 2017.</li>
+<li>Yangyu Wang and Kyeong Soo Kim, "Multi-hop extensions of energy-efficient
+wireless sensor network time synchronization," <i>Proc. of Smart Grid
+Technology and Data Processing (SGTDP) 2017</i>, Xi'an Jiaotong-Liverpool
+University, Suzhou, China, Feb. 17, 2017.</li>
 <li>Kyeong Soo Kim, "Toward fully-shared access: Hybrid ISP traffic control
 architecture and service plans exploiting excess bandwidth in shared access
 networks," <i>Proc. of FOAN 2016 Workshop</i>, Lisbon, Portugal, pp. 16-19,
@@ -456,6 +555,9 @@ energy-efficient WSN time synchronization based on time-translating
 gateways," <i>Proc. of International Conference on Information, System and
 Convergence Application (ICISCA) 2016</i>, Chiang Mai, Thailand,
 Jul. 13-16, 2016. (<a href="http://arxiv.org/abs/1606.09012">arXiv</a>)</li>
+<li>Sanghyuk Lee and Kyeong Soo Kim, "Energy balance of smart grid," Proc. of
+International Conference on Frontiers of Information Technology, Application
+and Tools (FITAT) 2016, Zhuahi, China, pp. 114, Mar.-Apr., 2016.</li>
 <li>Su Fong Chien, Mau-Luen Tham, Tiew On Ting, and Kyeong Soo Kim,
 "Energy-aware subchannel assignment in OFDMA system with proportional rate
 constraints," <i>Proc. of Wireless and Optical Communication Conference (WOCC)
@@ -608,9 +710,9 @@ Korea, pp. 79-82, Aug. 1991. (<a href="http://www.dbpia.co.kr/Journal/ArticleDet
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-4">
-<h4 id="orgheadline12">Technical Reports and Preprints</h4>
-<div class="outline-text-4" id="text-orgheadline12">
+<div id="outline-container-org08701ce" class="outline-4">
+<h4 id="org08701ce">Technical Reports and Preprints</h4>
+<div class="outline-text-4" id="text-org08701ce">
 <ul class="org-ul">
 <li>Kyeong Soo Kim, "Comments on "On clock synchronization algorithms for
 wireless sensor networks under unknown delay"," arXiv:1602.02794 [cs.DC],
@@ -632,13 +734,12 @@ Washington University, Sep. 1996. (<a href="http://iat-hnrl.swan.ac.uk/~kks/publ
 </ul>
 </div>
 </div>
-
-<div id="outline-container-orgheadline15" class="outline-4">
-<h4 id="orgheadline15">Patents</h4>
-<div class="outline-text-4" id="text-orgheadline15">
-</div><div id="outline-container-orgheadline13" class="outline-5">
-<h5 id="orgheadline13">Issued</h5>
-<div class="outline-text-5" id="text-orgheadline13">
+<div id="outline-container-org990a042" class="outline-4">
+<h4 id="org990a042">Patents</h4>
+<div class="outline-text-4" id="text-org990a042">
+</div><div id="outline-container-orgf580196" class="outline-5">
+<h5 id="orgf580196">Issued</h5>
+<div class="outline-text-5" id="text-orgf580196">
 <ul class="org-ul">
 <li>"Six-address scheme for multiple hop forwarding in wireless mesh networks,"
 <i>US Patent No. 8,483,192</i>, Jul. 9, 2013 (with Liwen Chu and George
@@ -660,9 +761,9 @@ controlled rate," <i>US Patent No. 6,721,797</i>, Apr. 13, 2004. (<a href="http:
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline14" class="outline-5">
-<h5 id="orgheadline14">Pending/Under Filing</h5>
-<div class="outline-text-5" id="text-orgheadline14">
+<div id="outline-container-orge3b3c59" class="outline-5">
+<h5 id="orge3b3c59">Pending/Under Filing</h5>
+<div class="outline-text-5" id="text-orge3b3c59">
 <ul class="org-ul">
 <li>"A novel approach to WLAN mesh interworking with multiple mesh portals,"
 <i>Under filing</i>, June 23, 2008 (with Ghislain Maurice N. Isabwe).</li>
@@ -680,13 +781,12 @@ USPTO</i>, Feb. 21, 2008.</li>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgheadline20" class="outline-4">
-<h4 id="orgheadline20">Standard Contributions</h4>
-<div class="outline-text-4" id="text-orgheadline20">
-</div><div id="outline-container-orgheadline16" class="outline-5">
-<h5 id="orgheadline16">IEEE 802.11 Working Group on Wireless Local Area Networks</h5>
-<div class="outline-text-5" id="text-orgheadline16">
+<div id="outline-container-orge0e8f39" class="outline-4">
+<h4 id="orge0e8f39">Standard Contributions</h4>
+<div class="outline-text-4" id="text-orge0e8f39">
+</div><div id="outline-container-org7c1c176" class="outline-5">
+<h5 id="org7c1c176">IEEE 802.11 Working Group on Wireless Local Area Networks</h5>
+<div class="outline-text-5" id="text-org7c1c176">
 <ul class="org-ul">
 <li>Liwen Chu et al., "RA-OLSR comment resolution," IEEE 802.11-07/2125r2,
 Jul. 2007.</li>
@@ -747,9 +847,9 @@ IEEE 802.11-06/0328r0, Feb. 2006.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline17" class="outline-5">
-<h5 id="orgheadline17">IEEE 802.16 Working Group on Broadband Wireless Access</h5>
-<div class="outline-text-5" id="text-orgheadline17">
+<div id="outline-container-orga105fe4" class="outline-5">
+<h5 id="orga105fe4">IEEE 802.16 Working Group on Broadband Wireless Access</h5>
+<div class="outline-text-5" id="text-orga105fe4">
 <ul class="org-ul">
 <li>Liwen Chu and Kyeong Soo Kim, "Action item from session #46: Text and
 figure fixing comment 544," IEEE C802.16h-06/129, Jan. 2007.</li>
@@ -760,9 +860,9 @@ relay) usage models," IEEE C802.16j-06/015, Sep. 2006.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline18" class="outline-5">
-<h5 id="orgheadline18">IEEE 802.22 Working Group on Wireless Regional Area Networks</h5>
-<div class="outline-text-5" id="text-orgheadline18">
+<div id="outline-container-orgf9994f0" class="outline-5">
+<h5 id="orgf9994f0">IEEE 802.22 Working Group on Wireless Regional Area Networks</h5>
+<div class="outline-text-5" id="text-orgf9994f0">
 <ul class="org-ul">
 <li>Wendong Hu, Liwen Chu, George Vlantis, and Kyeong Soo Kim, "Scheduling for
 connection based over-the-air inter base station communications," IEEE
@@ -773,9 +873,9 @@ connection based over-the-air inter base station communications," IEEE
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline19" class="outline-5">
-<h5 id="orgheadline19">Full Service Access Network (FSAN) Group</h5>
-<div class="outline-text-5" id="text-orgheadline19">
+<div id="outline-container-org520be61" class="outline-5">
+<h5 id="org520be61">Full Service Access Network (FSAN) Group</h5>
+<div class="outline-text-5" id="text-org520be61">
 <ul class="org-ul">
 <li>Kyeong Soo Kim, "Lucent technologies DBA contributions," <i>FSAN OAN-WG
 meeting</i>, Atlanta, USA, Dec. 2000.</li>
@@ -794,9 +894,9 @@ Meeting</i>, Makuhari, Japan, Jun. 2000.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgheadline21" class="outline-4">
-<h4 id="orgheadline21">Talks (Keynote Speeches, Invited Talks, Classes/Seminars, Tutorials, and Forums)</h4>
-<div class="outline-text-4" id="text-orgheadline21">
+<div id="outline-container-orgdee4941" class="outline-4">
+<h4 id="orgdee4941">Talks (Keynote Speeches, Invited Talks, Classes/Seminars, Tutorials, and Forums)</h4>
+<div class="outline-text-4" id="text-orgdee4941">
 <ul class="org-ul">
 <li>"Energy-efficient time synchronization achieving nanosecond accuracy in
 wireless networks," <i>Invited talk, 2016 International Conference
@@ -864,26 +964,26 @@ Seminar</i></a>, Stanford University, Stanford, CA, USA, Dec. 3, 2001. (<a href=
 Daejeon, Korea, Jun. 1999.</li>
 </ul>
 
-<hr  />
+<hr />
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-2">
-<h2 id="orgheadline26">Teaching</h2>
-<div class="outline-text-2" id="text-orgheadline26">
-</div><div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23">Office Hours</h3>
-<div class="outline-text-3" id="text-orgheadline23">
+<div id="outline-container-org62da814" class="outline-2">
+<h2 id="org62da814">Teaching</h2>
+<div class="outline-text-2" id="text-org62da814">
+</div><div id="outline-container-org2ea2e39" class="outline-3">
+<h3 id="org2ea2e39">Office Hours</h3>
+<div class="outline-text-3" id="text-org2ea2e39">
 <p>
 2~4 PM, Friday
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline24" class="outline-3">
-<h3 id="orgheadline24">Courses</h3>
-<div class="outline-text-3" id="text-orgheadline24">
+<div id="outline-container-orgacde985" class="outline-3">
+<h3 id="orgacde985">Courses</h3>
+<div class="outline-text-3" id="text-orgacde985">
 <ul class="org-ul">
 <li>2015-2016
 <ul class="org-ul">
@@ -939,9 +1039,9 @@ Daejeon, Korea, Jun. 1999.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline25" class="outline-3">
-<h3 id="orgheadline25">For Final Year Projects</h3>
-<div class="outline-text-3" id="text-orgheadline25">
+<div id="outline-container-orgcddf84a" class="outline-3">
+<h3 id="orgcddf84a">For Final Year Projects</h3>
+<div class="outline-text-3" id="text-orgcddf84a">
 <ul class="org-ul">
 <li><a href="http://joedreamer.github.io/">Blog on Arduino and Raspberry Pi@GitHub</a></li>
 </ul>
@@ -949,21 +1049,21 @@ Daejeon, Korea, Jun. 1999.</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-2">
-<h2 id="orgheadline27">Curriculum Vitae</h2>
-<div class="outline-text-2" id="text-orgheadline27">
+<div id="outline-container-org7991ad5" class="outline-2">
+<h2 id="org7991ad5">Curriculum Vitae</h2>
+<div class="outline-text-2" id="text-org7991ad5">
 <ul class="org-ul">
 <li><a href="./personal/cv.pdf">PDF version</a></li>
 </ul>
 
-<hr  />
+<hr />
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-09-17 Wed 12:19&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-11-24 Thu 17:23&gt;</span></span></p>
-<p class="date">Created: 2017-02-02 Thu 11:55</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.3.4)</p>
+<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-09-17 Wed 12:19&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-02-20 Mon 13:44&gt;</span></span></p>
+<p class="date">Created: 2017-04-16 Sun 18:54</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 9.0.5)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
