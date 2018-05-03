@@ -639,7 +639,12 @@
 		color: #ff0000;
 		font-weight: bold;
 	}
-
+	.org-ol {
+		font-size: 9pt;
+	}
+	.org-ul {
+		font-size: 9pt;
+	}
 }  /* END OF @media all */
 
 
