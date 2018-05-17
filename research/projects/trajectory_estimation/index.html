@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-05-13 Sun 20:59 -->
+<!-- 2018-05-17 Thu 13:48 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Trajectory Estimation of Mobile Users/Devices based on Wi-Fi Fingerprinting and Deep Neural Networks</title>
@@ -69,6 +69,7 @@
   pre.src-fortran:before { content: 'Fortran'; }
   pre.src-gnuplot:before { content: 'gnuplot'; }
   pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
   pre.src-js:before { content: 'Javascript'; }
   pre.src-latex:before { content: 'LaTeX'; }
@@ -186,7 +187,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -235,38 +236,39 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org443b7d0">Abstract</a></li>
-<li><a href="#org483bafb">Research questions</a></li>
-<li><a href="#orged5c7bd">People</a>
+<li><a href="#orgc664877">Abstract</a></li>
+<li><a href="#org106535d">Research questions</a></li>
+<li><a href="#org53c1c85">People</a>
 <ul>
-<li><a href="#org35af3fd">Supervisors</a></li>
-<li><a href="#org8704923">Participants</a></li>
+<li><a href="#orgfa4f8fd">Supervisors</a></li>
+<li><a href="#org55f8692">Participants</a></li>
 </ul>
 </li>
-<li><a href="#orgc51f2b2">Sponsor</a></li>
-<li><a href="#org30abc3a">Duration</a></li>
-<li><a href="#org0240036">Meetings</a></li>
-<li><a href="#org9f5782e">Outcomes</a>
+<li><a href="#org0dcda89">Sponsor</a></li>
+<li><a href="#org21d13a5">Duration</a></li>
+<li><a href="#orgdf43aba">Meetings</a></li>
+<li><a href="#org6d16788">Outcomes</a>
 <ul>
-<li><a href="#org80873ce">GitHub repositories</a></li>
-<li><a href="#orgc8f9ddf">Publications</a></li>
+<li><a href="#org8d1421a">GitHub repositories</a></li>
+<li><a href="#orgb903d27">Publications</a></li>
 </ul>
 </li>
-<li><a href="#orgc68c17a">References</a>
+<li><a href="#org64569ee">References</a>
 <ul>
-<li><a href="#org9751156">GitHub repositories for Python codes and fingerprint data</a></li>
-<li><a href="#org9b8ecb9">Trajectory estimation</a></li>
-<li><a href="#org0edfb92">Wi-Fi fingerprinting and deep learning</a></li>
-<li><a href="#org2e9088d">Android programming</a></li>
+<li><a href="#org8102e8b">GitHub repositories for Python codes and fingerprint data</a></li>
+<li><a href="#orga59011b">Trajectory estimation</a></li>
+<li><a href="#org92bb272">Wi-Fi fingerprinting and deep learning</a></li>
+<li><a href="#org2ca0077">Android programming</a></li>
 </ul>
 </li>
+<li><a href="#orgd5c2cdb">Related Projects</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org443b7d0" class="outline-2">
-<h2 id="org443b7d0">Abstract</h2>
-<div class="outline-text-2" id="text-org443b7d0">
+<div id="outline-container-orgc664877" class="outline-2">
+<h2 id="orgc664877">Abstract</h2>
+<div class="outline-text-2" id="text-orgc664877">
 <p>
 Where there is no GPS signal, received signal strength (RSS) from wireless
 network can be used for location estimation through fingerprinting; for
@@ -281,9 +283,9 @@ correlations using <a href="https://en.wikipedia.org/wiki/Deep_learning#Deep_neu
 </div>
 </div>
 
-<div id="outline-container-org483bafb" class="outline-2">
-<h2 id="org483bafb">Research questions</h2>
-<div class="outline-text-2" id="text-org483bafb">
+<div id="outline-container-org106535d" class="outline-2">
+<h2 id="org106535d">Research questions</h2>
+<div class="outline-text-2" id="text-org106535d">
 <p>
 We are to extend the Wi-Fi fingerprinting technique for the trajectory estimation of
 mobile users/devices using DNNs.
@@ -300,21 +302,22 @@ trajectory, <a href="https://en.wikipedia.org/wiki/Markov_model">Markov models</
 </div>
 </div>
 
-<div id="outline-container-orged5c7bd" class="outline-2">
-<h2 id="orged5c7bd">People</h2>
-<div class="outline-text-2" id="text-orged5c7bd">
-</div><div id="outline-container-org35af3fd" class="outline-3">
-<h3 id="org35af3fd">Supervisors</h3>
-<div class="outline-text-3" id="text-org35af3fd">
+<div id="outline-container-org53c1c85" class="outline-2">
+<h2 id="org53c1c85">People</h2>
+<div class="outline-text-2" id="text-org53c1c85">
+</div>
+<div id="outline-container-orgfa4f8fd" class="outline-3">
+<h3 id="orgfa4f8fd">Supervisors</h3>
+<div class="outline-text-3" id="text-orgfa4f8fd">
 <ul class="org-ul">
 <li><a href="http://kyeongsoo.github.io/">Dr Kyeong Soo Kim</a> (<a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 <li><a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/staff/sanghyuk-lee">Dr Sanghyuk Lee</a> (<a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org8704923" class="outline-3">
-<h3 id="org8704923">Participants</h3>
-<div class="outline-text-3" id="text-org8704923">
+<div id="outline-container-org55f8692" class="outline-3">
+<h3 id="org55f8692">Participants</h3>
+<div class="outline-text-3" id="text-org55f8692">
 <ul class="org-ul">
 <li>Zhenghang Zhong (E-mail:Zhenghang.Zhong15_at_student.xjtlu.edu.cn; Year 3,
 <a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -325,9 +328,9 @@ trajectory, <a href="https://en.wikipedia.org/wiki/Markov_model">Markov models</
 </div>
 </div>
 
-<div id="outline-container-orgc51f2b2" class="outline-2">
-<h2 id="orgc51f2b2">Sponsor</h2>
-<div class="outline-text-2" id="text-orgc51f2b2">
+<div id="outline-container-org0dcda89" class="outline-2">
+<h2 id="org0dcda89">Sponsor</h2>
+<div class="outline-text-2" id="text-org0dcda89">
 <ul class="org-ul">
 <li>Xi'an Jiaotong-Liverpool University <a href="http://www.xjtlu.edu.cn/en/research/summer-undergraduate-research-fellowships">Summer Undergraduate Research Fellowships
 (SURF)</a> programme (under grant SURF-201830).</li>
@@ -335,50 +338,52 @@ trajectory, <a href="https://en.wikipedia.org/wiki/Markov_model">Markov models</
 </div>
 </div>
 
-<div id="outline-container-org30abc3a" class="outline-2">
-<h2 id="org30abc3a">Duration</h2>
-<div class="outline-text-2" id="text-org30abc3a">
+<div id="outline-container-org21d13a5" class="outline-2">
+<h2 id="org21d13a5">Duration</h2>
+<div class="outline-text-2" id="text-org21d13a5">
 <ul class="org-ul">
 <li>June/2018 - August/2018 (10 weeks)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org0240036" class="outline-2">
-<h2 id="org0240036">Meetings</h2>
-<div class="outline-text-2" id="text-org0240036">
+<div id="outline-container-orgdf43aba" class="outline-2">
+<h2 id="orgdf43aba">Meetings</h2>
+<div class="outline-text-2" id="text-orgdf43aba">
 <ul class="org-ul">
 <li><i><b>TBD</b></i></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9f5782e" class="outline-2">
-<h2 id="org9f5782e">Outcomes</h2>
-<div class="outline-text-2" id="text-org9f5782e">
-</div><div id="outline-container-org80873ce" class="outline-3">
-<h3 id="org80873ce">GitHub repositories</h3>
+<div id="outline-container-org6d16788" class="outline-2">
+<h2 id="org6d16788">Outcomes</h2>
+<div class="outline-text-2" id="text-org6d16788">
 </div>
-<div id="outline-container-orgc8f9ddf" class="outline-3">
-<h3 id="orgc8f9ddf">Publications</h3>
+<div id="outline-container-org8d1421a" class="outline-3">
+<h3 id="org8d1421a">GitHub repositories</h3>
+</div>
+<div id="outline-container-orgb903d27" class="outline-3">
+<h3 id="orgb903d27">Publications</h3>
 </div>
 </div>
 
-<div id="outline-container-orgc68c17a" class="outline-2">
-<h2 id="orgc68c17a">References</h2>
-<div class="outline-text-2" id="text-orgc68c17a">
-</div><div id="outline-container-org9751156" class="outline-3">
-<h3 id="org9751156">GitHub repositories for Python codes and fingerprint data</h3>
-<div class="outline-text-3" id="text-org9751156">
+<div id="outline-container-org64569ee" class="outline-2">
+<h2 id="org64569ee">References</h2>
+<div class="outline-text-2" id="text-org64569ee">
+</div>
+<div id="outline-container-org8102e8b" class="outline-3">
+<h3 id="org8102e8b">GitHub repositories for Python codes and fingerprint data</h3>
+<div class="outline-text-3" id="text-org8102e8b">
 <ul class="org-ul">
 <li><a href="https://github.com/kyeongsoo/indoor_localization">Kyeong Soo Kim</a></li>
 <li><a href="https://github.com/MAGI003769/SURF-Indoor-Localization">Ruiaho Wang</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org9b8ecb9" class="outline-3">
-<h3 id="org9b8ecb9">Trajectory estimation</h3>
-<div class="outline-text-3" id="text-org9b8ecb9">
+<div id="outline-container-orga59011b" class="outline-3">
+<h3 id="orga59011b">Trajectory estimation</h3>
+<div class="outline-text-3" id="text-orga59011b">
 <ul class="org-ul">
 <li>Wei Zhang, Kan Liu, Weidong Zhang, Youmei Zhang, and Jason Gu, "Deep neural
 networks for wireless localization in indoor and outdoor environments,"
@@ -389,9 +394,9 @@ Aug. 2017. (<a href="https://doi.org/10.24963/ijcai.2017/430">DOI</a>)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0edfb92" class="outline-3">
-<h3 id="org0edfb92">Wi-Fi fingerprinting and deep learning</h3>
-<div class="outline-text-3" id="text-org0edfb92">
+<div id="outline-container-org92bb272" class="outline-3">
+<h3 id="org92bb272">Wi-Fi fingerprinting and deep learning</h3>
+<div class="outline-text-3" id="text-org92bb272">
 <ul class="org-ul">
 <li>Kyeong Soo Kim, Ruihao Wang, Zhenghang Zhong, Zikun Tan, Haowei Song, Jaehoon
 Cha, and Sanghyuk Lee, "Large-scale location-aware services in access:
@@ -431,9 +436,9 @@ Stanford, 2017.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2e9088d" class="outline-3">
-<h3 id="org2e9088d">Android programming</h3>
-<div class="outline-text-3" id="text-org2e9088d">
+<div id="outline-container-org2ca0077" class="outline-3">
+<h3 id="org2ca0077">Android programming</h3>
+<div class="outline-text-3" id="text-org2ca0077">
 <ul class="org-ul">
 <li>Sample apps and lecture notes: <a href="http://kyeongsoo.github.io/teaching/eg-m42/index.html">EG-M42 Software for Smartphone</a></li>
 <li><a href="https://github.com/kyeongsoo/wifiScanner">wifiScanner@github.com</a></li>
@@ -443,16 +448,29 @@ Stanford, 2017.</li>
 <li>Information specific to developers in China</li>
 </ul></li>
 </ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd5c2cdb" class="outline-2">
+<h2 id="orgd5c2cdb">Related Projects</h2>
+<div class="outline-text-2" id="text-orgd5c2cdb">
+<ul class="org-ul">
+<li>XJTLU RISGC-2017-4: "<a href="../campus_information_services/index.html">Feasibility Assessment and Roadmap for XJTLU Campus
+Information and Visitor Service System as A Test Bed for Large-Scale
+Location-Aware Services in SIP</a>"</li>
+<li>XJTLU SURF-201739: "<a href="../indoor_localization/index.html">Indoor Localisation Based on Wi-Fi Fingerprinting with
+Fuzzy Sets</a>"</li>
+</ul>
 
 <hr />
 </div>
 </div>
 </div>
-</div>
 <div id="postamble" class="status">
-<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-06-14 Wed 22:18&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-05-13 Sun 20:58&gt;</span></span></p>
-<p class="date">Created: 2018-05-13 Sun 20:59</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.1 (<a href="http://orgmode.org">Org</a> mode 9.0.5)</p>
+<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-06-14 Wed 22:18&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-05-17 Thu 13:48&gt;</span></span></p>
+<p class="date">Created: 2018-05-17 Thu 13:48</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 9.1.3)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
