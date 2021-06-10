@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-08-28 Fri 19:11 -->
+<!-- 2021-06-11 Fri 07:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Network Traffic Control Schemes and Service Plans exploiting Excess Bandwidth in Shared Access Networks</title>
@@ -41,7 +41,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -196,50 +196,26 @@
 </style>
 <link rel="stylesheet" type="text/css" href="../../../css/mystyle.css" />
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -249,17 +225,17 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orged0d1dd">Participants</a></li>
-<li><a href="#orgf4cc997">Grants</a></li>
-<li><a href="#org0879937">Duration</a></li>
-<li><a href="#org11f8385">Funding</a></li>
+<li><a href="#org6cd12e1">Participants</a></li>
+<li><a href="#org5b28a88">Grants</a></li>
+<li><a href="#org30ef89a">Duration</a></li>
+<li><a href="#org73db230">Funding</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orged0d1dd" class="outline-2">
-<h2 id="orged0d1dd">Participants</h2>
-<div class="outline-text-2" id="text-orged0d1dd">
+<div id="outline-container-org6cd12e1" class="outline-2">
+<h2 id="org6cd12e1">Participants</h2>
+<div class="outline-text-2" id="text-org6cd12e1">
 <ul class="org-ul">
 <li>PI: <a href="http://kyeongsoo.github.io/">Dr Kyeong Soo Kim</a> (<a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic Engineering</a>,
 <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -270,9 +246,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgf4cc997" class="outline-2">
-<h2 id="orgf4cc997">Grants</h2>
-<div class="outline-text-2" id="text-orgf4cc997">
+<div id="outline-container-org5b28a88" class="outline-2">
+<h2 id="org5b28a88">Grants</h2>
+<div class="outline-text-2" id="text-org5b28a88">
 <ul class="org-ul">
 <li>Xi'an Jiaotong-Liverpool University Research Development Fund (RDF) under
 grant reference number RDF-14-01-25.</li>
@@ -280,18 +256,18 @@ grant reference number RDF-14-01-25.</li>
 </div>
 </div>
 
-<div id="outline-container-org0879937" class="outline-2">
-<h2 id="org0879937">Duration</h2>
-<div class="outline-text-2" id="text-org0879937">
+<div id="outline-container-org30ef89a" class="outline-2">
+<h2 id="org30ef89a">Duration</h2>
+<div class="outline-text-2" id="text-org30ef89a">
 <ul class="org-ul">
 <li>Jan./2015&#x2013;Dec./2017 (3 years)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org11f8385" class="outline-2">
-<h2 id="org11f8385">Funding</h2>
-<div class="outline-text-2" id="text-org11f8385">
+<div id="outline-container-org73db230" class="outline-2">
+<h2 id="org73db230">Funding</h2>
+<div class="outline-text-2" id="text-org73db230">
 <ul class="org-ul">
 <li>RMB 95,000</li>
 </ul>
@@ -302,9 +278,9 @@ grant reference number RDF-14-01-25.</li>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-06-14 Wed 22:18&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-01-09 Wed 21:43&gt;</span></span></p>
-<p class="date">Created: 2020-08-28 Fri 19:11</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.3.6)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2021-06-11 Fri 07:45</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4)</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

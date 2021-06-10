@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-08-28 Fri 19:11 -->
+<!-- 2021-06-11 Fri 07:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Roadmap for Broadband Optical Internet Access Towards 10Gbit/s Everywhere</title>
@@ -41,7 +41,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -196,50 +196,26 @@
 </style>
 <link rel="stylesheet" type="text/css" href="../../../css/mystyle.css" />
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -249,19 +225,19 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb830c0b">People</a></li>
-<li><a href="#orgb62d4b6">Sponsor</a></li>
-<li><a href="#org18d640c">Duration</a></li>
-<li><a href="#orgb37cec6">Partners</a></li>
-<li><a href="#orgf469c06">Summary</a></li>
-<li><a href="#orgc58e57d">Outcomes</a></li>
+<li><a href="#orgdc49339">People</a></li>
+<li><a href="#org9b51053">Sponsor</a></li>
+<li><a href="#orgea33fbb">Duration</a></li>
+<li><a href="#orgb05a9c0">Partners</a></li>
+<li><a href="#org30ca680">Summary</a></li>
+<li><a href="#org9179101">Outcomes</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb830c0b" class="outline-2">
-<h2 id="orgb830c0b">People</h2>
-<div class="outline-text-2" id="text-orgb830c0b">
+<div id="outline-container-orgdc49339" class="outline-2">
+<h2 id="orgdc49339">People</h2>
+<div class="outline-text-2" id="text-orgdc49339">
 <ul class="org-ul">
 <li><a href="http://kyeongsoo.github.io/">Dr Kyeong Soo (Joseph) Kim</a> (PI)</li>
 <li><a href="mailto::k.ennser@swansea.ac.uk">Dr Karin Ennser</a> (Co-PI)</li>
@@ -270,27 +246,27 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgb62d4b6" class="outline-2">
-<h2 id="orgb62d4b6">Sponsor</h2>
-<div class="outline-text-2" id="text-orgb62d4b6">
+<div id="outline-container-org9b51053" class="outline-2">
+<h2 id="org9b51053">Sponsor</h2>
+<div class="outline-text-2" id="text-org9b51053">
 <ul class="org-ul">
 <li><a href="http://www.innovateuk.org/">Technology Strategy Board (TSB)</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org18d640c" class="outline-2">
-<h2 id="org18d640c">Duration</h2>
-<div class="outline-text-2" id="text-org18d640c">
+<div id="outline-container-orgea33fbb" class="outline-2">
+<h2 id="orgea33fbb">Duration</h2>
+<div class="outline-text-2" id="text-orgea33fbb">
 <ul class="org-ul">
 <li>Mar./16/2009&#x2013;Nov./30/2009</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb37cec6" class="outline-2">
-<h2 id="orgb37cec6">Partners</h2>
-<div class="outline-text-2" id="text-orgb37cec6">
+<div id="outline-container-orgb05a9c0" class="outline-2">
+<h2 id="orgb05a9c0">Partners</h2>
+<div class="outline-text-2" id="text-orgb05a9c0">
 <ul class="org-ul">
 <li><a href="http://www.oclaro.com/">Oclaro, Inc. (former Bookham Technology plc)</a> (Lead Org.)</li>
 <li><a href="http://www.ericsson.com/">Ericsson Ltd</a></li>
@@ -304,9 +280,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgf469c06" class="outline-2">
-<h2 id="orgf469c06">Summary</h2>
-<div class="outline-text-2" id="text-orgf469c06">
+<div id="outline-container-org30ca680" class="outline-2">
+<h2 id="org30ca680">Summary</h2>
+<div class="outline-text-2" id="text-org30ca680">
 <p>
 In all of the studies carried out so far on the implementation of
 broadband optical Internet access, few have carried the vision as
@@ -332,9 +308,9 @@ access systems.
 </div>
 </div>
 
-<div id="outline-container-orgc58e57d" class="outline-2">
-<h2 id="orgc58e57d">Outcomes</h2>
-<div class="outline-text-2" id="text-orgc58e57d">
+<div id="outline-container-org9179101" class="outline-2">
+<h2 id="org9179101">Outcomes</h2>
+<div class="outline-text-2" id="text-org9179101">
 <ul class="org-ul">
 <li>Kyeong Soo Kim, "An equivalent circuit rate-based study of 10-Gb/s
 next-generation optical access architectures," <i>(Extended version)
@@ -357,9 +333,9 @@ Mar. 19, 2010.  (<a href="http://portal.acm.org/citation.cfm?id=1808166">ACM</a>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-06-14 Wed 22:18&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-01-09 Wed 21:42&gt;</span></span></p>
-<p class="date">Created: 2020-08-28 Fri 19:11</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 26.3 (<a href="https://orgmode.org">Org</a> mode 9.3.6)</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2021-06-11 Fri 07:45</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4)</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
