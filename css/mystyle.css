@@ -816,7 +816,7 @@
 
 /* Smartphones */
 
-@media screen and (max-device-width: 480px)
+@media oly screen and (max-width: 480px)
 {
 	body {
 		/* margin: 10px 6% 10px 10px; */
@@ -824,28 +824,28 @@
 		font-size: 10pt;
 	}
 
-	h1 {
-		font-size: 14pt;
-	}
+	/* h1 { */
+	/* 	font-size: 14pt; */
+	/* } */
 
-	h2 {
-		font-size: 12pt;
-		padding-bottom: 4px;
-		/* margin-top: 5px; */
-		margin-top: 30px;
-		margin-bottom: 5px;
-		border-bottom: 1px solid #DDD;
-	}
+	/* h2 { */
+	/* 	font-size: 12pt; */
+	/* 	padding-bottom: 4px; */
+	/* 	/\* margin-top: 5px; *\/ */
+	/* 	margin-top: 30px; */
+	/* 	margin-bottom: 5px; */
+	/* 	border-bottom: 1px solid #DDD; */
+	/* } */
 
-	h3 {
-		font-size: 11pt;
-	}
+	/* h3 { */
+	/* 	font-size: 11pt; */
+	/* } */
 
-	h4 {
-		font-size: 10pt;
-		font-style: italic;
-		font-weight: bold
-	}
+	/* h4 { */
+	/* 	font-size: 10pt; */
+	/* 	font-style: italic; */
+	/* 	font-weight: bold */
+	/* } */
 
 	div {
 		orphans:2;
