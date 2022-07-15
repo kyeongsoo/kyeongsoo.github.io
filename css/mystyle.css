@@ -819,6 +819,12 @@
 @media oly screen and (max-width: 480px)
 {
 
+	body {
+        margin: 10px 6% 10px 10px;
+        font-family: Verdana, Helvetica, sans-serif;
+        font-size: 10pt;
+    }
+
 	/* body { */
 	/* 	/\* margin: 10px 6% 10px 10px; *\/ */
 	/* 	font-family: Verdana, Helvetica, sans-serif; */
