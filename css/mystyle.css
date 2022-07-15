@@ -650,10 +650,6 @@
 
 @media screen
 {
-	* {
-		box-sizing: border-box;
-	}
-
 	body {
 		margin: 10px 6% 10px 250px;
 		font-family: Verdana, Helvetica, sans-serif;
@@ -672,15 +668,16 @@
 		/* top: 180px; */
 		top: 35px;
 		width: 200px;
-		min-height:60px;
+		min-height:60px
 		/* max-height:55%; */
-		max-height:80%;
+		max-height:80%
 		overflow:auto;
 	}
 
 	#table-of-contents h2 {
 		display:none;
 	}
+
 
 
 	/* These style are only for IE: */
@@ -816,43 +813,36 @@
 
 /* Smartphones */
 
-@media oly screen and (max-width: 480px)
+@media screen and (max-device-width: 480px)
 {
-
 	body {
-        margin: 10px 6% 10px 10px;
-        font-family: Verdana, Helvetica, sans-serif;
-        font-size: 10pt;
-    }
+		margin: 10px 6% 10px 10px;
+		font-family: Verdana, Helvetica, sans-serif;
+		font-size: 24pt;
+	}
 
-	/* body { */
-	/* 	/\* margin: 10px 6% 10px 10px; *\/ */
-	/* 	font-family: Verdana, Helvetica, sans-serif; */
-	/* 	font-size: 10pt; */
-	/* } */
+	h1 {
+		font-size: 28pt;
+	}
 
-	/* h1 { */
-	/* 	font-size: 14pt; */
-	/* } */
+	h2 {
+		font-size: 26pt;
+		padding-bottom: 4px;
+		/* margin-top: 5px; */
+		margin-top: 30px;
+		margin-bottom: 5px;
+		border-bottom: 1px solid #DDD;
+	}
 
-	/* h2 { */
-	/* 	font-size: 12pt; */
-	/* 	padding-bottom: 4px; */
-	/* 	/\* margin-top: 5px; *\/ */
-	/* 	margin-top: 30px; */
-	/* 	margin-bottom: 5px; */
-	/* 	border-bottom: 1px solid #DDD; */
-	/* } */
+	h3 {
+		font-size: 25pt;
+	}
 
-	/* h3 { */
-	/* 	font-size: 11pt; */
-	/* } */
-
-	/* h4 { */
-	/* 	font-size: 10pt; */
-	/* 	font-style: italic; */
-	/* 	font-weight: bold */
-	/* } */
+	h4 {
+		font-size: 24pt;
+		font-style: italic;
+		font-weight: bold
+	}
 
 	div {
 		orphans:2;
