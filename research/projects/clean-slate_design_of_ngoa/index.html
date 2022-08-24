@@ -3,14 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-08-24 Wed 21:12 -->
+<!-- 2022-08-24 Wed 22:02 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Clean-Slate Design of Next-Generation Optical Access (NGOA)</title>
-<meta name="description" content="level-4 org export template" />
-<meta name="generator" content="Org Mode" />
-<style>
-  #content { max-width: 60em; margin: auto; }
+<meta name="generator" content="Org mode" />
+<meta name="description" content="level-4 org export template"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,9 +32,8 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -42,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
+    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    top: -8px;
-    right: 12px;
+    background-color: white;
+    top: -10px;
+    right: 10px;
     padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
+    border: 1px solid black;
   }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
+  pre.src:hover:before { display: inline;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -192,15 +192,38 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
+  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="../../../css/mystyle.css" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
 </head>
 <body>
-<div id="content" class="content">
+<div id="content">
 <h1 class="title">Clean-Slate Design of Next-Generation Optical Access (NGOA)</h1>
-<div id="table-of-contents" role="doc-toc">
+<div id="table-of-contents">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents">
 <ul>
 <li><a href="#org266f693">People</a>
 <ul>
@@ -272,7 +295,7 @@
 <h2 id="org679e282">Equipment and Facilities</h2>
 <div class="outline-text-2" id="text-org679e282">
 
-<div id="orgafd5ad9" class="figure">
+<div id="org9a86bbc" class="figure">
 <p><img src="../../../img/ngoa_virtual_testbed.png" alt="ngoa_virtual_testbed.png" />
 </p>
 </div>
@@ -294,7 +317,7 @@ memory in total)</li>
 <div class="outline-text-2" id="text-org6da6eb5">
 <p>
 We have been investigating the issues of quality of experience (QoE),
-elasticity<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>, and energy efficiency in NGOA with a focus on the
+elasticity<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>, and energy efficiency in NGOA with a focus on the
 solutions beyond 10G-EPON/XG-PON (i.e., NG-PON2 by ITU-T) and found
 out that the progress in the clean-slate design of NGOA has been
 impeded by the absence of a comprehensive research framework for a
@@ -396,7 +419,7 @@ both Academia and Industry.</li>
 We tackle the problem of quantifying user bandwidth requirement for
 the NGOA in objective and fair assessment of candidate
 architectures. We will base our work on the equivalent circuit rate
-(ECR) framework<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>, a quantitative analysis framework based on the
+(ECR) framework<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>, a quantitative analysis framework based on the
 end-user experiences capturing the impact of the whole network
 protocol stack as well as network architecture itself, and implement a
 virtual test bed for realistic simulation of candidate architectures.
@@ -417,7 +440,7 @@ developed measure and the virtual test bed.</li>
 
 <p>
 We recently reported initial results on this
-work<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>,<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>,<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>,<sup><a id="fnr.5" class="footref" href="#fn.5" role="doc-backlink">5</a></sup>,<sup><a id="fnr.6" class="footref" href="#fn.6" role="doc-backlink">6</a></sup>: We have developed a systematic
+work<sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup>,<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>,<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>,<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>,<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup>: We have developed a systematic
 ECR calculation procedure and application-level traffic models for web
 browsing, file downloading, and streaming video; we have also carried
 out a comparison study with a dedicated reference architecture and
@@ -488,20 +511,20 @@ of huge investment requested for the deployment of NGOA solutions.
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 The elasticity in the context of networking means the ability
 to manage overall performances by fast provisioning of network
 resources based on user demands.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
 Kyeong Soo Kim, "A research framework for the clean-slate
 design of next-generation optical access," <i>(Extended version of the
 FOAN 2011 paper) accepted for publication in</i> <a href="http://www.tandf.co.uk/journals/tf/01468030.html"><i>Fiber and Integrated
 Optics</i></a> <i>Special Issue on QoS in Access Networks</i>, Jan. 2012. (<a href="http://iat-hnrl.swan.ac.uk/~kks/publications/ngoa_research_fio2012_draft.pdf">HNRL</a>)
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
 Kyeong Soo Kim, "A research framework for the clean-slate
 design of next-generation optical access," <i>(Best Paper Award at</i>
 <i>FOAN 2011) Proc. of the 3rd International Congress on Ultra Modern</i>
@@ -509,21 +532,21 @@ design of next-generation optical access," <i>(Best Paper Award at</i>
 Hungary, Oct. 2011. (<a href="http://iat-hnrl.swan.ac.uk/~kks/publications/ngoa_research_foan2011.pdf">HNRL</a>)
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
 Kyeong Soo Kim, Karin Ennser, and Yogesh K. Dwivedi,
 "Clean-slate design of next-generation optical access," <i>(Invited</i>
 <i>paper) Proc. of the 13th International Conference on Transparent</i>
 <i>Optical Networks (ICTON)</i>, Stockholm, Sweden, Jun. 2011. (<a href="http://iat-hnrl.swan.ac.uk/~kks/publications/ngoa_icton2011_submitted.pdf">HNRL</a>)
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5" role="doc-backlink">5</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
 Karin Ennser, "Next generation access: A clean-slate
 approach?", <i>(Invited Talk) Midterm Workshop of FP7 Integrated Project
 OASE: Optical Access Seamless Evolution</i>, June 26 - 30, 2011,
 Stockholm, Sweden.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6" role="doc-backlink">6</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
 Kyeong Soo Kim, "Integration of OMNeT++ hybrid TDM/WDM-PON
 models into INET Framework," <i>OMNeT++ Workshop 2011</i>, Barcelona,
 Spain, Mar. 21, 2011. (<a href="http://iat-hnrl.swan.ac.uk/~kks/publications/hybrid_pon_omnetpp2011_extended_abstract.pdf">HNRL</a>)
@@ -533,9 +556,9 @@ Spain, Mar. 21, 2011. (<a href="http://iat-hnrl.swan.ac.uk/~kks/publications/hyb
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-07-15 Fri 21:52&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-06-14 Wed 22:24&gt;</span></span></p>
-<p class="date">Created: 2022-08-24 Wed 21:12</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
+<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-07-15 Fri 21:52&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-08-24 Wed 21:56&gt;</span></span></p>
+<p class="date">Created: 2022-08-24 Wed 22:02</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4)</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
