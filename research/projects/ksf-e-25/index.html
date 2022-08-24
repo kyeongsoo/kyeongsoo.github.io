@@ -3,15 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-29 Wed 13:31 -->
+<!-- 2022-08-24 Wed 21:12 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Feasibility Study of XJTLU Campus-Wide Indoor Localization System Based on Deep Neural Networks</title>
-<meta name="generator" content="Org mode" />
-<meta name="description" content="level-4 org export template"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="level-4 org export template" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -32,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -42,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -192,62 +192,39 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="../../../css/mystyle.css" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Feasibility Study of XJTLU Campus-Wide Indoor Localization System Based on Deep Neural Networks</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9c561a9">People</a>
+<li><a href="#org7e72b62">People</a>
 <ul>
-<li><a href="#org706f204">Faculty</a></li>
-<li><a href="#org96030c7">Research Associates</a></li>
+<li><a href="#org99477a3">Faculty</a></li>
+<li><a href="#org59ee2df">Research Associates</a></li>
 </ul>
 </li>
-<li><a href="#orge591239">Grants</a></li>
-<li><a href="#org6131fe1">Duration</a></li>
-<li><a href="#orge417905">Overview</a></li>
-<li><a href="#org9662665">Meetings</a></li>
-<li><a href="#org8b2ef29">Outcomes</a></li>
-<li><a href="#orgc80bd09">Related Projects</a></li>
+<li><a href="#org4c6dbc3">Grants</a></li>
+<li><a href="#org28b51e3">Duration</a></li>
+<li><a href="#orgd000e05">Overview</a></li>
+<li><a href="#org12ea709">Meetings</a></li>
+<li><a href="#org19f1208">Outcomes</a></li>
+<li><a href="#orgc4786dd">Related Projects</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9c561a9" class="outline-2">
-<h2 id="org9c561a9">People</h2>
-<div class="outline-text-2" id="text-org9c561a9">
+<div id="outline-container-org7e72b62" class="outline-2">
+<h2 id="org7e72b62">People</h2>
+<div class="outline-text-2" id="text-org7e72b62">
 </div>
-<div id="outline-container-org706f204" class="outline-3">
-<h3 id="org706f204">Faculty</h3>
-<div class="outline-text-3" id="text-org706f204">
+<div id="outline-container-org99477a3" class="outline-3">
+<h3 id="org99477a3">Faculty</h3>
+<div class="outline-text-3" id="text-org99477a3">
 <ul class="org-ul">
 <li><a href="http://kyeongsoo.github.io/">Dr Kyeong Soo (Joseph) Kim</a>, <a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic
 Engineering</a>, <a href="http://www.xjtlu.edu.cn/">XJTLU</a></li>
@@ -258,9 +235,9 @@ University of London</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org96030c7" class="outline-3">
-<h3 id="org96030c7">Research Associates</h3>
-<div class="outline-text-3" id="text-org96030c7">
+<div id="outline-container-org59ee2df" class="outline-3">
+<h3 id="org59ee2df">Research Associates</h3>
+<div class="outline-text-3" id="text-org59ee2df">
 <ul class="org-ul">
 <li>Mr Xintao Huan, <a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/">XJTLU</a></li>
 <li>Mr Jaehoon Cha, <a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/">XJTLU</a></li>
@@ -269,9 +246,9 @@ University of London</a></li>
 </div>
 </div>
 
-<div id="outline-container-orge591239" class="outline-2">
-<h2 id="orge591239">Grants</h2>
-<div class="outline-text-2" id="text-orge591239">
+<div id="outline-container-org4c6dbc3" class="outline-2">
+<h2 id="org4c6dbc3">Grants</h2>
+<div class="outline-text-2" id="text-org4c6dbc3">
 <ul class="org-ul">
 <li>Xi'an Jiaotong-Liverpool University Key Programme Special Fund
 (KSF)&#x2013;Exploratory Research Programme (under Grant KSF-E-25)</li>
@@ -279,18 +256,18 @@ University of London</a></li>
 </div>
 </div>
 
-<div id="outline-container-org6131fe1" class="outline-2">
-<h2 id="org6131fe1">Duration</h2>
-<div class="outline-text-2" id="text-org6131fe1">
+<div id="outline-container-org28b51e3" class="outline-2">
+<h2 id="org28b51e3">Duration</h2>
+<div class="outline-text-2" id="text-org28b51e3">
 <ul class="org-ul">
 <li>Jan./2019&#x2013;Mar./2022 (3 years and 3 months)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orge417905" class="outline-2">
-<h2 id="orge417905">Overview</h2>
-<div class="outline-text-2" id="text-orge417905">
+<div id="outline-container-orgd000e05" class="outline-2">
+<h2 id="orgd000e05">Overview</h2>
+<div class="outline-text-2" id="text-orgd000e05">
 <p>
 Location awareness is one of enabling technologies for future smart and green
 cities; understanding where people spend their times and how they interact with
@@ -308,7 +285,7 @@ available on XJTLU Intranet and tailoring them for the location.
 </p>
 
 
-<div id="org996c77c" class="figure">
+<div id="org2045ded" class="figure">
 <p><img src="../../../img/xjtlu_campus_information_services.png" alt="xjtlu_campus_information_services.png" width="60%" height="60%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>XJTLU campus information and visitors service system.</p>
@@ -316,15 +293,15 @@ available on XJTLU Intranet and tailoring them for the location.
 </div>
 </div>
 
-<div id="outline-container-org9662665" class="outline-2">
-<h2 id="org9662665">Meetings</h2>
-<div class="outline-text-2" id="text-org9662665">
+<div id="outline-container-org12ea709" class="outline-2">
+<h2 id="org12ea709">Meetings</h2>
+<div class="outline-text-2" id="text-org12ea709">
 </div>
 </div>
 
-<div id="outline-container-org8b2ef29" class="outline-2">
-<h2 id="org8b2ef29">Outcomes</h2>
-<div class="outline-text-2" id="text-org8b2ef29">
+<div id="outline-container-org19f1208" class="outline-2">
+<h2 id="org19f1208">Outcomes</h2>
+<div class="outline-text-2" id="text-org19f1208">
 <ul class="org-ul">
 <li>Xintao Huan, Kyeong Soo Kim, and Junqing Zhang, "Improvement and defense of
 clock-skew-based node identification in WSNs against spoofing attacks based on
@@ -352,9 +329,9 @@ networks," Sensors, vol. 19, no. 18:4027, Sep. 18, 2019. [SCIE] (<a href="https:
 </div>
 </div>
 
-<div id="outline-container-orgc80bd09" class="outline-2">
-<h2 id="orgc80bd09">Related Projects</h2>
-<div class="outline-text-2" id="text-orgc80bd09">
+<div id="outline-container-orgc4786dd" class="outline-2">
+<h2 id="orgc4786dd">Related Projects</h2>
+<div class="outline-text-2" id="text-orgc4786dd">
 <ul class="org-ul">
 <li>XJTLU SURF-201830: <a href="../trajectory_estimation/index.html">Trajectory Estimation of Mobile Users/Devices based on
 Wi-Fi Fingerprinting and Deep Neural Networks</a></li>
@@ -370,9 +347,9 @@ Location-Aware Services in SIP</a></li>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-06-14 Wed 22:18&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-09-17 Fri 17:11&gt;</span></span></p>
-<p class="date">Created: 2021-12-29 Wed 13:31</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4)</p>
+<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-07-15 Fri 21:52&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-09-17 Fri 17:11&gt;</span></span></p>
+<p class="date">Created: 2022-08-24 Wed 21:12</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

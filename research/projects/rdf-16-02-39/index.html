@@ -3,15 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-09-03 Fri 13:57 -->
+<!-- 2022-08-24 Wed 21:12 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Energy-Efficient Time Synchronisation and Data Bundling Schemes for Wireless Sensor Networks</title>
-<meta name="generator" content="Org mode" />
-<meta name="description" content="level-4 org export template"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="level-4 org export template" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -32,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -42,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -192,53 +192,30 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="../../../css/mystyle.css" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Energy-Efficient Time Synchronisation and Data Bundling Schemes for Wireless Sensor Networks</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcb4e4d0">Supervisors</a></li>
-<li><a href="#orgefa5f42">Participants</a></li>
-<li><a href="#org8b110f6">Grants</a></li>
-<li><a href="#orgd24ba07">Duration</a></li>
-<li><a href="#org3fc98d6">Outcomes</a></li>
-<li><a href="#orge93ba47">References</a></li>
-<li><a href="#org980efc3">Related Projects</a></li>
+<li><a href="#org2431600">Supervisors</a></li>
+<li><a href="#org99efa7c">Participants</a></li>
+<li><a href="#org0f8b840">Grants</a></li>
+<li><a href="#org424c4ec">Duration</a></li>
+<li><a href="#org7f83ced">Outcomes</a></li>
+<li><a href="#orgcf691ea">References</a></li>
+<li><a href="#org46ecca2">Related Projects</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgcb4e4d0" class="outline-2">
-<h2 id="orgcb4e4d0">Supervisors</h2>
-<div class="outline-text-2" id="text-orgcb4e4d0">
+<div id="outline-container-org2431600" class="outline-2">
+<h2 id="org2431600">Supervisors</h2>
+<div class="outline-text-2" id="text-org2431600">
 <ul class="org-ul">
 <li><a href="http://kyeongsoo.github.io/">Dr Kyeong Soo Kim</a> (<a href="https://www.xjtlu.edu.cn/en/study/departments/school-of-advanced-technology/">School of Advanced Technology</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 <li><a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/staff/sanghyuk-lee">Dr Sanghyuk Lee</a> (<a href="https://www.xjtlu.edu.cn/en/study/departments/school-of-advanced-technology/">School of Advanced Technology</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -249,9 +226,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgefa5f42" class="outline-2">
-<h2 id="orgefa5f42">Participants</h2>
-<div class="outline-text-2" id="text-orgefa5f42">
+<div id="outline-container-org99efa7c" class="outline-2">
+<h2 id="org99efa7c">Participants</h2>
+<div class="outline-text-2" id="text-org99efa7c">
 <ul class="org-ul">
 <li>Mr Xintao Huan (E-mail: Xintao.Huan_at_xjtlu.edu.cn; PhD Candidate; <a href="https://www.xjtlu.edu.cn/en/study/departments/school-of-advanced-technology/">School
 of Advanced Technology</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -259,9 +236,9 @@ of Advanced Technology</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li
 </div>
 </div>
 
-<div id="outline-container-org8b110f6" class="outline-2">
-<h2 id="org8b110f6">Grants</h2>
-<div class="outline-text-2" id="text-org8b110f6">
+<div id="outline-container-org0f8b840" class="outline-2">
+<h2 id="org0f8b840">Grants</h2>
+<div class="outline-text-2" id="text-org0f8b840">
 <ul class="org-ul">
 <li>Xi'an Jiaotong-Liverpool University Research Development Fund with
 Three-Year PhD scholarship (under grant RDF-16-02-39).</li>
@@ -269,18 +246,18 @@ Three-Year PhD scholarship (under grant RDF-16-02-39).</li>
 </div>
 </div>
 
-<div id="outline-container-orgd24ba07" class="outline-2">
-<h2 id="orgd24ba07">Duration</h2>
-<div class="outline-text-2" id="text-orgd24ba07">
+<div id="outline-container-org424c4ec" class="outline-2">
+<h2 id="org424c4ec">Duration</h2>
+<div class="outline-text-2" id="text-org424c4ec">
 <ul class="org-ul">
 <li>Jun./2018&#x2013;May/2021 (3 years)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org3fc98d6" class="outline-2">
-<h2 id="org3fc98d6">Outcomes<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></h2>
-<div class="outline-text-2" id="text-org3fc98d6">
+<div id="outline-container-org7f83ced" class="outline-2">
+<h2 id="org7f83ced">Outcomes<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup></h2>
+<div class="outline-text-2" id="text-org7f83ced">
 <ul class="org-ul">
 <li>Xintao Huan, Kyeong Soo Kim, Sanghyuk Lee, Eng Gee Lim, and Alan Marshall,
 "Improving multi-hop time synchronization performance in wireless sensor
@@ -322,9 +299,9 @@ Nov. 27-30, 2018. (<a href="https://doi.org/10.1109/CANDARW.2018.00050">DOI</a>)
 </div>
 </div>
 
-<div id="outline-container-orge93ba47" class="outline-2">
-<h2 id="orge93ba47">References</h2>
-<div class="outline-text-2" id="text-orge93ba47">
+<div id="outline-container-orgcf691ea" class="outline-2">
+<h2 id="orgcf691ea">References</h2>
+<div class="outline-text-2" id="text-orgcf691ea">
 <ul class="org-ul">
 <li>Yik-Chung Wu et al., "Clock synchronization of wireless sensor networks,"
 <i>IEEE Signal Processing Magazine</i>, vol.28, no.1, pp.124-138, Jan. 2011.</li>
@@ -339,9 +316,9 @@ pp. 1455-1458, Jul. 2013.</li>
 </div>
 </div>
 
-<div id="outline-container-org980efc3" class="outline-2">
-<h2 id="org980efc3">Related Projects</h2>
-<div class="outline-text-2" id="text-org980efc3">
+<div id="outline-container-org46ecca2" class="outline-2">
+<h2 id="org46ecca2">Related Projects</h2>
+<div class="outline-text-2" id="text-org46ecca2">
 <ul class="org-ul">
 <li>XJTLU SURF-201830: <a href="../trajectory_estimation/index.html">Trajectory Estimation of Mobile Users/Devices based on
 Wi-Fi Fingerprinting and Deep Neural Networks</a></li>
@@ -357,7 +334,7 @@ Location-Aware Services in SIP</a></li>
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 SCI has been merged to SCI Expanded (SCIE)
 (<a href="https://clarivate.com/webofsciencegroup/solutions/webofscience-scie/">https://clarivate.com/webofsciencegroup/solutions/webofscience-scie/</a>).
 </p></div></div>
@@ -366,9 +343,9 @@ SCI has been merged to SCI Expanded (SCIE)
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-06-14 Wed 22:18&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-12 Sat 20:47&gt;</span></span></p>
-<p class="date">Created: 2021-09-03 Fri 13:57</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4)</p>
+<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-07-15 Fri 21:52&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-12 Sat 20:47&gt;</span></span></p>
+<p class="date">Created: 2022-08-24 Wed 21:12</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

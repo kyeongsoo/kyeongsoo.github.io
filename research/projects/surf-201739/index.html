@@ -3,15 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-06-11 Fri 07:45 -->
+<!-- 2022-08-24 Wed 21:12 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Indoor Localisation Based on Wi-Fi Fingerprinting with Deep Learning and Fuzzy Sets</title>
-<meta name="generator" content="Org mode" />
-<meta name="description" content="level-4 org export template"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="level-4 org export template" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -32,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -42,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -192,92 +192,69 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="../../../css/mystyle.css" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Indoor Localisation Based on Wi-Fi Fingerprinting with Deep Learning and Fuzzy Sets</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org73a528c">People</a>
+<li><a href="#org7834a06">People</a>
 <ul>
-<li><a href="#org9945fa6">Supervisors</a></li>
-<li><a href="#org9ee3db8">Research Assistant</a></li>
-<li><a href="#org5834c41">Participants</a></li>
+<li><a href="#org0338424">Supervisors</a></li>
+<li><a href="#org891ebbf">Research Assistant</a></li>
+<li><a href="#org596a8bc">Participants</a></li>
 </ul>
 </li>
-<li><a href="#org3f07e9f">Grants</a></li>
-<li><a href="#org708b279">Duration</a></li>
-<li><a href="#org9a62f7e">Meetings</a></li>
-<li><a href="#orge520a86">Outcomes</a>
+<li><a href="#org1b989e2">Grants</a></li>
+<li><a href="#orgf2f9595">Duration</a></li>
+<li><a href="#orgad8000e">Meetings</a></li>
+<li><a href="#orga57b59f">Outcomes</a>
 <ul>
-<li><a href="#org34bf4c3">GitHub repositories for Python codes and fingerprint data</a></li>
-<li><a href="#org7dc3163">Publications</a></li>
+<li><a href="#orgf51ec62">GitHub repositories for Python codes and fingerprint data</a></li>
+<li><a href="#org1b2e529">Publications</a></li>
 </ul>
 </li>
-<li><a href="#org6131f64">References</a>
+<li><a href="#orgba997cb">References</a>
 <ul>
-<li><a href="#org987fbc5">Wi-Fi fingerprinting and deep learning</a></li>
-<li><a href="#orgdca38e4">Fuzzy similarity measures</a></li>
-<li><a href="#org115cde7">Android programming</a></li>
+<li><a href="#org047355d">Wi-Fi fingerprinting and deep learning</a></li>
+<li><a href="#orgce2c326">Fuzzy similarity measures</a></li>
+<li><a href="#orge7db03b">Android programming</a></li>
 </ul>
 </li>
-<li><a href="#org3387146">Related Projects</a></li>
+<li><a href="#orge7fb390">Related Projects</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org73a528c" class="outline-2">
-<h2 id="org73a528c">People</h2>
-<div class="outline-text-2" id="text-org73a528c">
+<div id="outline-container-org7834a06" class="outline-2">
+<h2 id="org7834a06">People</h2>
+<div class="outline-text-2" id="text-org7834a06">
 </div>
-<div id="outline-container-org9945fa6" class="outline-3">
-<h3 id="org9945fa6">Supervisors</h3>
-<div class="outline-text-3" id="text-org9945fa6">
+<div id="outline-container-org0338424" class="outline-3">
+<h3 id="org0338424">Supervisors</h3>
+<div class="outline-text-3" id="text-org0338424">
 <ul class="org-ul">
 <li><a href="http://kyeongsoo.github.io/">Dr Kyeong Soo Kim</a> (<a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 <li><a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/staff/sanghyuk-lee">Dr Sanghyuk Lee</a> (<a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org9ee3db8" class="outline-3">
-<h3 id="org9ee3db8">Research Assistant</h3>
-<div class="outline-text-3" id="text-org9ee3db8">
+<div id="outline-container-org891ebbf" class="outline-3">
+<h3 id="org891ebbf">Research Assistant</h3>
+<div class="outline-text-3" id="text-org891ebbf">
 <ul class="org-ul">
 <li>Jaehoon Cha (E-mail: Jaehoon.Cha_at_xjtlu.edu.cn; PhD Candidate, <a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of
 Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5834c41" class="outline-3">
-<h3 id="org5834c41">Participants</h3>
-<div class="outline-text-3" id="text-org5834c41">
+<div id="outline-container-org596a8bc" class="outline-3">
+<h3 id="org596a8bc">Participants</h3>
+<div class="outline-text-3" id="text-org596a8bc">
 <ul class="org-ul">
 <li>Ruihao Wang (E-mail: Ruihao.Wang14_at_student.xjtlu.edu.cn; Year 3, <a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department
 of Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -292,9 +269,9 @@ Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/"
 </div>
 </div>
 
-<div id="outline-container-org3f07e9f" class="outline-2">
-<h2 id="org3f07e9f">Grants</h2>
-<div class="outline-text-2" id="text-org3f07e9f">
+<div id="outline-container-org1b989e2" class="outline-2">
+<h2 id="org1b989e2">Grants</h2>
+<div class="outline-text-2" id="text-org1b989e2">
 <ul class="org-ul">
 <li>Xi'an Jiaotong-Liverpool University <a href="http://www.xjtlu.edu.cn/en/research/summer-undergraduate-research-fellowships">Summer Undergraduate Research Fellowships
 (SURF)</a> programme (under grant SURF-201739).</li>
@@ -302,18 +279,18 @@ Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/"
 </div>
 </div>
 
-<div id="outline-container-org708b279" class="outline-2">
-<h2 id="org708b279">Duration</h2>
-<div class="outline-text-2" id="text-org708b279">
+<div id="outline-container-orgf2f9595" class="outline-2">
+<h2 id="orgf2f9595">Duration</h2>
+<div class="outline-text-2" id="text-orgf2f9595">
 <ul class="org-ul">
 <li>Jun./2017&#x2013;Aug./2017 (10 weeks)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9a62f7e" class="outline-2">
-<h2 id="org9a62f7e">Meetings</h2>
-<div class="outline-text-2" id="text-org9a62f7e">
+<div id="outline-container-orgad8000e" class="outline-2">
+<h2 id="orgad8000e">Meetings</h2>
+<div class="outline-text-2" id="text-orgad8000e">
 <ul class="org-ul">
 <li><a href="./progress-deep-learning_20170804.pdf">04/08/2017</a>: "Progress on deep learning method" by Ruihao (Jeff) Wang</li>
 <li><a href="./fuzzy_sets_similarity_measures_20170714.pdf">14/07/2017</a>: "Fuzzy sets and similarity measures" by Jaehoon Cha</li>
@@ -322,13 +299,13 @@ Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/"
 </div>
 </div>
 
-<div id="outline-container-orge520a86" class="outline-2">
-<h2 id="orge520a86">Outcomes</h2>
-<div class="outline-text-2" id="text-orge520a86">
+<div id="outline-container-orga57b59f" class="outline-2">
+<h2 id="orga57b59f">Outcomes</h2>
+<div class="outline-text-2" id="text-orga57b59f">
 </div>
-<div id="outline-container-org34bf4c3" class="outline-3">
-<h3 id="org34bf4c3">GitHub repositories for Python codes and fingerprint data</h3>
-<div class="outline-text-3" id="text-org34bf4c3">
+<div id="outline-container-orgf51ec62" class="outline-3">
+<h3 id="orgf51ec62">GitHub repositories for Python codes and fingerprint data</h3>
+<div class="outline-text-3" id="text-orgf51ec62">
 <ul class="org-ul">
 <li><a href="https://github.com/MAGI003769/SURF-Indoor-Localization">Ruiaho Wang</a></li>
 <li><a href="https://github.com/kyeongsoo/indoor_localization">Kyeong Soo Kim</a></li>
@@ -336,9 +313,9 @@ Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/"
 </ul>
 </div>
 </div>
-<div id="outline-container-org7dc3163" class="outline-3">
-<h3 id="org7dc3163">Publications</h3>
-<div class="outline-text-3" id="text-org7dc3163">
+<div id="outline-container-org1b2e529" class="outline-3">
+<h3 id="org1b2e529">Publications</h3>
+<div class="outline-text-3" id="text-org1b2e529">
 <ul class="org-ul">
 <li>Kyeong Soo Kim, Ruihao Wang, Zhenghang Zhong, Zikun Tan, Haowei Song, Jaehoon
 Cha, and Sanghyuk Lee, "Large-scale location-aware services in access:
@@ -359,13 +336,13 @@ Germany Nov. 7, 2017. (<a href="https://arxiv.org/abs/1710.00951">arXiv</a>)</li
 </div>
 </div>
 
-<div id="outline-container-org6131f64" class="outline-2">
-<h2 id="org6131f64">References</h2>
-<div class="outline-text-2" id="text-org6131f64">
+<div id="outline-container-orgba997cb" class="outline-2">
+<h2 id="orgba997cb">References</h2>
+<div class="outline-text-2" id="text-orgba997cb">
 </div>
-<div id="outline-container-org987fbc5" class="outline-3">
-<h3 id="org987fbc5">Wi-Fi fingerprinting and deep learning</h3>
-<div class="outline-text-3" id="text-org987fbc5">
+<div id="outline-container-org047355d" class="outline-3">
+<h3 id="org047355d">Wi-Fi fingerprinting and deep learning</h3>
+<div class="outline-text-3" id="text-org047355d">
 <ul class="org-ul">
 <li>Paramvir Bahl and Venkata N. Padmanabhan, "<a href="https://www.microsoft.com/en-us/research/publication/radar-an-in-building-rf-based-user-location-and-tracking-system/">RADAR: An In-Building RF-based User
 Location and Tracking System</a>," <i>Proc. INFOCOM 2000</i>, pp. 1-10, 2000.</li>
@@ -390,9 +367,9 @@ Stanford, 2017.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdca38e4" class="outline-3">
-<h3 id="orgdca38e4">Fuzzy similarity measures</h3>
-<div class="outline-text-3" id="text-orgdca38e4">
+<div id="outline-container-orgce2c326" class="outline-3">
+<h3 id="orgce2c326">Fuzzy similarity measures</h3>
+<div class="outline-text-3" id="text-orgce2c326">
 <ul class="org-ul">
 <li>Liu Xuecheng, "<a href="https://doi.org/10.1016/0165-0114(92)90239-Z">Entropy, distance measure and similarity measure of fuzzy sets
 and their relations</a>," Fuzzy Sets and Systems 52(3), pp. 305-318,
@@ -403,9 +380,9 @@ pp. 1-11, May 2017.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org115cde7" class="outline-3">
-<h3 id="org115cde7">Android programming</h3>
-<div class="outline-text-3" id="text-org115cde7">
+<div id="outline-container-orge7db03b" class="outline-3">
+<h3 id="orge7db03b">Android programming</h3>
+<div class="outline-text-3" id="text-orge7db03b">
 <ul class="org-ul">
 <li>Sample apps and lecture notes: <a href="http://kyeongsoo.github.io/teaching/eg-m42/index.html">EG-M42 Software for Smartphone</a></li>
 <li><a href="https://github.com/kyeongsoo/wifiScanner">wifiScanner@github.com</a></li>
@@ -419,9 +396,9 @@ pp. 1-11, May 2017.</li>
 </div>
 </div>
 
-<div id="outline-container-org3387146" class="outline-2">
-<h2 id="org3387146">Related Projects</h2>
-<div class="outline-text-2" id="text-org3387146">
+<div id="outline-container-orge7fb390" class="outline-2">
+<h2 id="orge7fb390">Related Projects</h2>
+<div class="outline-text-2" id="text-orge7fb390">
 <ul class="org-ul">
 <li>XJTLU RISGC-2017-4: <a href="../campus_information_services/index.html">Feasibility Assessment and Roadmap for XJTLU Campus
 Information and Visitor Service System as A Test Bed for Large-Scale
@@ -435,9 +412,9 @@ Wi-Fi Fingerprinting and Deep Neural Networks</a></li>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-06-14 Wed 22:18&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-05-11 Sat 13:09&gt;</span></span></p>
-<p class="date">Created: 2021-06-11 Fri 07:45</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4)</p>
+<p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-07-15 Fri 21:52&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-05-11 Sat 13:09&gt;</span></span></p>
+<p class="date">Created: 2022-08-24 Wed 21:12</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
