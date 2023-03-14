@@ -3,15 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-11-19 Sat 18:08 -->
+<!-- 2023-03-14 Tue 21:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scalable and Energy-Efficient Multi-Building and Multi-Floor Indoor Localisation/Navigation based on Deep Neural Networks with a Multivariate Database</title>
-<meta name="generator" content="Org mode" />
-<meta name="description" content="level-4 org export template"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="level-4 org export template" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -32,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -42,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -192,52 +192,29 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="../../../css/mystyle.css" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Scalable and Energy-Efficient Multi-Building and Multi-Floor Indoor Localisation/Navigation based on Deep Neural Networks with a Multivariate Database</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9d0223b">Supervisors</a></li>
-<li><a href="#orga0fbd17">Participants</a></li>
-<li><a href="#orge50b80d">Grants</a></li>
-<li><a href="#org1e72122">Duration</a></li>
-<li><a href="#org9a0ceb5">Related Projects</a></li>
-<li><a href="#org88c002a">References</a></li>
+<li><a href="#org08f6e87">Supervisors</a></li>
+<li><a href="#org4198faf">Participants</a></li>
+<li><a href="#orgd51417c">Grants</a></li>
+<li><a href="#orgc477b08">Duration</a></li>
+<li><a href="#org6a09ef5">Related Projects</a></li>
+<li><a href="#orgaff4ee1">References</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9d0223b" class="outline-2">
-<h2 id="org9d0223b">Supervisors</h2>
-<div class="outline-text-2" id="text-org9d0223b">
+<div id="outline-container-org08f6e87" class="outline-2">
+<h2 id="org08f6e87">Supervisors</h2>
+<div class="outline-text-2" id="text-org08f6e87">
 <ul class="org-ul">
 <li><a href="http://kyeongsoo.github.io/">Dr Kyeong Soo Kim</a> (<a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic Engineering</a>,
 <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -247,9 +224,9 @@
 </div>
 </div>
 
-<div id="outline-container-orga0fbd17" class="outline-2">
-<h2 id="orga0fbd17">Participants</h2>
-<div class="outline-text-2" id="text-orga0fbd17">
+<div id="outline-container-org4198faf" class="outline-2">
+<h2 id="org4198faf">Participants</h2>
+<div class="outline-text-2" id="text-org4198faf">
 <ul class="org-ul">
 <li>Mr Sihao Li (E-mail: Sihao.Li_at_liverpool.ac.uk; PhD Candidate; <a href="https://www.xjtlu.edu.cn/en/study/departments/school-of-advanced-technology/">School of
 Advanced Technology</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -257,9 +234,9 @@ Advanced Technology</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </div>
 </div>
 
-<div id="outline-container-orge50b80d" class="outline-2">
-<h2 id="orge50b80d">Grants</h2>
-<div class="outline-text-2" id="text-orge50b80d">
+<div id="outline-container-orgd51417c" class="outline-2">
+<h2 id="orgd51417c">Grants</h2>
+<div class="outline-text-2" id="text-orgd51417c">
 <ul class="org-ul">
 <li>Xi'an Jiaotong-Liverpool University Research Development Fund with
 Three-Year PhD scholarship (under grant PRGS1912001).</li>
@@ -267,18 +244,18 @@ Three-Year PhD scholarship (under grant PRGS1912001).</li>
 </div>
 </div>
 
-<div id="outline-container-org1e72122" class="outline-2">
-<h2 id="org1e72122">Duration</h2>
-<div class="outline-text-2" id="text-org1e72122">
+<div id="outline-container-orgc477b08" class="outline-2">
+<h2 id="orgc477b08">Duration</h2>
+<div class="outline-text-2" id="text-orgc477b08">
 <ul class="org-ul">
 <li>Jun./2020&#x2013;May/2023 (3 years)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9a0ceb5" class="outline-2">
-<h2 id="org9a0ceb5">Related Projects</h2>
-<div class="outline-text-2" id="text-org9a0ceb5">
+<div id="outline-container-org6a09ef5" class="outline-2">
+<h2 id="org6a09ef5">Related Projects</h2>
+<div class="outline-text-2" id="text-org6a09ef5">
 <ul class="org-ul">
 <li>KSF-E-25: <a href="../ksf-e-25/index.html">Feasibility Study of XJTLU Campus-Wide Indoor Localisation System
 based on Deep Neural Networks</a></li>
@@ -295,9 +272,9 @@ for Wireless Sensor Networks</a></li>
 </div>
 </div>
 
-<div id="outline-container-org88c002a" class="outline-2">
-<h2 id="org88c002a">References</h2>
-<div class="outline-text-2" id="text-org88c002a">
+<div id="outline-container-orgaff4ee1" class="outline-2">
+<h2 id="orgaff4ee1">References</h2>
+<div class="outline-text-2" id="text-orgaff4ee1">
 <ul class="org-ul">
 <li>Kyeong Soo Kim, Sanghyuk Lee, and Kaizhu Huang, "A scalable deep neural
 network architecture for multi-building and multi-floor indoor localization
@@ -325,8 +302,8 @@ Munich, Germany, Nov. 7, 2017.</li>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-07-15 Fri 21:52&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-08-24 Wed 21:56&gt;</span></span></p>
-<p class="date">Created: 2022-11-19 Sat 18:08</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4)</p>
+<p class="date">Created: 2023-03-14 Tue 21:55</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

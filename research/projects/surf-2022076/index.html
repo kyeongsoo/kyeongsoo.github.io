@@ -3,15 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-11-19 Sat 18:08 -->
+<!-- 2023-03-14 Tue 21:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Scalable Representation of RSSIs for Multi-Building and Multi-Floor Indoor Localization Based on Deep Neural Networks</title>
-<meta name="generator" content="Org mode" />
-<meta name="description" content="level-4 org export template"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="level-4 org export template" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -32,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -42,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -192,66 +192,43 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="../../../css/mystyle.css" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Scalable Representation of RSSIs for Multi-Building and Multi-Floor Indoor Localization Based on Deep Neural Networks</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgad1cb6a">Abstract</a></li>
-<li><a href="#org0bad58c">Research questions</a></li>
-<li><a href="#orgb532883">People</a>
+<li><a href="#org7116dde">Abstract</a></li>
+<li><a href="#orgdcef820">Research questions</a></li>
+<li><a href="#orgda37ad4">People</a>
 <ul>
-<li><a href="#orga429d90">Supervisors</a></li>
-<li><a href="#org05edf82">Research Assistants</a></li>
-<li><a href="#orgdddd0bc">Participants</a></li>
+<li><a href="#orgaba8f8a">Supervisors</a></li>
+<li><a href="#org7f3c54a">Research Assistants</a></li>
+<li><a href="#orgb378478">Participants</a></li>
 </ul>
 </li>
-<li><a href="#org35c2313">Grants</a></li>
-<li><a href="#orgfb5e33d">Duration</a></li>
-<li><a href="#orgc0dcf82">Meetings</a></li>
-<li><a href="#orgdf58630">Outcomes</a>
+<li><a href="#orgefb1d03">Grants</a></li>
+<li><a href="#org39ca131">Duration</a></li>
+<li><a href="#org9eada2e">Meetings</a></li>
+<li><a href="#org4005c62">Outcomes</a>
 <ul>
-<li><a href="#orgfb19d63">GitHub repositories</a></li>
-<li><a href="#orgb9e3d98">Publications</a></li>
+<li><a href="#org4f2aab8">GitHub repositories</a></li>
+<li><a href="#org02ff845">Publications</a></li>
 </ul>
 </li>
-<li><a href="#orgea9ac22">References</a></li>
-<li><a href="#org82e4c50">Related Projects</a></li>
+<li><a href="#org42cb643">References</a></li>
+<li><a href="#org0ec04e4">Related Projects</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgad1cb6a" class="outline-2">
-<h2 id="orgad1cb6a">Abstract</h2>
-<div class="outline-text-2" id="text-orgad1cb6a">
+<div id="outline-container-org7116dde" class="outline-2">
+<h2 id="org7116dde">Abstract</h2>
+<div class="outline-text-2" id="text-org7116dde">
 <p>
 Since the SURF project titled "Indoor localization based on Wi-Fi
 fingerprinting with deep learning and fuzzy sets" in 2017, we have been
@@ -266,9 +243,9 @@ multi-floor indoor localization.
 </div>
 </div>
 
-<div id="outline-container-org0bad58c" class="outline-2">
-<h2 id="org0bad58c">Research questions</h2>
-<div class="outline-text-2" id="text-org0bad58c">
+<div id="outline-container-orgdcef820" class="outline-2">
+<h2 id="orgdcef820">Research questions</h2>
+<div class="outline-text-2" id="text-orgdcef820">
 <ul class="org-ul">
 <li>How can we represent in a scalable way large-dimensional RSSIs (e.g.,
 520-dimensional vectors in the UJIIndoorLoc database [1]) as inputs to a DNN
@@ -279,22 +256,22 @@ model for multi-building and multi-floor indoor localization?</li>
 </div>
 </div>
 
-<div id="outline-container-orgb532883" class="outline-2">
-<h2 id="orgb532883">People</h2>
-<div class="outline-text-2" id="text-orgb532883">
+<div id="outline-container-orgda37ad4" class="outline-2">
+<h2 id="orgda37ad4">People</h2>
+<div class="outline-text-2" id="text-orgda37ad4">
 </div>
-<div id="outline-container-orga429d90" class="outline-3">
-<h3 id="orga429d90">Supervisors</h3>
-<div class="outline-text-3" id="text-orga429d90">
+<div id="outline-container-orgaba8f8a" class="outline-3">
+<h3 id="orgaba8f8a">Supervisors</h3>
+<div class="outline-text-3" id="text-orgaba8f8a">
 <ul class="org-ul">
 <li><a href="http://kyeongsoo.github.io/">Dr Kyeong Soo (Joseph) Kim</a> (<a href="https://www.xjtlu.edu.cn/en/study/departments/academic-departments/communications-and-networking/">Department of Communications and Networking</a>,
 <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org05edf82" class="outline-3">
-<h3 id="org05edf82">Research Assistants</h3>
-<div class="outline-text-3" id="text-org05edf82">
+<div id="outline-container-org7f3c54a" class="outline-3">
+<h3 id="org7f3c54a">Research Assistants</h3>
+<div class="outline-text-3" id="text-org7f3c54a">
 <ul class="org-ul">
 <li>Sihao (Leonard) Li (E-mail: Sihao.Li_at_liverpool.ac.uk; PhD Candidate,
 <a href="https://www.liverpool.ac.uk/">University of Liverpool</a> and <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -304,9 +281,9 @@ of Liverpool</a> and <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </div>
 </div>
 
-<div id="outline-container-orgdddd0bc" class="outline-3">
-<h3 id="orgdddd0bc">Participants</h3>
-<div class="outline-text-3" id="text-orgdddd0bc">
+<div id="outline-container-orgb378478" class="outline-3">
+<h3 id="orgb378478">Participants</h3>
+<div class="outline-text-3" id="text-orgb378478">
 <ul class="org-ul">
 <li>Linxuan Biao (E-mail: Linxuan.Biao21_at_student.xjtlu.edu.cn; Year 1, BEng
 Computer Science and Technology, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -317,9 +294,9 @@ Telecommunications Engineering, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)
 </div>
 </div>
 
-<div id="outline-container-org35c2313" class="outline-2">
-<h2 id="org35c2313">Grants</h2>
-<div class="outline-text-2" id="text-org35c2313">
+<div id="outline-container-orgefb1d03" class="outline-2">
+<h2 id="orgefb1d03">Grants</h2>
+<div class="outline-text-2" id="text-orgefb1d03">
 <ul class="org-ul">
 <li>Xi'an Jiaotong-Liverpool University <a href="http://www.xjtlu.edu.cn/en/research/summer-undergraduate-research-fellowships">Summer Undergraduate Research Fellowships
 (SURF)</a> programme (under grant SURF-2022076).</li>
@@ -327,18 +304,18 @@ Telecommunications Engineering, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)
 </div>
 </div>
 
-<div id="outline-container-orgfb5e33d" class="outline-2">
-<h2 id="orgfb5e33d">Duration</h2>
-<div class="outline-text-2" id="text-orgfb5e33d">
+<div id="outline-container-org39ca131" class="outline-2">
+<h2 id="org39ca131">Duration</h2>
+<div class="outline-text-2" id="text-org39ca131">
 <ul class="org-ul">
 <li>Jun./2022&#x2013;Aug./2022 (10 weeks)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc0dcf82" class="outline-2">
-<h2 id="orgc0dcf82">Meetings</h2>
-<div class="outline-text-2" id="text-orgc0dcf82">
+<div id="outline-container-org9eada2e" class="outline-2">
+<h2 id="org9eada2e">Meetings</h2>
+<div class="outline-text-2" id="text-org9eada2e">
 <ul class="org-ul">
 <li>06/27/2022: Kickoff meeting, 2-3 PM, Skype
 <ul class="org-ul">
@@ -348,21 +325,21 @@ Telecommunications Engineering, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)
 </div>
 </div>
 
-<div id="outline-container-orgdf58630" class="outline-2">
-<h2 id="orgdf58630">Outcomes</h2>
-<div class="outline-text-2" id="text-orgdf58630">
+<div id="outline-container-org4005c62" class="outline-2">
+<h2 id="org4005c62">Outcomes</h2>
+<div class="outline-text-2" id="text-org4005c62">
 </div>
-<div id="outline-container-orgfb19d63" class="outline-3">
-<h3 id="orgfb19d63">GitHub repositories</h3>
-<div class="outline-text-3" id="text-orgfb19d63">
+<div id="outline-container-org4f2aab8" class="outline-3">
+<h3 id="org4f2aab8">GitHub repositories</h3>
+<div class="outline-text-3" id="text-org4f2aab8">
 <ul class="org-ul">
 <li><i>To be added&#x2026;</i></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb9e3d98" class="outline-3">
-<h3 id="orgb9e3d98">Publications</h3>
-<div class="outline-text-3" id="text-orgb9e3d98">
+<div id="outline-container-org02ff845" class="outline-3">
+<h3 id="org02ff845">Publications</h3>
+<div class="outline-text-3" id="text-org02ff845">
 <ul class="org-ul">
 <li><i>To be added&#x2026;</i></li>
 </ul>
@@ -370,9 +347,9 @@ Telecommunications Engineering, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)
 </div>
 </div>
 
-<div id="outline-container-orgea9ac22" class="outline-2">
-<h2 id="orgea9ac22">References</h2>
-<div class="outline-text-2" id="text-orgea9ac22">
+<div id="outline-container-org42cb643" class="outline-2">
+<h2 id="org42cb643">References</h2>
+<div class="outline-text-2" id="text-org42cb643">
 <ol class="org-ol">
 <li>Alejandro Pasos Ruiz, Michael Flynn, James Large, Matthew Middlehurst, and
 Anthony Bagnall, "The great multivariate time series classification bake off:
@@ -431,9 +408,9 @@ and tracking system," Proc. 2000 IEEE INFOCOM, vol. 2, 2000, pp. 775–784.</li>
 </div>
 </div>
 
-<div id="outline-container-org82e4c50" class="outline-2">
-<h2 id="org82e4c50">Related Projects</h2>
-<div class="outline-text-2" id="text-org82e4c50">
+<div id="outline-container-org0ec04e4" class="outline-2">
+<h2 id="org0ec04e4">Related Projects</h2>
+<div class="outline-text-2" id="text-org0ec04e4">
 <ul class="org-ul">
 <li>XJTLU PGRS1912001: <a href="../pgrs1912001/index.html">Scalable and Energy-Efficient Multi-Building and
 Multi-Floor Indoor Localisation/Navigation based on Deep Neural Networks with
@@ -457,8 +434,8 @@ Location-Aware Services in SIP</a></li>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-07-15 Fri 21:52&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-08-24 Wed 22:00&gt;</span></span></p>
-<p class="date">Created: 2022-11-19 Sat 18:08</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4)</p>
+<p class="date">Created: 2023-03-14 Tue 21:55</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

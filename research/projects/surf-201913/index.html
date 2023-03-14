@@ -3,15 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-11-19 Sat 18:08 -->
+<!-- 2023-03-14 Tue 21:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Analysis of XJTLUIndoorLoc Multivariate Dataset for DNN-Based Indoor Localization</title>
-<meta name="generator" content="Org mode" />
-<meta name="description" content="level-4 org export template"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="level-4 org export template" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -32,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -42,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -192,71 +192,48 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="../../../css/mystyle.css" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Analysis of XJTLUIndoorLoc Multivariate Dataset for DNN-Based Indoor Localization</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org75ea587">Abstract</a></li>
-<li><a href="#orgfa35f69">Research questions</a></li>
-<li><a href="#org6b8236f">People</a>
+<li><a href="#org7d1e27d">Abstract</a></li>
+<li><a href="#org1bba15d">Research questions</a></li>
+<li><a href="#org163b0d1">People</a>
 <ul>
-<li><a href="#org2247a04">Supervisors</a></li>
-<li><a href="#org92bab91">Research Assistants</a></li>
-<li><a href="#org0fa3108">Participants</a></li>
+<li><a href="#orgb20c2fa">Supervisors</a></li>
+<li><a href="#orgad1af7a">Research Assistants</a></li>
+<li><a href="#orgd8820c2">Participants</a></li>
 </ul>
 </li>
-<li><a href="#org3512dbb">Grants</a></li>
-<li><a href="#org3053e21">Duration</a></li>
-<li><a href="#orgd1589d0">Meetings</a></li>
-<li><a href="#org4cc226c">Outcomes</a></li>
-<li><a href="#org7cd638b">References</a>
+<li><a href="#org782dff3">Grants</a></li>
+<li><a href="#orgef31ce6">Duration</a></li>
+<li><a href="#org81335c0">Meetings</a></li>
+<li><a href="#org05a9620">Outcomes</a></li>
+<li><a href="#org1e2fdf2">References</a>
 <ul>
-<li><a href="#orgc0a957c">Trajectory estimation</a></li>
-<li><a href="#org13a1b37">Recurrent neural networks (RNNs) and long short-term memory (LSTM) networks</a></li>
-<li><a href="#orge233e92">Convolutional neural networks (CNNs) for time series data (e.g., audio signal)</a></li>
-<li><a href="#org87aa11c">Wi-Fi fingerprinting and deep learning</a></li>
-<li><a href="#org12c31e4">Fingerprint datasets</a></li>
-<li><a href="#org81f03ca">GitHub repositories for Python codes and fingerprint data</a></li>
-<li><a href="#orgcde9fd9">Android programming</a></li>
+<li><a href="#org61a9949">Trajectory estimation</a></li>
+<li><a href="#orgf57ae0b">Recurrent neural networks (RNNs) and long short-term memory (LSTM) networks</a></li>
+<li><a href="#org7fe0f2e">Convolutional neural networks (CNNs) for time series data (e.g., audio signal)</a></li>
+<li><a href="#org9a8b3a0">Wi-Fi fingerprinting and deep learning</a></li>
+<li><a href="#org88e76bf">Fingerprint datasets</a></li>
+<li><a href="#orgf81cf6b">GitHub repositories for Python codes and fingerprint data</a></li>
+<li><a href="#org43576ef">Android programming</a></li>
 </ul>
 </li>
-<li><a href="#org755f6ed">Related Projects</a></li>
+<li><a href="#org3eed710">Related Projects</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org75ea587" class="outline-2">
-<h2 id="org75ea587">Abstract</h2>
-<div class="outline-text-2" id="text-org75ea587">
+<div id="outline-container-org7d1e27d" class="outline-2">
+<h2 id="org7d1e27d">Abstract</h2>
+<div class="outline-text-2" id="text-org7d1e27d">
 <p>
 Through <a href="../surf-201830/index.html">the last year's SURF project</a>, we built a multivariate dataset&#x2014;i.e.,
 XJTLUIndoorLoc&#x2014;for indoor localization and trajectory estimation based on
@@ -271,9 +248,9 @@ localization and trajectory estimation.
 </div>
 </div>
 
-<div id="outline-container-orgfa35f69" class="outline-2">
-<h2 id="orgfa35f69">Research questions</h2>
-<div class="outline-text-2" id="text-orgfa35f69">
+<div id="outline-container-org1bba15d" class="outline-2">
+<h2 id="org1bba15d">Research questions</h2>
+<div class="outline-text-2" id="text-org1bba15d">
 <p>
 XJTLUIndoorLoc dataset was built to support large-scale indoor localization and
 trajectory estimation based on fingerprinting and/or time-series modelling using
@@ -291,13 +268,13 @@ geomagnetic field intensity?</li>
 </div>
 </div>
 
-<div id="outline-container-org6b8236f" class="outline-2">
-<h2 id="org6b8236f">People</h2>
-<div class="outline-text-2" id="text-org6b8236f">
+<div id="outline-container-org163b0d1" class="outline-2">
+<h2 id="org163b0d1">People</h2>
+<div class="outline-text-2" id="text-org163b0d1">
 </div>
-<div id="outline-container-org2247a04" class="outline-3">
-<h3 id="org2247a04">Supervisors</h3>
-<div class="outline-text-3" id="text-org2247a04">
+<div id="outline-container-orgb20c2fa" class="outline-3">
+<h3 id="orgb20c2fa">Supervisors</h3>
+<div class="outline-text-3" id="text-orgb20c2fa">
 <ul class="org-ul">
 <li><a href="http://kyeongsoo.github.io/">Dr Kyeong Soo (Joseph) Kim</a> (<a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic
 Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -305,9 +282,9 @@ Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org92bab91" class="outline-3">
-<h3 id="org92bab91">Research Assistants</h3>
-<div class="outline-text-3" id="text-org92bab91">
+<div id="outline-container-orgad1af7a" class="outline-3">
+<h3 id="orgad1af7a">Research Assistants</h3>
+<div class="outline-text-3" id="text-orgad1af7a">
 <ul class="org-ul">
 <li>Jaehoon Cha (E-mail: Jaehoon.Cha_at_xjtlu.edu.cn; PhD Candidate, <a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of
 Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -316,9 +293,9 @@ Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/"
 </ul>
 </div>
 </div>
-<div id="outline-container-org0fa3108" class="outline-3">
-<h3 id="org0fa3108">Participants</h3>
-<div class="outline-text-3" id="text-org0fa3108">
+<div id="outline-container-orgd8820c2" class="outline-3">
+<h3 id="orgd8820c2">Participants</h3>
+<div class="outline-text-3" id="text-orgd8820c2">
 <ul class="org-ul">
 <li>Zonghui Wang (E-mail: Zonghui.Wang15_at_student.xjtlu.edu.cn; Year 3,
 <a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic Engineering</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
@@ -351,9 +328,9 @@ Mathematical Sciences</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </div>
 </div>
 
-<div id="outline-container-org3512dbb" class="outline-2">
-<h2 id="org3512dbb">Grants</h2>
-<div class="outline-text-2" id="text-org3512dbb">
+<div id="outline-container-org782dff3" class="outline-2">
+<h2 id="org782dff3">Grants</h2>
+<div class="outline-text-2" id="text-org782dff3">
 <ul class="org-ul">
 <li>Xi'an Jiaotong-Liverpool University <a href="http://www.xjtlu.edu.cn/en/research/summer-undergraduate-research-fellowships">Summer Undergraduate Research Fellowships
 (SURF)</a> programme (under grant SURF-201913).</li>
@@ -361,18 +338,18 @@ Mathematical Sciences</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </div>
 </div>
 
-<div id="outline-container-org3053e21" class="outline-2">
-<h2 id="org3053e21">Duration</h2>
-<div class="outline-text-2" id="text-org3053e21">
+<div id="outline-container-orgef31ce6" class="outline-2">
+<h2 id="orgef31ce6">Duration</h2>
+<div class="outline-text-2" id="text-orgef31ce6">
 <ul class="org-ul">
 <li>Jun./2019&#x2013;Aug./2019 (10 weeks)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd1589d0" class="outline-2">
-<h2 id="orgd1589d0">Meetings</h2>
-<div class="outline-text-2" id="text-orgd1589d0">
+<div id="outline-container-org81335c0" class="outline-2">
+<h2 id="org81335c0">Meetings</h2>
+<div class="outline-text-2" id="text-org81335c0">
 <ul class="org-ul">
 <li>10/07/2019: 4th meeting, 10-12 AM, IR515
 <ul class="org-ul">
@@ -398,17 +375,17 @@ Mathematical Sciences</a>, <a href="http://www.xjtlu.edu.cn/en/">XJTLU</a>)</li>
 </div>
 </div>
 
-<div id="outline-container-org4cc226c" class="outline-2">
-<h2 id="org4cc226c">Outcomes</h2>
+<div id="outline-container-org05a9620" class="outline-2">
+<h2 id="org05a9620">Outcomes</h2>
 </div>
 
-<div id="outline-container-org7cd638b" class="outline-2">
-<h2 id="org7cd638b">References</h2>
-<div class="outline-text-2" id="text-org7cd638b">
+<div id="outline-container-org1e2fdf2" class="outline-2">
+<h2 id="org1e2fdf2">References</h2>
+<div class="outline-text-2" id="text-org1e2fdf2">
 </div>
-<div id="outline-container-orgc0a957c" class="outline-3">
-<h3 id="orgc0a957c">Trajectory estimation</h3>
-<div class="outline-text-3" id="text-orgc0a957c">
+<div id="outline-container-org61a9949" class="outline-3">
+<h3 id="org61a9949">Trajectory estimation</h3>
+<div class="outline-text-3" id="text-org61a9949">
 <ol class="org-ol">
 <li>Ho Jun Jang, Jae Min Shin, and Lynn Choi, "Geomagnetic field based indoor
 localization using recurrent neural networks," <i>Proc. GLOBECOM 2017</i>,
@@ -419,9 +396,9 @@ networks for wireless localization in indoor and outdoor environments,"
 </ol>
 </div>
 </div>
-<div id="outline-container-org13a1b37" class="outline-3">
-<h3 id="org13a1b37">Recurrent neural networks (RNNs) and long short-term memory (LSTM) networks</h3>
-<div class="outline-text-3" id="text-org13a1b37">
+<div id="outline-container-orgf57ae0b" class="outline-3">
+<h3 id="orgf57ae0b">Recurrent neural networks (RNNs) and long short-term memory (LSTM) networks</h3>
+<div class="outline-text-3" id="text-orgf57ae0b">
 <ol class="org-ol">
 <li value="3">Christopher Olah, <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understanding LSTM networks</a>, Accessed May 22, 2018.</li>
 <li>Yuan Lukito and Antonius Rachmat Chrismanto, "Recurrent neural networks model
@@ -431,9 +408,9 @@ Yogyakarta, Indonesia, Nov. 2017. (<a href="https://doi.org/10.1109/ICON-SONICS.
 </ol>
 </div>
 </div>
-<div id="outline-container-orge233e92" class="outline-3">
-<h3 id="orge233e92">Convolutional neural networks (CNNs) for time series data (e.g., audio signal)</h3>
-<div class="outline-text-3" id="text-orge233e92">
+<div id="outline-container-org7fe0f2e" class="outline-3">
+<h3 id="org7fe0f2e">Convolutional neural networks (CNNs) for time series data (e.g., audio signal)</h3>
+<div class="outline-text-3" id="text-org7fe0f2e">
 <ol class="org-ol">
 <li value="5">Alex Graves, Abdel-rahman Mohamed, and Geoffrey Hinton, "Speech
 recognition with deep recurrent neural networks," <i>arXiv:1303.5778 [cs.NE]</i>,
@@ -444,9 +421,9 @@ Applications</i>, 2009.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org87aa11c" class="outline-3">
-<h3 id="org87aa11c">Wi-Fi fingerprinting and deep learning</h3>
-<div class="outline-text-3" id="text-org87aa11c">
+<div id="outline-container-org9a8b3a0" class="outline-3">
+<h3 id="org9a8b3a0">Wi-Fi fingerprinting and deep learning</h3>
+<div class="outline-text-3" id="text-org9a8b3a0">
 <ol class="org-ol">
 <li value="7">Kyeong Soo Kim, Ruihao Wang, Zhenghang Zhong, Zikun Tan, Haowei Song,
 Jaehoon Cha, and Sanghyuk Lee, "Large-scale location-aware services in
@@ -454,7 +431,7 @@ access: Hierarchical building/floor classification and location estimation
 using Wi-Fi fingerprinting based on deep neural networks," <i>(Extended version
 of the FOAN 2017 paper)</i>, <i>Fiber and Integrated Optics</i>, vol. 37, no. 5,
 pp. 277-289, Apr. 27, 2018. (<a href="https://doi.org/10.1080/01468030.2018.1467515">DOI</a>)</li>
-<li><a id="org1422fec"></a>Kyeong Soo Kim, Sanghyuk Lee, and Kaizhu Huang "A scalable deep neural
+<li><a id="org68bab1c"></a>Kyeong Soo Kim, Sanghyuk Lee, and Kaizhu Huang "A scalable deep neural
 network architecture for multi-building and multi-floor indoor localization
 based on Wi-Fi fingerprinting," <a href="https://bdataanalytics.biomedcentral.com/"><i>Big Data Analytics</i></a>, vol. 3, no. 4.,
 pp. 1017, Apr. 19, 2018. (<a href="https://doi.org/10.1186/s41044-018-0031-2">DOI</a>) (<a href="https://arxiv.org/abs/1712.01990">arXiv</a>)</li>
@@ -489,9 +466,9 @@ systems</a>, Stanford, 2017.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org12c31e4" class="outline-3">
-<h3 id="org12c31e4">Fingerprint datasets</h3>
-<div class="outline-text-3" id="text-org12c31e4">
+<div id="outline-container-org88e76bf" class="outline-3">
+<h3 id="org88e76bf">Fingerprint datasets</h3>
+<div class="outline-text-3" id="text-org88e76bf">
 <ol class="org-ol">
 <li value="17">J. Torres-Sospedra et al., "UJIIndoorLoc: A new multi-building and
 multi-floor database for WLAN fingerprint-based indoor localization
@@ -509,9 +486,9 @@ positioning</a>," <i>Data</i>, vol. 2, no. 4, article no. 32, pp. 1-16, 2017.
 </ol>
 </div>
 </div>
-<div id="outline-container-org81f03ca" class="outline-3">
-<h3 id="org81f03ca">GitHub repositories for Python codes and fingerprint data</h3>
-<div class="outline-text-3" id="text-org81f03ca">
+<div id="outline-container-orgf81cf6b" class="outline-3">
+<h3 id="orgf81cf6b">GitHub repositories for Python codes and fingerprint data</h3>
+<div class="outline-text-3" id="text-orgf81cf6b">
 <ul class="org-ul">
 <li><a href="https://github.com/kyeongsoo/indoor_localization">Kyeong Soo (Joseph) Kim</a></li>
 <li><a href="https://github.com/MAGI003769/SURF-Indoor-Localization">Ruiaho (Jeff) Wang</a></li>
@@ -519,9 +496,9 @@ positioning</a>," <i>Data</i>, vol. 2, no. 4, article no. 32, pp. 1-16, 2017.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcde9fd9" class="outline-3">
-<h3 id="orgcde9fd9">Android programming</h3>
-<div class="outline-text-3" id="text-orgcde9fd9">
+<div id="outline-container-org43576ef" class="outline-3">
+<h3 id="org43576ef">Android programming</h3>
+<div class="outline-text-3" id="text-org43576ef">
 <ul class="org-ul">
 <li>Sample apps and lecture notes: <a href="http://kyeongsoo.github.io/teaching/eg-m42/index.html">EG-M42 Software for Smartphone</a></li>
 <li><a href="https://github.com/kyeongsoo/wifiScanner">wifiScanner@github.com</a></li>
@@ -535,9 +512,9 @@ positioning</a>," <i>Data</i>, vol. 2, no. 4, article no. 32, pp. 1-16, 2017.
 </div>
 </div>
 
-<div id="outline-container-org755f6ed" class="outline-2">
-<h2 id="org755f6ed">Related Projects</h2>
-<div class="outline-text-2" id="text-org755f6ed">
+<div id="outline-container-org3eed710" class="outline-2">
+<h2 id="org3eed710">Related Projects</h2>
+<div class="outline-text-2" id="text-org3eed710">
 <ul class="org-ul">
 <li>XJTLU SURF-201830: <a href="../surf-201830/index.html">Trajectory Estimation of Mobile Users/Devices based on
 Wi-Fi Fingerprinting and Deep Neural Networks</a></li>
@@ -554,8 +531,8 @@ Location-Aware Services in SIP</a></li>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-07-15 Fri 21:52&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-08-24 Wed 22:00&gt;</span></span></p>
-<p class="date">Created: 2022-11-19 Sat 18:08</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4)</p>
+<p class="date">Created: 2023-03-14 Tue 21:55</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

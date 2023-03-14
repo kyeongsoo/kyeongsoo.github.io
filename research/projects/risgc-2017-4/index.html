@@ -3,15 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-11-19 Sat 18:08 -->
+<!-- 2023-03-14 Tue 21:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Feasibility Assessment and Roadmap for XJTLU Campus Information and Visitor Service System as A Test Bed for Large-Scale Location-Aware Services in SIP</title>
-<meta name="generator" content="Org mode" />
-<meta name="description" content="level-4 org export template"
- />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="description" content="level-4 org export template" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -32,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -42,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -192,59 +192,36 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="../../../css/mystyle.css" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Feasibility Assessment and Roadmap for XJTLU Campus Information and Visitor Service System as A Test Bed for Large-Scale Location-Aware Services in SIP</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfc5b32d">People</a>
+<li><a href="#orgee35768">People</a>
 <ul>
-<li><a href="#orgb063fa9">Faculty</a></li>
+<li><a href="#org9410099">Faculty</a></li>
 </ul>
 </li>
-<li><a href="#org3c9b8db">Grants</a></li>
-<li><a href="#orgd001515">Overview</a></li>
-<li><a href="#orgace0476">Meetings</a></li>
-<li><a href="#org6e5bee8">Related Projects</a></li>
+<li><a href="#org10d283f">Grants</a></li>
+<li><a href="#org1a9be0f">Overview</a></li>
+<li><a href="#orgf480f48">Meetings</a></li>
+<li><a href="#org61318ae">Related Projects</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgfc5b32d" class="outline-2">
-<h2 id="orgfc5b32d">People</h2>
-<div class="outline-text-2" id="text-orgfc5b32d">
+<div id="outline-container-orgee35768" class="outline-2">
+<h2 id="orgee35768">People</h2>
+<div class="outline-text-2" id="text-orgee35768">
 </div>
-<div id="outline-container-orgb063fa9" class="outline-3">
-<h3 id="orgb063fa9">Faculty</h3>
-<div class="outline-text-3" id="text-orgb063fa9">
+<div id="outline-container-org9410099" class="outline-3">
+<h3 id="org9410099">Faculty</h3>
+<div class="outline-text-3" id="text-org9410099">
 <ul class="org-ul">
 <li><a href="http://kyeongsoo.github.io/">Dr Kyeong Soo (Joseph) Kim</a>, <a href="http://www.xjtlu.edu.cn/en/departments/academic-departments/electrical-and-electronic-engineering/">Department of Electrical and Electronic
 Engineering</a>, <a href="http://www.xjtlu.edu.cn/">XJTLU</a></li>
@@ -262,9 +239,9 @@ Engineering</a>, <a href="http://www.xjtlu.edu.cn/">XJTLU</a></li>
 </div>
 </div>
 
-<div id="outline-container-org3c9b8db" class="outline-2">
-<h2 id="org3c9b8db">Grants</h2>
-<div class="outline-text-2" id="text-org3c9b8db">
+<div id="outline-container-org10d283f" class="outline-2">
+<h2 id="org10d283f">Grants</h2>
+<div class="outline-text-2" id="text-org10d283f">
 <ul class="org-ul">
 <li>Xi'an Jiaotong-Liverpool University Research Institute for Smart and Green
 Cities (RISGC) Seed Grant Programme 2016-2017 (under Grant RISGC-2017-4)</li>
@@ -272,9 +249,9 @@ Cities (RISGC) Seed Grant Programme 2016-2017 (under Grant RISGC-2017-4)</li>
 </div>
 </div>
 
-<div id="outline-container-orgd001515" class="outline-2">
-<h2 id="orgd001515">Overview</h2>
-<div class="outline-text-2" id="text-orgd001515">
+<div id="outline-container-org1a9be0f" class="outline-2">
+<h2 id="org1a9be0f">Overview</h2>
+<div class="outline-text-2" id="text-org1a9be0f">
 <p>
 Location awareness is one of enabling technologies for future smart and green
 cities; understanding where people spend their times and how they interact with
@@ -292,7 +269,7 @@ available on XJTLU Intranet and tailoring them for the location.
 </p>
 
 
-<div id="orgb1bcfcc" class="figure">
+<div id="org6d00e5c" class="figure">
 <p><img src="../../../img/xjtlu_campus_information_services.png" alt="xjtlu_campus_information_services.png" width="60%" height="60%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>XJTLU campus information and visitors service system.</p>
@@ -300,9 +277,9 @@ available on XJTLU Intranet and tailoring them for the location.
 </div>
 </div>
 
-<div id="outline-container-orgace0476" class="outline-2">
-<h2 id="orgace0476">Meetings</h2>
-<div class="outline-text-2" id="text-orgace0476">
+<div id="outline-container-orgf480f48" class="outline-2">
+<h2 id="orgf480f48">Meetings</h2>
+<div class="outline-text-2" id="text-orgf480f48">
 <ul class="org-ul">
 <li>22/06/2017 (Presentation from Paul Craig)</li>
 <li><a href="./kickoff_meeting_20170512.pdf">12/05/2017</a> (Kick-off meeting)</li>
@@ -310,9 +287,9 @@ available on XJTLU Intranet and tailoring them for the location.
 </div>
 </div>
 
-<div id="outline-container-org6e5bee8" class="outline-2">
-<h2 id="org6e5bee8">Related Projects</h2>
-<div class="outline-text-2" id="text-org6e5bee8">
+<div id="outline-container-org61318ae" class="outline-2">
+<h2 id="org61318ae">Related Projects</h2>
+<div class="outline-text-2" id="text-org61318ae">
 <ul class="org-ul">
 <li>XJTLU RISGC-2017-1: Occupancy-driven intelligent control of HVAC system for
 saving energy and enhancing thermal comfort</li>
@@ -331,8 +308,8 @@ Fuzzy Sets</a></li>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-07-15 Fri 21:52&gt;</span></span> Time-stamp: <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-08-24 Wed 21:59&gt;</span></span></p>
-<p class="date">Created: 2022-11-19 Sat 18:08</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4)</p>
+<p class="date">Created: 2023-03-14 Tue 21:55</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.1 (<a href="https://orgmode.org">Org</a> mode 9.5.2)</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
