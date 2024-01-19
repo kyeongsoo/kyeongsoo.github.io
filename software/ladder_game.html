@@ -171,6 +171,9 @@
                     }
                     setTimeout(traceLoop, traceDelay)
                 } else {
+                    y = 0.9 * canvasHeight;
+                    ctx.fillStyle = userNameColor;
+                    ctx.fillText("=".concat(prayerName), x, y + 2 * fontHeight);
                     alert(prayerName.concat(" will lead prayer for us!"));
                 }
             }
