@@ -17,48 +17,37 @@
         canvas {
             border: 0px solid black;
             background-color: black;
-            /* display: block;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            width: 100%; */
         }
     </style>
 </head>
 
-<!-- <body onload="startGame()"> -->
-
 <body>
     <div id="canvas"></div>
-
-    <!-- <h1>Ladder Game</h1> -->
     <script>
         window.onload = function () {
             // constants
+            const stepSound = new Audio("https://kyeongsoo.github.io/software/click.wav");
             const userIndexes = [];  // rail indexes of users after tracing
             const userNames = [];
-            const userNameColor = "lightyellow";
+            const userNameColor = "yellow";
             const drawingDelay = 0;
             const ladderColor = "silver";
             const ladderWidth = 2;
             const prayerColor = "lightgreen";
-            const traceWidth = 2*ladderWidth;
+            const traceWidth = 2 * ladderWidth;
 
             const railNumber = parseInt(prompt("Input the number of rails: ", 5));
-            const rungMaxNumber = Math.min(Math.max(5*railNumber, 20), 50);
-            const prayer = Math.floor(Math.random()*railNumber); // rail index of prayer
-            const traceDelay = 500/railNumber; // millisecond
+            const rungMaxNumber = Math.min(Math.max(5 * railNumber, 20), 50);
+            const prayer = Math.floor(Math.random() * railNumber); // rail index of prayer
+            const traceDelay = 500 / railNumber; // millisecond
 
             // variables
             let canvasWidth = window.innerWidth;
             let canvasHeight = window.innerHeight;
             let prayerName = "";
             let railHeight = 0.8 * canvasHeight;
-            let rungWidth = canvasWidth/railNumber;
-            let rungSpace = railHeight/(rungMaxNumber + 2);
+            let rungWidth = canvasWidth / railNumber;
+            let rungSpace = railHeight / (rungMaxNumber + 2);
             let rungStatus = Array.from(Array(railNumber - 1), () => new Array(rungMaxNumber));
 
             let gameCanvas = {
@@ -74,7 +63,7 @@
             // initialize context
             gameCanvas.start();
             const ctx = gameCanvas.context;
-            ctx.font = "25px Monospace";
+            ctx.font = "20px Verdana";
             ctx.fillStyle = userNameColor;
             ctx.lineWidth = ladderWidth;
             ctx.strokeStyle = ladderColor;
@@ -86,7 +75,7 @@
             for (let i = 0; i < railNumber; i++) {
                 x = (i + 0.5) * rungWidth;
                 userNames[i] = prompt("Input a participant's name: ", "Name".concat((i + 1).toString()));
-                ctx.fillText(userNames[i], x, y - 0.25*fontHeight);
+                ctx.fillText(userNames[i], x, y - 0.25 * fontHeight);
                 ctx.beginPath();
                 ctx.moveTo(x, y);
                 ctx.lineTo(x, y + railHeight);
@@ -126,16 +115,17 @@
             let j = 0;
             let traceLoop = function () {
                 if (!prayerFound) {
+                    stepSound.play();
                     if (j == 0) {
                         ctx.strokeStyle = rainbow(railNumber, i);
                         i = userIndex;
-                        x = (i + 0.5)*rungWidth;
-                        y = 0.1*canvasHeight;
+                        x = (i + 0.5) * rungWidth;
+                        y = 0.1 * canvasHeight;
                         ctx.beginPath();
                         ctx.moveTo(x, y);
-                        ctx.lineTo(x, y + 1.5*rungSpace);
+                        ctx.lineTo(x, y + 1.5 * rungSpace);
                         ctx.stroke();
-                        y += 1.5*rungSpace;
+                        y += 1.5 * rungSpace;
                     }
                     if (i > 0 && rungStatus[i - 1][j] == 1) {
                         ctx.beginPath();
@@ -162,7 +152,7 @@
                     } else {
                         ctx.beginPath();
                         ctx.moveTo(x, y);
-                        ctx.lineTo(x, y + 1.5*rungSpace);
+                        ctx.lineTo(x, y + 1.5 * rungSpace);
                         ctx.stroke();
                         if (userIndex < railNumber - 1) {
                             if (i == prayer) {
@@ -181,26 +171,6 @@
                     }
                     setTimeout(traceLoop, traceDelay)
                 } else {
-                    // var prayer_dialog = document.createElement("div");
-                    // prayer_dialog.style.display = "block";
-                    // prayer_dialog.style.position = "absolute";
-                    // prayer_dialog.style.width = "500px";
-                    // prayer_dialog.style.height = "200px";
-                    // prayer_dialog.style.font = "bold 20px Arial";
-                    // prayer_dialog.style.color = "#FF0000";
-                    // prayer_dialog.style.left = (ground_width/2 - 100) + "px";
-                    // prayer_dialog.style.top = (ground_height/2 - 100) + "px";
-                    // prayer_dialog.style.textAlign = "center";
-                    // prayer_dialog.innerHTML = prayerInitials.concat(" will lead prayer for us!");
-                    // gameover_dialog_button = document.createElement("button");
-                    // gameover_dialog_button.style.display = "inline-block";
-                    // gameover_dialog_button.innerHTML = "Click To Play Again";
-                    // gameover_dialog_button.onclick = function () {
-                    //     document.location.reload(false);
-                    // }
-                    // prayer_dialog.appendChild(prayer_dialog_button);
-                    // body.appendChild(prayer_dialog);
-                    // prayer_dialog_button.focus();
                     alert(prayerName.concat(" will lead prayer for us!"));
                 }
             }
@@ -211,11 +181,11 @@
                 // Adam Cole, 2011-Sept-14
                 // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
                 var r, g, b;
-                var h = step/numOfSteps;
-                var i = ~~(h*6);
-                var f = h*6 - i;
+                var h = step / numOfSteps;
+                var i = ~~(h * 6);
+                var f = h * 6 - i;
                 var q = 1 - f;
-                switch (i%6) {
+                switch (i % 6) {
                     case 0: r = 1; g = f; b = 0; break;
                     case 1: r = q; g = 1; b = 0; break;
                     case 2: r = 0; g = 1; b = f; break;
@@ -223,18 +193,9 @@
                     case 4: r = f; g = 0; b = 1; break;
                     case 5: r = 1; g = 0; b = q; break;
                 }
-                var c = "#" + ("00" + (~ ~(r*255)).toString(16)).slice(-2) + ("00" + (~ ~(g*255)).toString(16)).slice(-2) + ("00" + (~ ~(b*255)).toString(16)).slice(-2);
+                var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
                 return (c);
             }
-
-            // } // end of startGame()
-
-            // window.addEventListener('resize', () => {
-            //     let canvas = document.getElementById("canvas");
-            //     canvas.width = window.innerWidth;
-            //     canvas.height = window.innerHeight;
-            //     startGame();
-            // });
         }
     </script>
 </body>
