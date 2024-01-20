@@ -37,9 +37,10 @@
             const traceWidth = 2 * ladderWidth;
 
             const railNumber = parseInt(prompt("Input the number of rails: ", 5));
-            const rungMaxNumber = Math.min(Math.max(5 * railNumber, 20), 50);
+            const rungMaxNumber = Math.min(Math.max(5 * railNumber, 50), 100);
+            const fontSize = (railNumber > 10 ? (railNumber > 50 ? 10 : 15) : 20);
             const prayer = Math.floor(Math.random() * railNumber); // rail index of prayer
-            const traceDelay = 500 / railNumber; // millisecond
+            const traceDelay = 1000 / railNumber; // millisecond
 
             // variables
             let canvasWidth = window.innerWidth;
@@ -63,7 +64,7 @@
             // initialize context
             gameCanvas.start();
             const ctx = gameCanvas.context;
-            ctx.font = "20px Verdana";
+            ctx.font = fontSize.toString().concat("px Verdana");
             ctx.fillStyle = userNameColor;
             ctx.lineWidth = ladderWidth;
             ctx.strokeStyle = ladderColor;
@@ -74,7 +75,7 @@
             y = 0.1 * canvasHeight;
             for (let i = 0; i < railNumber; i++) {
                 x = (i + 0.5) * rungWidth;
-                userNames[i] = prompt("Input a participant's name: ", "Name".concat((i + 1).toString()));
+                userNames[i] = prompt("Input a participant's name: ", (i + 1).toString());
                 ctx.fillText(userNames[i], x, y - 0.25 * fontHeight);
                 ctx.beginPath();
                 ctx.moveTo(x, y);
@@ -173,14 +174,15 @@
                 } else {
                     y = 0.9 * canvasHeight;
                     ctx.fillStyle = userNameColor;
-                    ctx.fillText("=".concat(prayerName), x, y + 2 * fontHeight);
+                    ctx.fillText("is ".concat(prayerName), x, y + 2 * fontHeight);
                     alert(prayerName.concat(" will lead prayer for us!"));
                 }
             }
             setTimeout(traceLoop, traceDelay);
 
             function rainbow(numOfSteps, step) {
-                // This function generates vibrant, "evenly spaced" colours (i.e. no clustering). This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
+                // This function generates vibrant, "evenly spaced" colours (i.e. no clustering).
+                // This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
                 // Adam Cole, 2011-Sept-14
                 // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
                 var r, g, b;
