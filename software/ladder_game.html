@@ -26,7 +26,7 @@
     <script>
         window.onload = function () {
             // constants
-            const stepSound = new Audio("https://kyeongsoo.github.io/software/click.wav");
+            const stepSound = new Audio("click.wav");
             const userIndexes = [];  // rail indexes of users after tracing
             const userNames = [];
             const userNameColor = "yellow";
@@ -118,41 +118,33 @@
                 if (!prayerFound) {
                     stepSound.play();
                     if (j == 0) {
-                        ctx.strokeStyle = rainbow(railNumber, i);
+                        ctx.strokeStyle = rainbow(railNumber, userIndex);
                         i = userIndex;
                         x = (i + 0.5) * rungWidth;
                         y = 0.1 * canvasHeight;
                         ctx.beginPath();
                         ctx.moveTo(x, y);
                         ctx.lineTo(x, y + 1.5 * rungSpace);
-                        ctx.stroke();
                         y += 1.5 * rungSpace;
-                    }
-                    if (i > 0 && rungStatus[i - 1][j] == 1) {
+                    } else {
                         ctx.beginPath();
                         ctx.moveTo(x, y);
+                    }
+                    if (i > 0 && rungStatus[i - 1][j] == 1) {
                         ctx.lineTo(x - rungWidth, y);
-                        ctx.stroke();
                         x -= rungWidth;
                         i -= 1;
                     } else if (i < railNumber - 1 && rungStatus[i][j] == 1) {
-                        ctx.beginPath();
-                        ctx.moveTo(x, y);
                         ctx.lineTo(x + rungWidth, y);
-                        ctx.stroke();
                         x += rungWidth;
                         i += 1;
                     }
                     if (j < rungMaxNumber - 1) {
-                        ctx.beginPath();
-                        ctx.moveTo(x, y);
                         ctx.lineTo(x, y + rungSpace);
                         ctx.stroke();
                         y += rungSpace;
                         j++;
                     } else {
-                        ctx.beginPath();
-                        ctx.moveTo(x, y);
                         ctx.lineTo(x, y + 1.5 * rungSpace);
                         ctx.stroke();
                         if (userIndex < railNumber - 1) {
@@ -185,11 +177,11 @@
                 // This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
                 // Adam Cole, 2011-Sept-14
                 // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
-                var r, g, b;
-                var h = step / numOfSteps;
-                var i = ~~(h * 6);
-                var f = h * 6 - i;
-                var q = 1 - f;
+                let r, g, b;
+                const h = step / numOfSteps;
+                const i = ~~(h * 6);
+                const f = h * 6 - i;
+                const q = 1 - f;
                 switch (i % 6) {
                     case 0: r = 1; g = f; b = 0; break;
                     case 1: r = q; g = 1; b = 0; break;

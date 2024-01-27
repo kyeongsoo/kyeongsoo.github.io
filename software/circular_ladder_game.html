@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ladder Game</title>
+    <style>
+        body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            display: block;
+        }
+
+        canvas {
+            border: 0px solid black;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="canvas"></div>
+    <script>
+        window.onload = function () {
+            // constants
+            const railNumber = parseInt(prompt("Input the number of rails: ", 5));
+            const drawingDelay = 0;
+            const fontSize = (railNumber > 10 ? (railNumber > 50 ? 10 : 15) : 20);
+            const ladderColor = "silver";
+            const ladderWidth = 2;
+            const prayer = Math.floor(Math.random() * railNumber); // rail index of prayer
+            const prayerColor = "lightgreen";
+            const railAngle = 2 * Math.PI / railNumber;
+            const rungMaxNumber = Math.min(Math.max(5 * railNumber, 50), 100);
+            const stepSound = new Audio("https://kyeongsoo.github.io/software/click.wav");
+            const traceDelay = 1000 / railNumber; // millisecond
+            const traceWidth = 1.5 * ladderWidth;
+            const userIndexes = [];  // rail indexes of users after tracing
+            const userNameColor = "yellow";
+            const userNames = [];
+
+            // variables
+            let canvasWidth = window.innerWidth;
+            let canvasHeight = window.innerHeight;
+            let prayerName = "";
+            let railHeight = 0.4 * Math.min(canvasHeight, canvasWidth);
+            let rungSpace = railHeight / (rungMaxNumber + 2);
+            let rungWidth = canvasWidth / railNumber;
+            let gameCanvas = {
+                canvas: document.createElement("canvas"),
+                start: function () {
+                    this.canvas.width = canvasWidth;
+                    this.canvas.height = canvasHeight;
+                    this.context = this.canvas.getContext("2d");
+                    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                }
+            }
+
+            // initialize context
+            gameCanvas.start();
+            const ctx = gameCanvas.context;
+            ctx.font = fontSize.toString().concat("px Verdana");
+            ctx.fillStyle = userNameColor;
+            ctx.lineWidth = ladderWidth;
+            ctx.strokeStyle = ladderColor;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            const fontHeight = parseInt(ctx.font);
+
+            // handle user names
+            let x0 = 0.05 * canvasWidth;
+            let y0 = 0.05 * canvasHeight;
+            for (let i = 0; i < railNumber; i++) {
+                userNames[i] = prompt("Input a participant's name: ", (i + 1).toString());
+                ctx.fillText((i + 1).toString().concat(": ".concat(userNames[i])), x0, y0 + i * 1.5 * fontHeight);
+            }
+
+            // draw rails
+            x0 = canvasWidth / 2; // center x coordinate
+            y0 = canvasHeight / 2; // center coordinate
+            let r1 = 0.45 * Math.min(canvasHeight, canvasWidth); // outer circle radius
+            let r2 = 0.05 * Math.min(canvasHeight, canvasWidth); // innder cicle radius
+            let x1, x2, x3, y1, y2, y3;
+            for (let i = 0; i < railNumber; i++) {
+                x1 = x0 + r1 * Math.cos(1.5 * Math.PI + i * railAngle);
+                y1 = y0 + r1 * Math.sin(1.5 * Math.PI + i * railAngle);
+                if (i == prayer) {
+                    x2 = x0 + 0.3 * r2 * Math.cos(1.5 * Math.PI + i * railAngle);
+                    y2 = y0 + 0.3 * r2 * Math.sin(1.5 * Math.PI + i * railAngle);
+                } else {
+                    x2 = x0 + r2 * Math.cos(1.5 * Math.PI + i * railAngle);
+                    y2 = y0 + r2 * Math.sin(1.5 * Math.PI + i * railAngle);
+                }
+                x3 = x0 + 1.03 * r1 * Math.cos(1.5 * Math.PI + i * railAngle);
+                y3 = y0 + 1.03 * r1 * Math.sin(1.5 * Math.PI + i * railAngle);
+                
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+                ctx.fillText((i + 1).toString(), x3, y3);
+            }
+            // x = (prayer + 0.5) * rungWidth;
+            // y = 0.9 * canvasHeight;
+            // ctx.fillStyle = prayerColor;
+            // ctx.fillText("Prayer", x, y + 0.9 * fontHeight);
+            ctx.font = (1.5 * fontSize).toString().concat("px Verdana");
+            ctx.fillText("\u{1F64F}", x0, y0);
+            ctx.font = fontSize.toString().concat("px Verdana");
+
+            // initialize rungStatuses
+            const initialize2DArray = (n_rows, n_cols, val = null) =>
+                // based on https://www.30secondsofcode.org/js/s/initialize-2d-array/
+                Array.from({ length: n_rows }).map(() =>
+                    Array.from({ length: n_cols }).fill(val)
+                );
+            let rungStatus = initialize2DArray(railNumber, rungMaxNumber, 0);
+
+            // determine rung statuses in a way as fair as possible
+            for (let j = 0; j < rungMaxNumber; j++) {
+                for (let i = 0; i < railNumber; i++) {
+                    let k = (i + j) % railNumber; // starting rail index
+                    if (Math.random() < 0.5) {
+                        if (rungStatus[railIndex(k + 1, railNumber)][j] == 0 && rungStatus[railIndex(k - 1, railNumber)][j] == 0) {
+                            rungStatus[k][j] = 1;
+                        } else {
+                            rungStatus[k][j] = 0;
+                        }
+                    } else {
+                        rungStatus[i][j] = 0;
+                    }
+                }
+            }
+
+            // draw arcs based on rung statuses
+            let a1, a2;
+            for (let i = 0; i < railNumber; i++) {
+                a1 = 1.5 * Math.PI + i * railAngle;
+                a2 = a1 + railAngle;
+                for (let j = 0; j < rungMaxNumber; j++) {
+                    if (rungStatus[i][j] == 1) {
+                        r1 = 0.45 * Math.min(canvasHeight, canvasWidth) - (j + 1) * rungSpace;
+                        ctx.beginPath();
+                        ctx.arc(x0, y0, r1, a1, a2);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // trace down rails and rungs
+            ctx.lineWidth = traceWidth;
+            let prayerFound = false;
+            let userIndex = 0;
+            let i = 0;
+            let j = 0;
+            let initialized = false;
+            let vertical = false; // 'false' -> last movement is horizontal
+            let traceLoop = function () {
+                if (!prayerFound) {
+                    // stepSound.play();
+
+                    if (!initialized) {
+                        i = userIndex;
+                        ctx.strokeStyle = rainbow(railNumber, i);
+                        // a1 = 1.5 * Math.PI + i * railAngle;
+                        r1 = 0.45 * Math.min(canvasHeight, canvasWidth) - j * rungSpace;
+                        x1 = x0 + r1 * Math.cos(1.5 * Math.PI + i * railAngle);
+                        y1 = y0 + r1 * Math.sin(1.5 * Math.PI + i * railAngle);
+                        r2 = 0.45 * Math.min(canvasHeight, canvasWidth) - (j + 1) * rungSpace;
+                        x2 = x0 + r2 * Math.cos(1.5 * Math.PI + i * railAngle);
+                        y2 = y0 + r2 * Math.sin(1.5 * Math.PI + i * railAngle);
+                        ctx.beginPath();
+                        ctx.moveTo(x1, y1);
+                        ctx.lineTo(x2, y2);
+                        initialized = true;
+                        vertical = true;
+                    } else {
+                        a1 = 1.5 * Math.PI + i * railAngle;
+                        r1 = 0.45 * Math.min(canvasHeight, canvasWidth) - (j + 1) * rungSpace;
+                        x1 = x0 + r1 * Math.cos(1.5 * Math.PI + i * railAngle);
+                        y1 = y0 + r1 * Math.sin(1.5 * Math.PI + i * railAngle);
+                        ctx.beginPath();
+                        ctx.moveTo(x1, y1);
+                        if (j < rungMaxNumber) {
+                            if (vertical && rungStatus[railIndex(i - 1, railNumber)][j] == 1) {
+                                a2 = a1 - railAngle;
+                                ctx.arc(x0, y0, r1, a1, a2, true); // counter-clockwise
+                                i = railIndex(i - 1, railNumber);
+                                vertical = false;
+                            } else if (vertical && rungStatus[i][j] == 1) {
+                                a2 = a1 + railAngle;
+                                ctx.arc(x0, y0, r1, a1, a2);
+                                i = railIndex(i + 1, railNumber);
+                                vertical = false;
+                            } else {
+                                r2 = 0.45 * Math.min(canvasHeight, canvasWidth) - (j + 2) * rungSpace;
+                                x2 = x0 + r2 * Math.cos(1.5 * Math.PI + i * railAngle);
+                                y2 = y0 + r2 * Math.sin(1.5 * Math.PI + i * railAngle);
+                                ctx.lineTo(x2, y2);
+                                j++;
+                                vertical = true;
+                            }
+                        } else {
+                            if (i == prayer) {
+                                r2 = 0.05 * Math.min(canvasHeight, canvasWidth);
+                                x2 = x0 + 0.3 * r2 * Math.cos(1.5 * Math.PI + i * railAngle);
+                                y2 = y0 + 0.3 * r2 * Math.sin(1.5 * Math.PI + i * railAngle);
+                                ctx.lineTo(x2, y2);
+                                prayerName = userNames[userIndex];
+                                prayerFound = true;
+                            } else {
+                                r2 = 0.45 * Math.min(canvasHeight, canvasWidth) - (j + 2) * rungSpace;
+                                x2 = x0 + r2 * Math.cos(1.5 * Math.PI + i * railAngle);
+                                y2 = y0 + r2 * Math.sin(1.5 * Math.PI + i * railAngle);
+                                ctx.lineTo(x2, y2);
+                            }
+                            userIndexes[userIndex] = i;
+                            userIndex++;
+                            j = 0;
+                            initialized = false;
+                        }
+                    }
+                    ctx.stroke();
+                    setTimeout(traceLoop, traceDelay);
+                } else {
+                    // y = 0.9 * canvasHeight;
+                    // ctx.fillStyle = userNameColor;
+                    // ctx.fillText("is ".concat(prayerName), x, y + 2 * fontHeight);
+                    alert(prayerName.concat(" will lead prayer for us!"));
+                }
+            }
+            setTimeout(traceLoop, traceDelay);
+
+            function railIndex(i, railNumber) {
+                return (i >= 0 ? i % railNumber : i + railNumber);
+            }
+
+            function rainbow(numOfSteps, step) {
+                // This function generates vibrant, "evenly spaced" colours (i.e. no clustering).
+                // This is ideal for creating easily distinguishable vibrant markers in Google Maps and other apps.
+                // Adam Cole, 2011-Sept-14
+                // HSV to RBG adapted from: http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
+                let r, g, b;
+                const h = step / numOfSteps;
+                const i = ~~(h * 6);
+                const f = h * 6 - i;
+                const q = 1 - f;
+                switch (i % 6) {
+                    case 0: r = 1; g = f; b = 0; break;
+                    case 1: r = q; g = 1; b = 0; break;
+                    case 2: r = 0; g = 1; b = f; break;
+                    case 3: r = 0; g = q; b = 1; break;
+                    case 4: r = f; g = 0; b = 1; break;
+                    case 5: r = 1; g = 0; b = q; break;
+                }
+                var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
+                return (c);
+            }
+        }
+    </script>
+</body>
+
+</html>
