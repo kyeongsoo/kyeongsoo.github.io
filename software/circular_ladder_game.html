@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Ladder Game</title>
+    <title>Circular Ladder Game</title>
     <style>
         body {
             height: 100%;
@@ -66,12 +66,12 @@
             ctx.fillStyle = userNameColor;
             ctx.lineWidth = ladderWidth;
             ctx.strokeStyle = ladderColor;
-            ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             const fontHeight = parseInt(ctx.font);
 
             // handle user names
-            let x0 = 0.05 * canvasWidth;
+            ctx.textAlign = "left";
+            let x0 = 0.02 * canvasWidth;
             let y0 = 0.05 * canvasHeight;
             for (let i = 0; i < railNumber; i++) {
                 userNames[i] = prompt("Input a participant's name: ", (i + 1).toString());
@@ -79,6 +79,7 @@
             }
 
             // draw rails
+            ctx.textAlign = "center";
             x0 = canvasWidth / 2; // center x coordinate
             y0 = canvasHeight / 2; // center coordinate
             let r1 = 0.45 * Math.min(canvasHeight, canvasWidth); // outer circle radius
