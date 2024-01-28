@@ -70,12 +70,18 @@
             const fontHeight = parseInt(ctx.font);
 
             // handle user names
+            const inputNames = confirm("Do you want input users' names?");
             ctx.textAlign = "left";
             let x0 = 0.02 * canvasWidth;
             let y0 = 0.05 * canvasHeight;
             for (let i = 0; i < railNumber; i++) {
-                userNames[i] = prompt("Input a participant's name: ", (i + 1).toString());
+                if (inputNames) {
+                    userNames[i] = prompt("Input a participant's name: ", (i + 1).toString());
+                } else {
+                    userNames[i] = "Name".concat((i + 1).toString());
+                }
                 ctx.fillText((i + 1).toString().concat(": ".concat(userNames[i])), x0, y0 + i * 1.5 * fontHeight);
+
             }
 
             // draw rails
