@@ -25,13 +25,17 @@
     <div id="canvas"></div>
     <script>
         window.onload = function () {
+            // pseudo random number generator replacing Math.random()
+            const prng = splitmix32(Date.now() * Math.random())
+
             // constants
             const railNumber = parseInt(prompt("Input the number of rails: ", 5));
             const drawingDelay = 0;
             const fontSize = (railNumber > 10 ? (railNumber > 50 ? 10 : 15) : 20);
             const ladderColor = "silver";
             const ladderWidth = 2;
-            const prayer = Math.floor(Math.random() * railNumber); // rail index of prayer
+            const prayer = Math.floor(prng() * railNumber); // rail index of prayer
+            // const prayer = Math.floor(Math.random() * railNumber); // rail index of prayer
             const prayerColor = "lightgreen";
             const railAngle = 2 * Math.PI / railNumber;
             const rungMaxNumber = Math.min(Math.max(5 * railNumber, 50), 100);
@@ -130,7 +134,8 @@
             for (let j = 0; j < rungMaxNumber; j++) {
                 for (let i = 0; i < railNumber; i++) {
                     let k = (i + j) % railNumber; // starting rail index
-                    if (Math.random() < 0.5) {
+                    if (prng() < 0.5) {
+                    // if (Math.random() < 0.5) {
                         if (rungStatus[railIndex(k + 1, railNumber)][j] == 0 && rungStatus[railIndex(k - 1, railNumber)][j] == 0) {
                             rungStatus[k][j] = 1;
                         } else {
@@ -265,6 +270,18 @@
                 }
                 var c = "#" + ("00" + (~ ~(r * 255)).toString(16)).slice(-2) + ("00" + (~ ~(g * 255)).toString(16)).slice(-2) + ("00" + (~ ~(b * 255)).toString(16)).slice(-2);
                 return (c);
+            }
+
+            function splitmix32(a) {
+                return function () {
+                    a |= 0;
+                    a = a + 0x9e3779b9 | 0;
+                    let t = a ^ a >>> 16;
+                    t = Math.imul(t, 0x21f0aaad);
+                    t = t ^ t >>> 15;
+                    t = Math.imul(t, 0x735a2d97);
+                    return ((t = t ^ t >>> 15) >>> 0) / 4294967296;
+                }
             }
         }
     </script>
